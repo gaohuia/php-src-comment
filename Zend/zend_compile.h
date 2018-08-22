@@ -521,8 +521,11 @@ struct _zend_execute_data {
 #define ZEND_CALL_NUM_ARGS(call) \
 	(call)->This.u2.num_args
 
+// 一个固定的偏移值
 #define ZEND_CALL_FRAME_SLOT \
+	// 结构体大小 + 
 	((int)((ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval)) - 1) / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
+	// ((int)( 指向最后一个字节 / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
 
 #define ZEND_CALL_VAR(call, n) \
 	((zval*)(((char*)(call)) + ((int)(n))))
@@ -532,6 +535,7 @@ struct _zend_execute_data {
 	(((zval*)(call)) + (ZEND_CALL_FRAME_SLOT + ((int)(n))))
 
 // call是execute_data
+// 得到的是一个指针
 #define ZEND_CALL_ARG(call, n) \
 	ZEND_CALL_VAR_NUM(call, ((int)(n)) - 1)
 

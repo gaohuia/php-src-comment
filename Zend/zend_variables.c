@@ -33,6 +33,7 @@ ZEND_API void ZEND_FASTCALL _zval_dtor_func(zend_refcounted *p ZEND_FILE_LINE_DC
 	switch (GC_TYPE(p)) {
 		case IS_STRING:
 		case IS_CONSTANT: {
+				// zend_string 就一个结构体　所有的数据都存在一起. 直接释放就可以了. 
 				zend_string *str = (zend_string*)p;
 				CHECK_ZVAL_STRING_REL(str);
 				zend_string_free(str);

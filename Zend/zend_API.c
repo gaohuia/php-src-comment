@@ -476,14 +476,19 @@ ZEND_API int ZEND_FASTCALL zend_parse_arg_double_slow(zval *arg, double *dest) /
 }
 /* }}} */
 
+// 应该是将zval转为一个zend_string
 ZEND_API int ZEND_FASTCALL zend_parse_arg_str_weak(zval *arg, zend_string **dest) /* {{{ */
 {
+	// < IS_STRING的应该都是简单类型
 	if (EXPECTED(Z_TYPE_P(arg) < IS_STRING)) {
 		convert_to_string(arg);
 		*dest = Z_STR_P(arg);
 	} else if (UNEXPECTED(Z_TYPE_P(arg) == IS_OBJECT)) {
+		// 如果是对象
+		// 那么看看这个对象有没有cast_object方法
 		if (Z_OBJ_HANDLER_P(arg, cast_object)) {
 			zval obj;
+			// 调用它, 并且指定目标类型是IS_STRING
 			if (Z_OBJ_HANDLER_P(arg, cast_object)(arg, &obj, IS_STRING) == SUCCESS) {
 				zval_ptr_dtor(arg);
 				ZVAL_COPY_VALUE(arg, &obj);
@@ -491,6 +496,7 @@ ZEND_API int ZEND_FASTCALL zend_parse_arg_str_weak(zval *arg, zend_string **dest
 				return 1;
 			}
 		} else if (Z_OBJ_HANDLER_P(arg, get)) {
+			// 
 			zval rv;
 			zval *z = Z_OBJ_HANDLER_P(arg, get)(arg, &rv);
 

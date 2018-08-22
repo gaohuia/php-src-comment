@@ -733,7 +733,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 		int _max_num_args = (max_num_args); \		// 最大参数个数
 		int _num_args = EX_NUM_ARGS(); \			// 应该是, 当前函数的实际参数个数
 		int _i; \
-		zval *_real_arg, *_arg = NULL; \
+		zval *_real_arg, *_arg = NULL; \			// 
 		zend_expected_type _expected_type = Z_EXPECTED_LONG; \
 		char *_error = NULL; \
 		zend_bool _dummy; \
@@ -757,7 +757,9 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 				error_code = ZPP_ERROR_FAILURE; \
 				break; \
 			} \
+			// i 应该是当前参数索引
 			_i = 0; \
+			// 看起来像是指向了参数列表的第一个参数zval结构的前面一个位置, 便于_real_arg++时, 指向第一个参数. 
 			_real_arg = ZEND_CALL_ARG(execute_data, 0);
 
 #define ZEND_PARSE_PARAMETERS_START(min_num_args, max_num_args) \
@@ -787,6 +789,8 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 	ZEND_ASSERT(_i <= _min_num_args || _optional==1); \
 	ZEND_ASSERT(_i >  _min_num_args || _optional==0); \
 	if (_optional) { \
+		// 如果是可选参数, 并且没有已经参数了, 退出参数解析. 
+		// 也就是后面的参数解析宏都不会运行了. 
 		if (UNEXPECTED(_i >_num_args)) break; \
 	} \
 	_real_arg++; \
@@ -1041,6 +1045,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 
 /* old "s" */
 #define Z_PARAM_STRING_EX2(dest, dest_len, check_null, deref, separate) \
+		// 先把指针移到当前参数zval, zval* _arg = &zval
 		Z_PARAM_PROLOGUE(deref, separate); \
 		if (UNEXPECTED(!zend_parse_arg_string(_arg, &dest, &dest_len, check_null))) { \
 			_expected_type = Z_EXPECTED_STRING; \
@@ -1175,11 +1180,16 @@ static zend_always_inline int zend_parse_arg_double(zval *arg, double *dest, zen
 	return 1;
 }
 
+// 将zval解析为一个zend_string变量
+// zend_string变量的内存由调用者分配. 
 static zend_always_inline int zend_parse_arg_str(zval *arg, zend_string **dest, int check_null)
 {
+	// 如果zval的类型是 IS_STRING
 	if (EXPECTED(Z_TYPE_P(arg) == IS_STRING)) {
+		// 直接把zend_value取出来写入目标变量
 		*dest = Z_STR_P(arg);
 	} else if (check_null && Z_TYPE_P(arg) == IS_NULL) {
+		// null的时候, 写入NULL
 		*dest = NULL;
 	} else {
 		return zend_parse_arg_str_slow(arg, dest);
@@ -1187,6 +1197,8 @@ static zend_always_inline int zend_parse_arg_str(zval *arg, zend_string **dest, 
 	return 1;
 }
 
+// 将zval解析为一个字符串
+// zval -> char*, length
 static zend_always_inline int zend_parse_arg_string(zval *arg, char **dest, size_t *dest_len, int check_null)
 {
 	zend_string *str;

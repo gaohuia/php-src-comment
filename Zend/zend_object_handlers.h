@@ -121,6 +121,7 @@ typedef HashTable *(*zend_object_get_gc_t)(zval *object, zval **table, int *n);
 
 typedef int (*zend_object_do_operation_t)(zend_uchar opcode, zval *result, zval *op1, zval *op2);
 
+// 这边应该是一些魔术方法的定义，和一些固定方法的指针．　
 struct _zend_object_handlers {
 	/* offset of real object header (usually zero) */
 	int										offset;
@@ -146,7 +147,7 @@ struct _zend_object_handlers {
 	zend_object_get_constructor_t			get_constructor;
 	zend_object_get_class_name_t			get_class_name;
 	zend_object_compare_t					compare_objects;
-	zend_object_cast_t						cast_object;
+	zend_object_cast_t						cast_object;			// 应该是一个类型转换方法，
 	zend_object_count_elements_t			count_elements;
 	zend_object_get_debug_info_t			get_debug_info;
 	zend_object_get_closure_t				get_closure;

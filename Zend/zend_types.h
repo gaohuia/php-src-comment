@@ -333,11 +333,15 @@ typedef struct _HashTableIterator {
 	HashPosition  pos;
 } HashTableIterator;
 
+// 对象值
 struct _zend_object {
 	zend_refcounted_h gc;
 	uint32_t          handle; // TODO: may be removed ???
+	// 估计是类, 可能反射会用到
 	zend_class_entry *ce;
+	// 这里估计是对象的方法
 	const zend_object_handlers *handlers;
+	// 对象的属性?
 	HashTable        *properties;
 	zval              properties_table[1];
 };
