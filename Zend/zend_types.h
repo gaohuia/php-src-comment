@@ -176,6 +176,7 @@ typedef union _zend_value {
 	} ww;
 } zend_value;
 
+// 
 struct _zval_struct {
 	zend_value        value;			/* value */
 	union {
@@ -192,7 +193,7 @@ struct _zval_struct {
 		uint32_t     next;                 /* hash collision chain */
 		uint32_t     cache_slot;           /* literal cache slot */
 		uint32_t     lineno;               /* line number (for ast nodes) */
-		uint32_t     num_args;             /* arguments number for EX(This) */
+		uint32_t     num_args;             /* arguments number for EX(This) */ // 当他是一个execute_data的This时, 此处记录了参数的个数. 
 		uint32_t     fe_pos;               /* foreach position */
 		uint32_t     fe_iter_idx;          /* foreach iterator index */
 		uint32_t     access_flags;         /* class constant access flags */

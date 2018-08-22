@@ -42,8 +42,10 @@ PHP_FUNCTION(header)
 	sapi_header_line ctr = {0};
 	size_t len;
 
+	// 开始取参数, 需要指定最小参数个数和最大参数个数. 
+	// void header ( string $string [, bool $replace = true [, int $http_response_code ]] )
 	ZEND_PARSE_PARAMETERS_START(1, 3)
-		Z_PARAM_STRING(ctr.line, len)
+		Z_PARAM_STRING(ctr.line, len)		// zend_parse_arg_string(_arg, &ctr.line, &len, 0)
 		Z_PARAM_OPTIONAL
 		Z_PARAM_BOOL(rep)
 		Z_PARAM_LONG(ctr.response_code)

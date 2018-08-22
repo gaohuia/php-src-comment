@@ -61,6 +61,7 @@ typedef struct _zend_fcall_info_cache {
 
 #define ZEND_NS_NAME(ns, name)			ns "\\" name
 
+// 函数名称
 #define ZEND_FN(name) zif_##name
 #define ZEND_MN(name) zim_##name
 #define ZEND_NAMED_FUNCTION(name)		void name(INTERNAL_FUNCTION_PARAMETERS)
@@ -728,9 +729,9 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 
 #define ZEND_PARSE_PARAMETERS_START_EX(flags, min_num_args, max_num_args) do { \
 		const int _flags = (flags); \
-		int _min_num_args = (min_num_args); \
-		int _max_num_args = (max_num_args); \
-		int _num_args = EX_NUM_ARGS(); \
+		int _min_num_args = (min_num_args); \		// 最小参数个数
+		int _max_num_args = (max_num_args); \		// 最大参数个数
+		int _num_args = EX_NUM_ARGS(); \			// 应该是, 当前函数的实际参数个数
 		int _i; \
 		zval *_real_arg, *_arg = NULL; \
 		zend_expected_type _expected_type = Z_EXPECTED_LONG; \
@@ -1050,6 +1051,8 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 #define Z_PARAM_STRING_EX(dest, dest_len, check_null, separate) \
 	Z_PARAM_STRING_EX2(dest, dest_len, check_null, separate, separate)
 
+// 解析字符串变量, 并写入到变量中去
+// 只需要传变量名
 #define Z_PARAM_STRING(dest, dest_len) \
 	Z_PARAM_STRING_EX(dest, dest_len, 0, 0)
 

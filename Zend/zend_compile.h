@@ -459,12 +459,18 @@ typedef enum _zend_call_kind {
 	ZEND_CALL_TOP_CODE			/* direct VM call to "main" code from external C code */
 } zend_call_kind;
 
+// ZEND函数的参数
 struct _zend_execute_data {
+	// 如果是PHP函数, zend_op应该是指向机器码的内存. 
 	const zend_op       *opline;           /* executed opline                */
+	// 指向当前结构体? 为啥有这种操作
 	zend_execute_data   *call;             /* current call                   */
+	// 这里为啥又定义了一个返回值的指针?
 	zval                *return_value;
 	zend_function       *func;             /* executed function              */
+	// this 指向的变量, 所以YY是不是所有的变量都可以定义方法? 
 	zval                 This;             /* this + call_info + num_args    */
+	// 是否用于调用栈回逆?
 	zend_execute_data   *prev_execute_data;
 	zend_array          *symbol_table;
 #if ZEND_EX_USE_RUN_TIME_CACHE
@@ -521,9 +527,11 @@ struct _zend_execute_data {
 #define ZEND_CALL_VAR(call, n) \
 	((zval*)(((char*)(call)) + ((int)(n))))
 
+// call是execute_data
 #define ZEND_CALL_VAR_NUM(call, n) \
 	(((zval*)(call)) + (ZEND_CALL_FRAME_SLOT + ((int)(n))))
 
+// call是execute_data
 #define ZEND_CALL_ARG(call, n) \
 	ZEND_CALL_VAR_NUM(call, ((int)(n)) - 1)
 
@@ -531,6 +539,8 @@ struct _zend_execute_data {
 
 #define EX_CALL_INFO()			ZEND_CALL_INFO(execute_data)
 #define EX_CALL_KIND()			ZEND_CALL_KIND(execute_data)
+
+// 取出ZEND_FUNCTION实际传递的参数个数. 
 #define EX_NUM_ARGS()			ZEND_CALL_NUM_ARGS(execute_data)
 
 #define ZEND_CALL_USES_STRICT_TYPES(call) \
