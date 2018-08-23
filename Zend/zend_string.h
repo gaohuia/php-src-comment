@@ -72,6 +72,8 @@ END_EXTERN_C()
 
 #define _ZSTR_HEADER_SIZE XtOffsetOf(zend_string, val)
 
+// 分配一个zend_string类型的内存, 大小为zend_string结构体的大小+length的大小
+// 另外多分配一个字节
 #define _ZSTR_STRUCT_SIZE(len) (_ZSTR_HEADER_SIZE + len + 1)
 
 #define ZSTR_ALLOCA_ALLOC(str, _len, use_heap) do { \
@@ -147,6 +149,8 @@ static zend_always_inline zend_string *zend_string_alloc(size_t len, int persist
 	return ret;
 }
 
+// 分配一个zend_string变量，并把这个变量的引用设置为1
+// hash设置为0
 static zend_always_inline zend_string *zend_string_safe_alloc(size_t n, size_t m, size_t l, int persistent)
 {
 	zend_string *ret = (zend_string *)safe_pemalloc(n, m, ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(l)), persistent);

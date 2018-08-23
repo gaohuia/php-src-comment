@@ -2830,6 +2830,8 @@ ZEND_API void * __zend_malloc(size_t len)
 	if (EXPECTED(tmp || !len)) {
 		return tmp;
 	}
+
+	// 分配失败时，系统内存不够了...
 	zend_out_of_memory();
 }
 

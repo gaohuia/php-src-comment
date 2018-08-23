@@ -634,10 +634,13 @@ END_EXTERN_C()
 	} while (0)
 
 // 将数据写入到return_value这个指针里面去. 
+// 
 #define RETVAL_BOOL(b)					ZVAL_BOOL(return_value, b)
 #define RETVAL_NULL() 					ZVAL_NULL(return_value)
 #define RETVAL_LONG(l) 					ZVAL_LONG(return_value, l)
 #define RETVAL_DOUBLE(d) 				ZVAL_DOUBLE(return_value, d)
+
+// 写入时，不增加引用计数. 
 #define RETVAL_STR(s)			 		ZVAL_STR(return_value, s)
 #define RETVAL_INTERNED_STR(s)	 		ZVAL_INTERNED_STR(return_value, s)
 #define RETVAL_NEW_STR(s)		 		ZVAL_NEW_STR(return_value, s)
