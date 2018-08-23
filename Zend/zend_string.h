@@ -131,6 +131,7 @@ static zend_always_inline uint32_t zend_string_delref(zend_string *s)
 	return 1;
 }
 
+// 与zend_string_safe_alloc类似. 
 static zend_always_inline zend_string *zend_string_alloc(size_t len, int persistent)
 {
 	zend_string *ret = (zend_string *)pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(len)), persistent);
@@ -169,8 +170,10 @@ static zend_always_inline zend_string *zend_string_safe_alloc(size_t n, size_t m
 	return ret;
 }
 
+// 分配一个zend_string结构体. 
 static zend_always_inline zend_string *zend_string_init(const char *str, size_t len, int persistent)
 {
+	// 分配一个zend_string结构. 
 	zend_string *ret = zend_string_alloc(len, persistent);
 
 	memcpy(ZSTR_VAL(ret), str, len);
@@ -185,6 +188,7 @@ static zend_always_inline zend_string *zend_string_init_interned(const char *str
 	return zend_new_interned_string(ret);
 }
 
+// COPY, 只是zend_string, 其实是增加一下引用记数. 
 static zend_always_inline zend_string *zend_string_copy(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -193,6 +197,7 @@ static zend_always_inline zend_string *zend_string_copy(zend_string *s)
 	return s;
 }
 
+// 这里会复制一个zend_string结构. 
 static zend_always_inline zend_string *zend_string_dup(zend_string *s, int persistent)
 {
 	if (ZSTR_IS_INTERNED(s)) {
