@@ -286,9 +286,11 @@ static zend_always_inline int _zend_handle_numeric_str(const char *key, size_t l
 {
 	const char *tmp = key;
 
+	// 首字符>'9' 返回0
 	if (*tmp > '9') {
 		return 0;
 	} else if (*tmp < '0') {
+		// 负数
 		if (*tmp != '-') {
 			return 0;
 		}
@@ -445,6 +447,8 @@ static zend_always_inline int zend_symtable_exists_ind(HashTable *ht, zend_strin
 {
 	zend_ulong idx;
 
+	// 是不是将字符串转在zend_ulong类型, 是的
+	// 尝试解析这个字符串
 	if (ZEND_HANDLE_NUMERIC(key, idx)) {
 		return zend_hash_index_exists(ht, idx);
 	} else {

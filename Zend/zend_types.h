@@ -159,7 +159,7 @@ typedef uintptr_t zend_type;
 typedef union _zend_value {
 	zend_long         lval;				/* long value */
 	double            dval;				/* double value */
-	zend_refcounted  *counted;
+	zend_refcounted  *counted;			// 可以理解为, 一种多态..
 	zend_string      *str;
 	zend_array       *arr;
 	zend_object      *obj;
@@ -534,6 +534,8 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_CONSTANT(zval)			((Z_TYPE_FLAGS(zval) & IS_TYPE_CONSTANT) != 0)
 #define Z_CONSTANT_P(zval_p)		Z_CONSTANT(*(zval_p))
 
+// 一般带_P的，需要传入一个　zval*
+// 不带_P的，传入一个zval结构. 
 #define Z_REFCOUNTED(zval)			((Z_TYPE_FLAGS(zval) & IS_TYPE_REFCOUNTED) != 0)
 #define Z_REFCOUNTED_P(zval_p)		Z_REFCOUNTED(*(zval_p))
 

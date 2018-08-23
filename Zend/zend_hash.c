@@ -476,6 +476,7 @@ static zend_always_inline Bucket *zend_hash_find_bucket(const HashTable *ht, zen
 	uint32_t idx;
 	Bucket *p, *arData;
 
+	// 得到一个hash值
 	h = zend_string_hash_val(key);
 	arData = ht->arData;
 	nIndex = h | ht->nTableMask;
@@ -2440,6 +2441,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_minmax(const HashTable *ht, compare_func_
 	return &res->val;
 }
 
+// 到这里，　好歹key肯定能解析出一点数字来. 
 ZEND_API int ZEND_FASTCALL _zend_handle_numeric_str_ex(const char *key, size_t length, zend_ulong *idx)
 {
 	register const char *tmp = key;
