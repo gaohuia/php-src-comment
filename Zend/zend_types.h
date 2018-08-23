@@ -474,6 +474,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 /* extended types */
 #define IS_INTERNED_STRING_EX		IS_STRING
 
+// 一次赋值. 
 #define IS_STRING_EX				(IS_STRING         | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_ARRAY_EX					(IS_ARRAY          | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_OBJECT_EX				(IS_OBJECT         | ((                   IS_TYPE_REFCOUNTED                   ) << Z_TYPE_FLAGS_SHIFT))

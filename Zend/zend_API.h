@@ -633,6 +633,7 @@ END_EXTERN_C()
 		}										\
 	} while (0)
 
+// 将数据写入到return_value这个指针里面去. 
 #define RETVAL_BOOL(b)					ZVAL_BOOL(return_value, b)
 #define RETVAL_NULL() 					ZVAL_NULL(return_value)
 #define RETVAL_LONG(l) 					ZVAL_LONG(return_value, l)
@@ -651,6 +652,7 @@ END_EXTERN_C()
 #define RETVAL_FALSE  					ZVAL_FALSE(return_value)
 #define RETVAL_TRUE   					ZVAL_TRUE(return_value)
 
+// 返回数据
 #define RETURN_BOOL(b) 					{ RETVAL_BOOL(b); return; }
 #define RETURN_NULL() 					{ RETVAL_NULL(); return;}
 #define RETURN_LONG(l) 					{ RETVAL_LONG(l); return; }
