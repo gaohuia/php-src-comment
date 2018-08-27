@@ -162,10 +162,14 @@ typedef union _zend_value {
 	zend_long         lval;				/* long value */
 	// 同上. 
 	double            dval;				/* double value */
-	// 可以指向下面各种内存变量
+	// 可以指向下面各种内存变量, 不会单独使用. 
 	zend_refcounted  *counted;			// 可以理解为, 一种多态..
+
+	// 字符串
 	zend_string      *str;
+	// 数组
 	zend_array       *arr;
+	// object
 	zend_object      *obj;
 	zend_resource    *res;
 	zend_reference   *ref;
