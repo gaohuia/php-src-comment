@@ -169,7 +169,7 @@ typedef union _zend_value {
 	zend_string      *str;
 	// 数组
 	zend_array       *arr;
-	// object
+	//
 	zend_object      *obj;
 	zend_resource    *res;
 	zend_reference   *ref;
