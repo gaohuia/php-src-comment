@@ -60,14 +60,38 @@ PHP源码阅读笔记.
 	void *Z_PTR_P(zval*)
 
 #### zval赋值
-	ZVAL_UNDEF(zval*)
-	ZVAL_NULL(zval*)
-	ZVAL_FALSE(zval*)
-	ZVAL_TRUE(zval*)
-	ZVAL_BOOL(zval*, bool)
-	ZVAL_LONG(zval*, long)
-	ZVAL_DOUBLE(zval*, double)
-	ZVAL_STR(zval*, zend_string*)
+
+以下方法会变更变量的类型. 没有特殊声明不影响引用计数. 
+
+	ZVAL_UNDEF(zval*) 					将变量设置为undefined
+	ZVAL_NULL(zval*) 					设置变量为null
+	ZVAL_FALSE(zval*) 					设置为false
+	ZVAL_TRUE(zval*) 					设置为true
+	ZVAL_BOOL(zval*, bool) 				同上两个
+	ZVAL_LONG(zval*, long) 				设置为long值
+	ZVAL_DOUBLE(zval*, double) 			设置为double值
+	ZVAL_STR(zval*, zend_string*) 		设置为zend_string值, 会考虑zend_string为internal的情况
+	ZVAL_NEW_STR(zval*, zend_string*) 	设置为zend_string值, 没有上述考虑
+	ZVAL_STR_COPY(zval*, zend_string*) 	设置zval*变量的值为zend_string, 会增加zend_string引用数
+	ZVAL_ARR(zval*, zend_array*) 		设置zval*变量的值为zend_array
+	ZVAL_NEW_ARR(zval*) 				分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1.
+	ZVAL_NEW_PERSISTENT_ARR(zval*) 		分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
+	ZVAL_OBJ(zval*, zend_object*)		设置zend_object值
+	ZVAL_RES(zval*, zend_resource*) 	zend_resource
+	ZVAL_NEW_RES(zval* p_zval, int handler, int type, void *p) 用handler, type, p初始化一个zend_resource结构, 并设置其值. 
+	ZVAL_REF(zval*, zend_reference*)	设置zend_reference
+	ZVAL_NEW_EMPTY_REF(zval*) 			分配一个新的zend_reference结构, 并设置到zval作为其值. 引用计数为1. 
+	ZVAL_NEW_REF(zval* p_val, zval* r)  分配一个新的zend_reference结构, 将引用r变量. 
+	ZVAL_NEW_PERSISTENT_REF 			同上, 只是在系统内存中分配. 
+	ZVAL_CE(zval* p, zend_function* v)
+	ZVAL_PTR(zval* p, void* v)
+	ZVAL_FUNC(zval* p, zend_function* v)
+
+
+#### 引用计数
+
+	Z_TRY_ADDREF(zval* p) 				如果是可以引用计数的, 那么增加它. 
+	Z_TRY_DELREF(zval* p) 				尝试, 减少引用. 
 
 ## 数据类型及常用操作
 
