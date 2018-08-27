@@ -1,40 +1,37 @@
-The PHP Interpreter
-===================
+PHP源码阅读笔记. 
+--------------------
 
-This is the github mirror of the official PHP repository located at
-http://git.php.net.
+## 重要文件
 
-[![Build Status](https://secure.travis-ci.org/php/php-src.svg?branch=master)](http://travis-ci.org/php/php-src)
-[![Build status](https://ci.appveyor.com/api/projects/status/meyur6fviaxgdwdy?svg=true)](https://ci.appveyor.com/project/php/php-src)
+Zend/zend_types.h 		定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
+Zend/zend_string.h 		定义了zend_string相关操作. 
+Zend/zend_API.h 		定义了扩展相关的宏和函数.
+Zend/zend_alloc.h 		定义了内存分配相关的方法.
+Zend/zend_hash.h 		定义了hash表相关的方法和宏. 
 
-Pull Requests
-=============
-PHP accepts pull requests via github. Discussions are done on github, but
-depending on the topic can also be relayed to the official PHP developer
-mailing list internals@lists.php.net.
+## 数据类似常用操作
 
-New features require an RFC and must be accepted by the developers.
-See https://wiki.php.net/rfc and https://wiki.php.net/rfc/voting for more
-information on the process.
-
-Bug fixes **do not** require an RFC, but require a bugtracker ticket. Always
-open a ticket at https://bugs.php.net and reference the bug id using #NNNNNN.
-
-    Fix #55371: get_magic_quotes_gpc() throws deprecation warning
-
-    After removing magic quotes, the get_magic_quotes_gpc function caused
-    a deprecate warning. get_magic_quotes_gpc can be used to detected
-    the magic_quotes behavior and therefore should not raise a warning at any
-    time. The patch removes this warning
-
-We do not merge pull requests directly on github. All PRs will be
-pulled and pushed through http://git.php.net.
+### Long类型
 
 
-Guidelines for contributors
-===========================
-- [CODING_STANDARDS](/CODING_STANDARDS)
-- [README.GIT-RULES](/README.GIT-RULES)
-- [README.MAILINGLIST_RULES](/README.MAILINGLIST_RULES)
-- [README.RELEASE_PROCESS](/README.RELEASE_PROCESS)
 
+
+### 字符串类型
+
+#### 创建一个zend_string结构. 并设置引用数为1
+	zend_string *zend_string_alloc(size_t len, int persistent)
+
+#### 创建一个zend_string结构, 并为期赋值. 设置引用数为1. str指向的缓冲区将会被copy到zend_str结构内. 
+	zend_string *zend_string_init(const char *str, size_t len, int persistent)	
+
+#### 此方法只是简单增加了引用计数, 并返回传入的zend_string
+	zend_string *zend_string_copy(zend_string *s)
+
+#### 释放zend_string, 只是减少一次引用, 如果引用减为0自动释放
+	void zend_string_release(zend_string *s)
+
+#### 增加引用
+	uint32_t zend_string_addref(zend_string *s)
+	
+#### 减少引用
+	uint32_t zend_string_delref(zend_string *s)
