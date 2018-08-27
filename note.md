@@ -1,7 +1,12 @@
 
 --------------------
 
-### 字符串操作
+### Long类型
+
+
+
+
+### 字符串类型
 
 #### 创建一个zend_string结构. 并设置引用数为1
 	zend_string *zend_string_alloc(size_t len, int persistent)

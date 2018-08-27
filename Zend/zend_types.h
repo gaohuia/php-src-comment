@@ -158,8 +158,11 @@ typedef uintptr_t zend_type;
 
 // 大小64位
 typedef union _zend_value {
+	// 不需要处理内存问题, 与zval结构共享内存. 
 	zend_long         lval;				/* long value */
+	// 同上. 
 	double            dval;				/* double value */
+	// 可以指向下面各种内存变量
 	zend_refcounted  *counted;			// 可以理解为, 一种多态..
 	zend_string      *str;
 	zend_array       *arr;
@@ -171,6 +174,7 @@ typedef union _zend_value {
 	void             *ptr;
 	zend_class_entry *ce;
 	zend_function    *func;
+
 	struct {
 		uint32_t w1;
 		uint32_t w2;
