@@ -9,6 +9,64 @@ PHP源码阅读笔记.
 * Zend/zend_alloc.h 		定义了内存分配相关的方法.
 * Zend/zend_hash.h 		定义了hash表相关的方法和宏. 
 
+## zval
+
+#### 取得变量类型, 如: IS_NULL, IS_LONG, IS_STRING 等
+	zend_uchar zval_get_type(const zval* pz)
+	zend_uchar Z_TYPE(zval)
+	zend_uchar Z_TYPE_P(zval*)
+
+#### 取得变量类型, TYPE_INFO. 如IS_STRING_EX, IS_ARRAY_EX 等. 
+	uint32_t Z_TYPE_INFO(zval)
+	uint32_t Z_TYPE_INFO_P(zval*)
+
+#### 取得变量的counted, zend_refcounted_h结构指针. 此值同时是str,arr等指向的内存的开始. 
+	zend_refcounted_h* Z_COUNTED(zval)
+	zend_refcounted_h* Z_COUNTED_P(zval*)
+
+#### 返回引用计数, 数字. 	
+	uint32_t GC_REFCOUNT(zend_refcounted_h*) 
+
+#### zval取值
+	zend_long Z_LVAL(zval) 			取long值
+	zend_long Z_LVAL_P(zval*) 		取long值
+	double Z_DVAL(zval) 			取double值
+	double Z_DVAL(zval*) 			取double值         	
+	zend_string Z_STR(zval) 		返回字符串zend_string
+	zend_string Z_STR(zval*)        返回字符串zend_string
+	char* Z_STRVAL(zval)    		取字符串缓冲区
+	char* Z_STRVAL_P(zval*) 		取字符串缓冲区
+	size_t Z_STRLEN(zval)   		取字符串变量的长度
+	size_t Z_STRLEN(zval*)  		取字符串变量的长度
+	zend_ulong Z_STRHASH(zval) 		计算字符串hash值
+	zend_ulong Z_STRHASH_P(zval*) 	计算字符串hash值
+	zend_array* Z_ARR(zval) 		取zend_array 别名: Z_ARRVAL
+	zend_array* Z_ARR_P(zval*) 		取zend_array 别名: Z_ARRVAL_P
+	zend_object *Z_OBJ(zval) 		取zend_object值	
+	zend_object *Z_OBJCE(zval) 		取zend_object值	
+	zend_object *Z_OBJ_P(zval*) 	取zend_object值
+	zend_object *Z_OBJCE_P(zval*) 	取zend_object值
+	zend_resource *Z_RES(zval) 
+	zend_resource *Z_RES_P(zval*) 
+	zend_reference *Z_REF(zval)
+	zend_reference *Z_REF_P(zval)
+	zend_function *Z_FUNC(zval)
+	zend_function *Z_FUNC_P(zval*)
+	zend_class_entry *Z_CE(zval)
+	zend_class_entry *Z_CE_P(zval*)
+	void *Z_PTR(zval)
+	void *Z_PTR_P(zval*)
+
+#### zval赋值
+	ZVAL_UNDEF(zval*)
+	ZVAL_NULL(zval*)
+	ZVAL_FALSE(zval*)
+	ZVAL_TRUE(zval*)
+	ZVAL_BOOL(zval*, bool)
+	ZVAL_LONG(zval*, long)
+	ZVAL_DOUBLE(zval*, double)
+	ZVAL_STR(zval*, zend_string*)
+
 ## 数据类型及常用操作
 
 ### Long类型

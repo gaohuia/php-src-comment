@@ -163,7 +163,7 @@ typedef union _zend_value {
 	// 同上. 
 	double            dval;				/* double value */
 	// 可以指向下面各种内存变量, 不会单独使用. 
-	zend_refcounted  *counted;			// 可以理解为, 一种多态..
+	zend_refcounted  *counted;			// 可以理解为, 一种多态.
 
 	// 字符串
 	zend_string      *str;
@@ -225,6 +225,7 @@ typedef struct _zend_refcounted_h {
 	} u;
 } zend_refcounted_h;
 
+// 别名
 struct _zend_refcounted {
 	zend_refcounted_h gc;
 };
@@ -401,6 +402,7 @@ struct _zend_ast_ref {
 #define IS_PTR						17
 #define _IS_ERROR					20
 
+// 取得zval类型
 static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 	return pz->u1.v.type;
 }
@@ -423,6 +425,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_TYPE_INFO(zval)			(zval).u1.type_info
 #define Z_TYPE_INFO_P(zval_p)		Z_TYPE_INFO(*(zval_p))
 
+// 变量扩展变量 ---------------------------------------------------------
 #define Z_NEXT(zval)				(zval).u2.next
 #define Z_NEXT_P(zval_p)			Z_NEXT(*(zval_p))
 
@@ -448,12 +451,15 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 
 #define Z_TYPE_FLAGS_SHIFT			8
 #define Z_CONST_FLAGS_SHIFT			16
+// 变量扩展变量 END ---------------------------------------------------------
 
+// 引用计数部分. 传入的正好是一个value变量如, z.value.counted
 #define GC_REFCOUNT(p)				(p)->gc.refcount
 #define GC_TYPE(p)					(p)->gc.u.v.type
 #define GC_FLAGS(p)					(p)->gc.u.v.flags
 #define GC_INFO(p)					(p)->gc.u.v.gc_info
 #define GC_TYPE_INFO(p)				(p)->gc.u.type_info
+// 
 
 #define Z_GC_TYPE(zval)				GC_TYPE(Z_COUNTED(zval))
 #define Z_GC_TYPE_P(zval_p)			Z_GC_TYPE(*(zval_p))
