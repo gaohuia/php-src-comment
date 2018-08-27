@@ -88,6 +88,12 @@ PHP源码阅读笔记.
 	ZVAL_FUNC(zval* p, zend_function* v)
 
 
+#### ZVAL COPY
+
+	ZVAL_COPY_VALUE(zval* p_zval, zval* v) 		简单COPY value和type_info字段. 不增加引用计数. 
+	ZVAL_COPY(zval* p_zval, zval* v)	同上, 但如果是引用计数的类型, copy值后, 增加引用计数. 
+	ZVAL_DUP(zval* p_zval, zval* v) 	先简单COPY, 如果值是COPYABLE的, copy之, 如果是引用计数的, 增加引用. 其它情况不管. 
+
 #### 引用计数
 
 	Z_TRY_ADDREF(zval* p) 				如果是可以引用计数的, 那么增加它. 
