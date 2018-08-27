@@ -203,6 +203,7 @@ struct _zval_struct {
 	} u2;
 };
 
+// 8个字节
 typedef struct _zend_refcounted_h {
 	uint32_t         refcount;			/* reference counter 32-bit */
 	union {
@@ -584,9 +585,11 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_DVAL(zval)				(zval).value.dval
 #define Z_DVAL_P(zval_p)			Z_DVAL(*(zval_p))
 
+// 返回zval内的str值. 
 #define Z_STR(zval)					(zval).value.str
 #define Z_STR_P(zval_p)				Z_STR(*(zval_p))
 
+// 按5.6, 这个宏返回字符串char*
 #define Z_STRVAL(zval)				ZSTR_VAL(Z_STR(zval))
 #define Z_STRVAL_P(zval_p)			Z_STRVAL(*(zval_p))
 
@@ -931,7 +934,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 	do {												\
 		zval *_z1 = (z);								\
 		const zval *_z2 = (v);							\
-		// 实际上代表了所有Value值.64位 
+		// 实际上代表了所有Value值. 64位 
 		zend_refcounted *_gc = Z_COUNTED_P(_z2);		\
 		uint32_t _t = Z_TYPE_INFO_P(_z2);				\
 		ZVAL_COPY_VALUE_EX(_z1, _z2, _gc, _t);			\
