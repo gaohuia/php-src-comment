@@ -232,3 +232,5 @@ win32/wsyslog.h
 !ext/fileinfo/libmagic.patch
 !ext/mbstring/oniguruma.patch
 
+/.tags
+/.tags_sorted_by_file

@@ -1728,8 +1728,11 @@ static zend_always_inline void zend_array_dup_packed_elements(HashTable *source,
 static zend_always_inline uint32_t zend_array_dup_elements(HashTable *source, HashTable *target, int static_keys, int with_holes)
 {
 	uint32_t idx = 0;
+	// 源数组的data
 	Bucket *p = source->arData;
+	// 目标数组的data
 	Bucket *q = target->arData;
+	// 最后一个bucket的后面.
 	Bucket *end = p + source->nNumUsed;
 
 	do {
@@ -1753,6 +1756,7 @@ static zend_always_inline uint32_t zend_array_dup_elements(HashTable *source, Ha
 	return idx;
 }
 
+// 初看是COPY一个HashTable变量, 并返回之.
 ZEND_API HashTable* ZEND_FASTCALL zend_array_dup(HashTable *source)
 {
 	uint32_t idx;
@@ -1760,14 +1764,19 @@ ZEND_API HashTable* ZEND_FASTCALL zend_array_dup(HashTable *source)
 
 	IS_CONSISTENT(source);
 
+	// 分配一个HashTable的内存.
 	ALLOC_HASHTABLE(target);
+	// 初始化这个HashTable, 引用计数, 类似设置等
 	GC_REFCOUNT(target) = 1;
 	GC_TYPE_INFO(target) = IS_ARRAY | (GC_COLLECTABLE << GC_FLAGS_SHIFT);
 
+	// 设置nTableSize, 应该是容量大小
 	target->nTableSize = source->nTableSize;
 	target->pDestructor = ZVAL_PTR_DTOR;
 
+	//
 	if (source->nNumUsed == 0) {
+		// 源数组没有元素的情况
 		target->u.flags = (source->u.flags & ~(HASH_FLAG_INITIALIZED|HASH_FLAG_PACKED|HASH_FLAG_PERSISTENT|ZEND_HASH_APPLY_COUNT_MASK)) | HASH_FLAG_APPLY_PROTECTION | HASH_FLAG_STATIC_KEYS;
 		target->nTableMask = HT_MIN_MASK;
 		target->nNumUsed = 0;
@@ -1776,6 +1785,7 @@ ZEND_API HashTable* ZEND_FASTCALL zend_array_dup(HashTable *source)
 		target->nInternalPointer = HT_INVALID_IDX;
 		HT_SET_DATA_ADDR(target, &uninitialized_bucket);
 	} else if (GC_FLAGS(source) & IS_ARRAY_IMMUTABLE) {
+		// 源数组是不可变元素
 		target->u.flags = (source->u.flags & ~HASH_FLAG_PERSISTENT) | HASH_FLAG_APPLY_PROTECTION;
 		target->nTableMask = source->nTableMask;
 		target->nNumUsed = source->nNumUsed;
@@ -1793,6 +1803,7 @@ ZEND_API HashTable* ZEND_FASTCALL zend_array_dup(HashTable *source)
 			target->nInternalPointer = idx;
 		}
 	} else if (source->u.flags & HASH_FLAG_PACKED) {
+		// 这个 HASH_FLAG_PACKED 暂时不知道它的意思.
 		target->u.flags = (source->u.flags & ~(HASH_FLAG_PERSISTENT|ZEND_HASH_APPLY_COUNT_MASK)) | HASH_FLAG_APPLY_PROTECTION;
 		target->nTableMask = source->nTableMask;
 		target->nNumUsed = source->nNumUsed;
@@ -1816,12 +1827,15 @@ ZEND_API HashTable* ZEND_FASTCALL zend_array_dup(HashTable *source)
 			target->nInternalPointer = idx;
 		}
 	} else {
+		// 除了 HASH_FLAG_PERSISTENT 和 ZEND_HASH_APPLY_COUNT_MASK 标记不考贝, 其它的都考贝
 		target->u.flags = (source->u.flags & ~(HASH_FLAG_PERSISTENT|ZEND_HASH_APPLY_COUNT_MASK)) | HASH_FLAG_APPLY_PROTECTION;
 		target->nTableMask = source->nTableMask;
 		target->nNextFreeElement = source->nNextFreeElement;
 		target->nInternalPointer = source->nInternalPointer;
 
+		// 分配一块和源数组一样大小的内存.
 		HT_SET_DATA_ADDR(target, emalloc(HT_SIZE(target)));
+		// 初看是重置了些什么
 		HT_HASH_RESET(target);
 
 		if (HT_HAS_STATIC_KEYS_ONLY(target)) {
@@ -2441,7 +2455,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_minmax(const HashTable *ht, compare_func_
 	return &res->val;
 }
 
-// 到这里，　好歹key肯定能解析出一点数字来. 
+// 到这里，　好歹key肯定能解析出一点数字来.
 ZEND_API int ZEND_FASTCALL _zend_handle_numeric_str_ex(const char *key, size_t length, zend_ulong *idx)
 {
 	register const char *tmp = key;
