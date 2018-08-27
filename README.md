@@ -3,11 +3,11 @@ PHP源码阅读笔记.
 
 ## 重要文件
 
-Zend/zend_types.h 		定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
-Zend/zend_string.h 		定义了zend_string相关操作. 
-Zend/zend_API.h 		定义了扩展相关的宏和函数.
-Zend/zend_alloc.h 		定义了内存分配相关的方法.
-Zend/zend_hash.h 		定义了hash表相关的方法和宏. 
+* Zend/zend_types.h 		定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
+* Zend/zend_string.h 		定义了zend_string相关操作. 
+* Zend/zend_API.h 		定义了扩展相关的宏和函数.
+* Zend/zend_alloc.h 		定义了内存分配相关的方法.
+* Zend/zend_hash.h 		定义了hash表相关的方法和宏. 
 
 ## 数据类似常用操作
 
