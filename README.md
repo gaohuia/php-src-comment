@@ -167,11 +167,11 @@ PHP源码阅读笔记.
     PHP中有一个Packed数组. 用于存储类似于数组的数据. 
 
 ```C
-    int zend_hash_del(HashTable*, zend_string*);
-    void zend_hash_real_init(HashTable*, zend_bool packed);
-    void zend_hash_packed_to_hash(HashTable*);
-    void zend_hash_to_packed(HashTable*);
-    zend_bool HT_IS_WITHOUT_HOLES(HashTable *);  // 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞. 
+    void zend_hash_real_init(HashTable*, zend_bool packed);     // 初始化一个HashTable
+    int zend_hash_del(HashTable*, zend_string*);                // 删除一个key
+    void zend_hash_packed_to_hash(HashTable*);                  // 把packed数组转为hash
+    void zend_hash_to_packed(HashTable*);                       // hash转为packed数组
+    zend_bool HT_IS_WITHOUT_HOLES(HashTable *);                 // 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞. 
 ```
 
 ### 参考文档
