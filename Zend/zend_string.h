@@ -48,7 +48,7 @@ END_EXTERN_C()
 
 /* Shortcuts */
 
-// shortcuts 没错, 只是便捷的取出zend_string结构的成员. 
+// shortcuts 没错, 只是便捷的取出zend_string结构的成员.
 #define ZSTR_VAL(zstr)  (zstr)->val
 #define ZSTR_LEN(zstr)  (zstr)->len
 #define ZSTR_H(zstr)    (zstr)->h
@@ -95,9 +95,9 @@ END_EXTERN_C()
 
 /*---*/
 
-// 返回zend_string结构的hash值. 
-// zend_string会缓存这个hash, 如果缓存中不存在hash值则是计算出这个缓存值, 并返回. 
-// 所以取zend_string结构的hash值应当使用这个方法. 
+// 返回zend_string结构的hash值.
+// zend_string会缓存这个hash, 如果缓存中不存在hash值则是计算出这个缓存值, 并返回.
+// 所以取zend_string结构的hash值应当使用这个方法.
 static zend_always_inline zend_ulong zend_string_hash_val(zend_string *s)
 {
 	if (!ZSTR_H(s)) {
@@ -112,7 +112,7 @@ static zend_always_inline void zend_string_forget_hash_val(zend_string *s)
 	ZSTR_H(s) = 0;
 }
 
-// 返回一个zend_string结构的引用数. 
+// 返回一个zend_string结构的引用数.
 static zend_always_inline uint32_t zend_string_refcount(const zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -121,7 +121,7 @@ static zend_always_inline uint32_t zend_string_refcount(const zend_string *s)
 	return 1;
 }
 
-// 增加引用计数. 
+// 增加引用计数.
 static zend_always_inline uint32_t zend_string_addref(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -130,7 +130,7 @@ static zend_always_inline uint32_t zend_string_addref(zend_string *s)
 	return 1;
 }
 
-// 减少引用计数. 
+// 减少引用计数.
 static zend_always_inline uint32_t zend_string_delref(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -139,7 +139,7 @@ static zend_always_inline uint32_t zend_string_delref(zend_string *s)
 	return 1;
 }
 
-// 与zend_string_safe_alloc类似. 
+// 与zend_string_safe_alloc类似.
 static zend_always_inline zend_string *zend_string_alloc(size_t len, int persistent)
 {
 	zend_string *ret = (zend_string *)pemalloc(ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(len)), persistent);
@@ -179,11 +179,11 @@ static zend_always_inline zend_string *zend_string_safe_alloc(size_t n, size_t m
 }
 
 // 调用zend_string_alloc, 所以同样引用数为1
-// 分配一个zend_string结构体. 
+// 分配一个zend_string结构体.
 // 并给赋值
 static zend_always_inline zend_string *zend_string_init(const char *str, size_t len, int persistent)
 {
-	// 分配一个zend_string结构. 
+	// 分配一个zend_string结构.
 	zend_string *ret = zend_string_alloc(len, persistent);
 
 	memcpy(ZSTR_VAL(ret), str, len);
@@ -207,7 +207,7 @@ static zend_always_inline zend_string *zend_string_copy(zend_string *s)
 	return s;
 }
 
-// 这里会复制一个zend_string结构. 
+// 这里会复制一个zend_string结构.
 static zend_always_inline zend_string *zend_string_dup(zend_string *s, int persistent)
 {
 	if (ZSTR_IS_INTERNED(s)) {
@@ -217,7 +217,7 @@ static zend_always_inline zend_string *zend_string_dup(zend_string *s, int persi
 	}
 }
 
-// 以给定的长度重新分配一个zend_string结构并返回之. 
+// 以给定的长度重新分配一个zend_string结构并返回之.
 // 与下面两个方法基本相同
 // 新长度超过原长度时, 原来的内存会被保留
 // 新长度小于原长度时, 原来的内存会被truncate
@@ -240,7 +240,7 @@ static zend_always_inline zend_string *zend_string_realloc(zend_string *s, size_
 	return ret;
 }
 
-// 字符串增长. 
+// 字符串增长.
 static zend_always_inline zend_string *zend_string_extend(zend_string *s, size_t len, int persistent)
 {
 	zend_string *ret;
@@ -249,30 +249,30 @@ static zend_always_inline zend_string *zend_string_extend(zend_string *s, size_t
 
 	if (!ZSTR_IS_INTERNED(s)) {
 		if (EXPECTED(GC_REFCOUNT(s) == 1)) {
-			// 如果引用数为1, 使用更高效的办法. 减少一次内存copy. 
-			// 如果zend_string的引用数为1, 重新分配它的内存. 到指定的长度. 
-			// realloc会保留原内存数据. 
+			// 如果引用数为1, 使用更高效的办法. 减少一次内存copy.
+			// 如果zend_string的引用数为1, 重新分配它的内存. 到指定的长度.
+			// realloc会保留原内存数据.
 			ret = (zend_string *)perealloc(s, ZEND_MM_ALIGNED_SIZE(_ZSTR_STRUCT_SIZE(len)), persistent);
 			ZSTR_LEN(ret) = len;
 			zend_string_forget_hash_val(ret);
-			// 返回这个新的内存块的指针. 
+			// 返回这个新的内存块的指针.
 			return ret;
 		} else {
-			// 如果引用数不为1, 减少引用. 
+			// 如果引用数不为1, 减少引用.
 			GC_REFCOUNT(s)--;
 		}
 	}
 
-	// 重新分配一个zend_string结构. 
-	// 不必管原来的那个zend_string指针了, 因为它当前的引用数>=1, 自然有别的指针会管理它. 
+	// 重新分配一个zend_string结构.
+	// 不必管原来的那个zend_string指针了, 因为它当前的引用数>=1, 自然有别的指针会管理它.
 	ret = zend_string_alloc(len, persistent);
 
-	// 只需要copy内存, length已经在上一步设置过了. 
+	// 只需要copy内存, length已经在上一步设置过了.
 	memcpy(ZSTR_VAL(ret), ZSTR_VAL(s), ZSTR_LEN(s) + 1);
 	return ret;
 }
 
-// 字符串截取. 
+// 字符串截取.
 static zend_always_inline zend_string *zend_string_truncate(zend_string *s, size_t len, int persistent)
 {
 	zend_string *ret;
@@ -313,7 +313,7 @@ static zend_always_inline zend_string *zend_string_safe_realloc(zend_string *s, 
 }
 
 // 字符串释放, 只有引用数<=1的zend_string结构能被释放.
-// 否则会报错. 
+// 否则会报错.
 static zend_always_inline void zend_string_free(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -322,8 +322,8 @@ static zend_always_inline void zend_string_free(zend_string *s)
 	}
 }
 
-// 减少zend_string结构的引用数. 
-// 如果引用数减为0, 自动释放 . 
+// 减少zend_string结构的引用数.
+// 如果引用数减为0, 自动释放 .
 static zend_always_inline void zend_string_release(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -333,7 +333,7 @@ static zend_always_inline void zend_string_release(zend_string *s)
 	}
 }
 
-// 比较两个zend_string结构是不是存储着相同的数据. 
+// 比较两个zend_string结构是不是存储着相同的数据.
 static zend_always_inline zend_bool zend_string_equals(zend_string *s1, zend_string *s2)
 {
 	return s1 == s2 || (ZSTR_LEN(s1) == ZSTR_LEN(s2) && !memcmp(ZSTR_VAL(s1), ZSTR_VAL(s2), ZSTR_LEN(s1)));
@@ -381,6 +381,7 @@ static zend_always_inline zend_bool zend_string_equals(zend_string *s1, zend_str
  *                  -- Ralf S. Engelschall <rse@engelschall.com>
  */
 
+// hash函数
 static zend_always_inline zend_ulong zend_inline_hash_func(const char *str, size_t len)
 {
 	zend_ulong hash = Z_UL(5381);

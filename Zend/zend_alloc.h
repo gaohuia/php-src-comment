@@ -64,7 +64,7 @@ typedef struct _zend_mm_debug_info {
 } zend_mm_debug_info;
 
 # define ZEND_MM_OVERHEAD ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info))
-#else 
+#else
 # define ZEND_MM_OVERHEAD 0
 #endif
 
@@ -231,6 +231,7 @@ ZEND_API size_t zend_memory_usage(int real_usage);
 ZEND_API size_t zend_memory_peak_usage(int real_usage);
 
 /* fast cache for HashTables */
+
 #define ALLOC_HASHTABLE(ht)	\
 	(ht) = (HashTable *) emalloc(sizeof(HashTable))
 

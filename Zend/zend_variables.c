@@ -33,7 +33,7 @@ ZEND_API void ZEND_FASTCALL _zval_dtor_func(zend_refcounted *p ZEND_FILE_LINE_DC
 	switch (GC_TYPE(p)) {
 		case IS_STRING:
 		case IS_CONSTANT: {
-				// zend_string 就一个结构体　所有的数据都存在一起. 直接释放就可以了. 
+				// zend_string 就一个结构体　所有的数据都存在一起. 直接释放就可以了.
 				zend_string *str = (zend_string*)p;
 				CHECK_ZVAL_STRING_REL(str);
 				zend_string_free(str);
@@ -166,6 +166,8 @@ ZEND_API void zval_add_ref_unref(zval *p)
 
 ZEND_API void ZEND_FASTCALL _zval_copy_ctor_func(zval *zvalue ZEND_FILE_LINE_DC)
 {
+	// 执行各种类型的COPYABLE的zend_value的COPY动作.
+	//
 	if (EXPECTED(Z_TYPE_P(zvalue) == IS_ARRAY)) {
 		ZVAL_ARR(zvalue, zend_array_dup(Z_ARRVAL_P(zvalue)));
 	} else if (EXPECTED(Z_TYPE_P(zvalue) == IS_STRING)) {

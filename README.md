@@ -1,15 +1,15 @@
-PHP源码阅读笔记. 
+PHP源码阅读笔记.
 --------------------
-阅读过程中的一些笔记，便于将来写扩展时使用. 
+阅读过程中的一些笔记，便于将来写扩展时使用.
 基于php源码7.2.9
 
 ## 重要文件
 
 * Zend/zend_types.h 		定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
-* Zend/zend_string.h 		定义了zend_string相关操作. 
+* Zend/zend_string.h 		定义了zend_string相关操作.
 * Zend/zend_API.h 		定义了扩展相关的宏和函数.
 * Zend/zend_alloc.h 		定义了内存分配相关的方法.
-* Zend/zend_hash.h 		定义了hash表相关的方法和宏. 
+* Zend/zend_hash.h 		定义了hash表相关的方法和宏.
 
 ## zval
 
@@ -18,22 +18,22 @@ PHP源码阅读笔记.
 	zend_uchar Z_TYPE(zval)
 	zend_uchar Z_TYPE_P(zval*)
 
-#### 取得变量类型, TYPE_INFO. 如IS_STRING_EX, IS_ARRAY_EX 等. 
+#### 取得变量类型, TYPE_INFO. 如IS_STRING_EX, IS_ARRAY_EX 等.
 	uint32_t Z_TYPE_INFO(zval)
 	uint32_t Z_TYPE_INFO_P(zval*)
 
-#### 取得变量的counted, zend_refcounted_h结构指针. 此值同时是str,arr等指向的内存的开始. 
+#### 取得变量的counted, zend_refcounted_h结构指针. 此值同时是str,arr等指向的内存的开始.
 	zend_refcounted_h* Z_COUNTED(zval)
 	zend_refcounted_h* Z_COUNTED_P(zval*)
 
-#### 返回引用计数, 数字. 	
-	uint32_t GC_REFCOUNT(zend_refcounted_h*) 
+#### 返回引用计数, 数字.
+	uint32_t GC_REFCOUNT(zend_refcounted_h*)
 
 #### zval取值
 	zend_long Z_LVAL(zval) 			取long值
 	zend_long Z_LVAL_P(zval*) 		取long值
 	double Z_DVAL(zval) 			取double值
-	double Z_DVAL(zval*) 			取double值         	
+	double Z_DVAL(zval*) 			取double值
 	zend_string Z_STR(zval) 		返回字符串zend_string
 	zend_string Z_STR(zval*)        返回字符串zend_string
 	char* Z_STRVAL(zval)    		取字符串缓冲区
@@ -44,12 +44,12 @@ PHP源码阅读笔记.
 	zend_ulong Z_STRHASH_P(zval*) 	计算字符串hash值
 	zend_array* Z_ARR(zval) 		取zend_array 别名: Z_ARRVAL
 	zend_array* Z_ARR_P(zval*) 		取zend_array 别名: Z_ARRVAL_P
-	zend_object *Z_OBJ(zval) 		取zend_object值	
-	zend_object *Z_OBJCE(zval) 		取zend_object值	
+	zend_object *Z_OBJ(zval) 		取zend_object值
+	zend_object *Z_OBJCE(zval) 		取zend_object值
 	zend_object *Z_OBJ_P(zval*) 	取zend_object值
 	zend_object *Z_OBJCE_P(zval*) 	取zend_object值
-	zend_resource *Z_RES(zval) 
-	zend_resource *Z_RES_P(zval*) 
+	zend_resource *Z_RES(zval)
+	zend_resource *Z_RES_P(zval*)
 	zend_reference *Z_REF(zval)
 	zend_reference *Z_REF_P(zval)
 	zend_function *Z_FUNC(zval)
@@ -61,7 +61,7 @@ PHP源码阅读笔记.
 
 #### zval赋值
 
-以下方法会变更变量的类型. 没有特殊声明不影响引用计数. 
+以下方法会变更变量的类型. 没有特殊声明不影响引用计数.
 
 	ZVAL_UNDEF(zval*) 					将变量设置为undefined
 	ZVAL_NULL(zval*) 					设置变量为null
@@ -78,11 +78,11 @@ PHP源码阅读笔记.
 	ZVAL_NEW_PERSISTENT_ARR(zval*) 		分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
 	ZVAL_OBJ(zval*, zend_object*)		设置zend_object值
 	ZVAL_RES(zval*, zend_resource*) 	zend_resource
-	ZVAL_NEW_RES(zval* p_zval, int handler, int type, void *p) 用handler, type, p初始化一个zend_resource结构, 并设置其值. 
+	ZVAL_NEW_RES(zval* p_zval, int handler, int type, void *p) 用handler, type, p初始化一个zend_resource结构, 并设置其值.
 	ZVAL_REF(zval*, zend_reference*)	设置zend_reference
-	ZVAL_NEW_EMPTY_REF(zval*) 			分配一个新的zend_reference结构, 并设置到zval作为其值. 引用计数为1. 
-	ZVAL_NEW_REF(zval* p_val, zval* r)  分配一个新的zend_reference结构, 将引用r变量. 
-	ZVAL_NEW_PERSISTENT_REF 			同上, 只是在系统内存中分配. 
+	ZVAL_NEW_EMPTY_REF(zval*) 			分配一个新的zend_reference结构, 并设置到zval作为其值. 引用计数为1.
+	ZVAL_NEW_REF(zval* p_val, zval* r)  分配一个新的zend_reference结构, 将引用r变量.
+	ZVAL_NEW_PERSISTENT_REF 			同上, 只是在系统内存中分配.
 	ZVAL_CE(zval* p, zend_function* v)
 	ZVAL_PTR(zval* p, void* v)
 	ZVAL_FUNC(zval* p, zend_function* v)
@@ -97,14 +97,14 @@ PHP源码阅读笔记.
 
 #### ZVAL COPY
 
-	ZVAL_COPY_VALUE(zval* p_zval, zval* v) 		简单COPY value和type_info字段. 不增加引用计数. 
-	ZVAL_COPY(zval* p_zval, zval* v)	同上, 但如果是引用计数的类型, copy值后, 增加引用计数. 
-	ZVAL_DUP(zval* p_zval, zval* v) 	先简单COPY, 如果值是COPYABLE的, copy之, 如果是引用计数的, 增加引用. 其它情况不管. 
+	ZVAL_COPY_VALUE(zval* p_zval, zval* v) 		简单COPY value和type_info字段. 不增加引用计数.
+	ZVAL_COPY(zval* p_zval, zval* v)	同上, 但如果是引用计数的类型, copy值后, 增加引用计数.
+	ZVAL_DUP(zval* p_zval, zval* v) 	先简单COPY, 如果值是COPYABLE的, copy之, 如果是引用计数的, 增加引用. 其它情况不管.
 
 #### 引用计数
 
-	Z_TRY_ADDREF(zval* p) 				如果是可以引用计数的, 那么增加它. 
-	Z_TRY_DELREF(zval* p) 				尝试, 减少引用. 
+	Z_TRY_ADDREF(zval* p) 				如果是可以引用计数的, 那么增加它.
+	Z_TRY_DELREF(zval* p) 				尝试, 减少引用.
 
 ## 数据类型及常用操作
 
@@ -118,8 +118,8 @@ PHP源码阅读笔记.
 #### 创建一个zend_string结构. 并设置引用数为1
 	zend_string *zend_string_alloc(size_t len, int persistent)
 
-#### 创建一个zend_string结构, 并为期赋值. 设置引用数为1. str指向的缓冲区将会被copy到zend_str结构内. 
-	zend_string *zend_string_init(const char *str, size_t len, int persistent)	
+#### 创建一个zend_string结构, 并为期赋值. 设置引用数为1. str指向的缓冲区将会被copy到zend_str结构内.
+	zend_string *zend_string_init(const char *str, size_t len, int persistent)
 
 #### 此方法只是简单增加了引用计数, 并返回传入的zend_string
 	zend_string *zend_string_copy(zend_string *s)
@@ -132,3 +132,11 @@ PHP源码阅读笔记.
 	
 #### 减少引用
 	uint32_t zend_string_delref(zend_string *s)
+
+### 数组类型
+
+#### 分配一个HashTable结构zend_array
+	ALLOC_HASHTABLE(HashTable *ht)
+
+#### 释放一个HashTable指针的内存.
+	FREE_HASHTABLE(HashTable *ht)
