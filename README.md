@@ -143,3 +143,11 @@ PHP源码阅读笔记.
 
 #### 判断两个zend_string是否相等. 
 	zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
+
+
+
+### 参考文档
+
+* [Blog by nikic](http://nikic.github.io/)
+* [PHP Internals Book](http://www.phpinternalsbook.com/index.html)
+* [PHP at the Core: A Hacker's Guide](http://php.net/manual/en/internals2.php)
