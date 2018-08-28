@@ -210,6 +210,8 @@ ZEND_API void ZEND_FASTCALL zend_hash_packed_to_hash(HashTable *ht)
 
 	HT_ASSERT_RC1(ht);
 	ht->u.flags &= ~HASH_FLAG_PACKED;
+
+	// 分配一样大小的数据区域和hash区. 
 	new_data = pemalloc(HT_SIZE_EX(ht->nTableSize, -ht->nTableSize), (ht)->u.flags & HASH_FLAG_PERSISTENT);
 	ht->nTableMask = -ht->nTableSize;
 	HT_SET_DATA_ADDR(ht, new_data);
@@ -221,15 +223,24 @@ ZEND_API void ZEND_FASTCALL zend_hash_packed_to_hash(HashTable *ht)
 // 
 ZEND_API void ZEND_FASTCALL zend_hash_to_packed(HashTable *ht)
 {
+	// 求分配内存块的起始位置. 
 	void *new_data, *old_data = HT_GET_DATA_ADDR(ht);
+
+	// 数据区域
 	Bucket *old_buckets = ht->arData;
 
 	HT_ASSERT_RC1(ht);
+
+	// FLAG中, 只留下HASH_FLAG_PERSISTENT
+	// 转成packed时, 只需要留下一个最小的hash区域大小. 
 	new_data = pemalloc(HT_SIZE_EX(ht->nTableSize, HT_MIN_MASK), (ht)->u.flags & HASH_FLAG_PERSISTENT);
+	// 
 	ht->u.flags |= HASH_FLAG_PACKED | HASH_FLAG_STATIC_KEYS;
 	ht->nTableMask = HT_MIN_MASK;
 	HT_SET_DATA_ADDR(ht, new_data);
 	HT_HASH_RESET_PACKED(ht);
+
+	// 变成packed hashtable, 只是没有hash表了, Bucket内的东西还是存在的
 	memcpy(ht->arData, old_buckets, sizeof(Bucket) * ht->nNumUsed);
 	pefree(old_data, (ht)->u.flags & HASH_FLAG_PERSISTENT);
 }
@@ -892,6 +903,7 @@ static void ZEND_FASTCALL zend_hash_do_resize(HashTable *ht)
 	}
 }
 
+// 重新计算hash区域
 ZEND_API int ZEND_FASTCALL zend_hash_rehash(HashTable *ht)
 {
 	Bucket *p;
@@ -899,6 +911,7 @@ ZEND_API int ZEND_FASTCALL zend_hash_rehash(HashTable *ht)
 
 	IS_CONSISTENT(ht);
 
+	// 没数据, 啥都不用干. 
 	if (UNEXPECTED(ht->nNumOfElements == 0)) {
 		if (ht->u.flags & HASH_FLAG_INITIALIZED) {
 			ht->nNumUsed = 0;
@@ -907,18 +920,25 @@ ZEND_API int ZEND_FASTCALL zend_hash_rehash(HashTable *ht)
 		return SUCCESS;
 	}
 
+	// 重置Hash区. 将Hash区域全部置为HT_INVALID_IDX
 	HT_HASH_RESET(ht);
 	i = 0;
+
+	// 第一个Bucket
 	p = ht->arData;
+	// 没空洞的数据. 
 	if (HT_IS_WITHOUT_HOLES(ht)) {
 		do {
+			// 示出hash区的nIndex
 			nIndex = p->h | ht->nTableMask;
+			// 取待原hash区index, 将原hash区index设置到当前zval的next
 			Z_NEXT(p->val) = HT_HASH(ht, nIndex);
 			HT_HASH(ht, nIndex) = HT_IDX_TO_HASH(i);
 			p++;
 		} while (++i < ht->nNumUsed);
 	} else {
 		do {
+			// 空洞变量
 			if (UNEXPECTED(Z_TYPE(p->val) == IS_UNDEF)) {
 				uint32_t j = i;
 				Bucket *q = p;

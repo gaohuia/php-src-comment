@@ -314,10 +314,13 @@ struct _zend_array {
 #define HT_HASH(ht, idx) \
 	HT_HASH_EX((ht)->arData, idx)
 
+// Hash区域内存大小, 每个元素是一个32位无符号整数, 是Bucket索引
 #define HT_HASH_SIZE(nTableMask) \
 	(((size_t)(uint32_t)-(int32_t)(nTableMask)) * sizeof(uint32_t))
 #define HT_DATA_SIZE(nTableSize) \
 	((size_t)(nTableSize) * sizeof(Bucket))
+
+// nTableMask 代表Hash区域的大小
 #define HT_SIZE_EX(nTableSize, nTableMask) \
 	(HT_DATA_SIZE((nTableSize)) + HT_HASH_SIZE((nTableMask)))
 #define HT_SIZE(ht) \
