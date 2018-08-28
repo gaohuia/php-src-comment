@@ -93,23 +93,28 @@ PHP源码阅读笔记.
 ```
 
 #### zval引用
-
-    zval* Z_REFVAL(zval)     返回所引用的zval
-    zval* Z_REFVAL_P(zval*) 同上
-    ZVAL_DEREF(zval* p_zval)        解引用, 如果p_zval是一个引用的变量, p_zval将会被设置为它所引用的zval地址
-    ZVAL_MAKE_REF(zval* p_zval)     做引用, 与上面的方法相反. 如果p_zval并非一个引用变量. 将会创建一个新的zval变量引用p_zval, 并将p_zval设置为新的变量地址
-    ZVAL_UNREF(zval* p_zval)         强制取消引用. 原来的引用变量被强行转换成非引用变量
+```C
+    zval* Z_REFVAL(zval);           // 返回所引用的zval
+    zval* Z_REFVAL_P(zval*);        // 返回所引用的zval
+    ZVAL_DEREF(zval* p_zval);       // 解引用, 如果p_zval是一个引用的变量, p_zval将会被设置为它所引用的zval地址
+    ZVAL_MAKE_REF(zval* p_zval);    // 做引用, 与上面的方法相反. 如果p_zval并非一个引用变量. 将会创建一个新的zval变量引用p_zval, 并将p_zval设置为新的变量地址
+    ZVAL_UNREF(zval* p_zval);       // 强制取消引用. 原来的引用变量被强行转换成非引用变量
+```
 
 #### ZVAL COPY
 
-    ZVAL_COPY_VALUE(zval* p_zval, zval* v)         简单COPY value和type_info字段. 不增加引用计数.
-    ZVAL_COPY(zval* p_zval, zval* v)    同上, 但如果是引用计数的类型, copy值后, 增加引用计数.
-    ZVAL_DUP(zval* p_zval, zval* v)     先简单COPY, 如果值是COPYABLE的, copy之, 如果是引用计数的, 增加引用. 其它情况不管.
+```C
+    ZVAL_COPY_VALUE(zval* p_zval, zval* v); // 简单COPY value和type_info字段. 不增加引用计数.
+    ZVAL_COPY(zval* p_zval, zval* v);       // 同上, 但如果是引用计数的类型, copy值后, 增加引用计数.
+    ZVAL_DUP(zval* p_zval, zval* v);        // 先简单COPY, 如果值是COPYABLE的, copy之, 如果是引用计数的, 增加引用. 其它情况不管.
+```
 
 #### 引用计数
 
-    Z_TRY_ADDREF(zval* p)                 如果是可以引用计数的, 那么增加它.
-    Z_TRY_DELREF(zval* p)                 尝试, 减少引用.
+```C
+    Z_TRY_ADDREF(zval* p);  // 如果是可以引用计数的, 那么增加它.
+    Z_TRY_DELREF(zval* p);  // 尝试, 减少引用.
+```
 
 ## 数据类型及常用操作
 
