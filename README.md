@@ -30,62 +30,67 @@ PHP源码阅读笔记.
 	uint32_t GC_REFCOUNT(zend_refcounted_h*)
 
 #### zval取值
-	zend_long Z_LVAL(zval) 			取long值
-	zend_long Z_LVAL_P(zval*) 		取long值
-	double Z_DVAL(zval) 			取double值
-	double Z_DVAL(zval*) 			取double值
-	zend_string Z_STR(zval) 		返回字符串zend_string
-	zend_string Z_STR(zval*)        返回字符串zend_string
-	char* Z_STRVAL(zval)    		取字符串缓冲区
-	char* Z_STRVAL_P(zval*) 		取字符串缓冲区
-	size_t Z_STRLEN(zval)   		取字符串变量的长度
-	size_t Z_STRLEN(zval*)  		取字符串变量的长度
-	zend_ulong Z_STRHASH(zval) 		计算字符串hash值
-	zend_ulong Z_STRHASH_P(zval*) 	计算字符串hash值
-	zend_array* Z_ARR(zval) 		取zend_array 别名: Z_ARRVAL
-	zend_array* Z_ARR_P(zval*) 		取zend_array 别名: Z_ARRVAL_P
-	zend_object *Z_OBJ(zval) 		取zend_object值
-	zend_object *Z_OBJCE(zval) 		取zend_object值
-	zend_object *Z_OBJ_P(zval*) 	取zend_object值
-	zend_object *Z_OBJCE_P(zval*) 	取zend_object值
-	zend_resource *Z_RES(zval)
-	zend_resource *Z_RES_P(zval*)
-	zend_reference *Z_REF(zval)
-	zend_reference *Z_REF_P(zval)
-	zend_function *Z_FUNC(zval)
-	zend_function *Z_FUNC_P(zval*)
-	zend_class_entry *Z_CE(zval)
-	zend_class_entry *Z_CE_P(zval*)
-	void *Z_PTR(zval)
-	void *Z_PTR_P(zval*)
+
+```C
+	zend_long Z_LVAL(zval); 		// 取long值
+	zend_long Z_LVAL_P(zval*); 		// 取long值
+	double Z_DVAL(zval); 			// 取double值
+	double Z_DVAL(zval*); 			// 取double值
+	zend_string Z_STR(zval); 		// 返回字符串zend_string
+	zend_string Z_STR(zval*);       // 返回字符串zend_string
+	char* Z_STRVAL(zval);    		// 取字符串缓冲区
+	char* Z_STRVAL_P(zval*); 		// 取字符串缓冲区
+	size_t Z_STRLEN(zval);   		// 取字符串变量的长度
+	size_t Z_STRLEN(zval*);  		// 取字符串变量的长度
+	zend_ulong Z_STRHASH(zval); 	// 计算字符串hash值
+	zend_ulong Z_STRHASH_P(zval*); 	// 计算字符串hash值
+	zend_array* Z_ARR(zval); 		// 取zend_array 别名: Z_ARRVAL
+	zend_array* Z_ARR_P(zval*); 	// 取zend_array 别名: Z_ARRVAL_P
+	zend_object *Z_OBJ(zval); 		// 取zend_object值
+	zend_object *Z_OBJCE(zval); 	// 取zend_object值
+	zend_object *Z_OBJ_P(zval*); 	// 取zend_object值
+	zend_object *Z_OBJCE_P(zval*); 	// 取zend_object值
+	zend_resource *Z_RES(zval);
+	zend_resource *Z_RES_P(zval*);
+	zend_reference *Z_REF(zval);
+	zend_reference *Z_REF_P(zval);
+	zend_function *Z_FUNC(zval);
+	zend_function *Z_FUNC_P(zval*);
+	zend_class_entry *Z_CE(zval);
+	zend_class_entry *Z_CE_P(zval*);
+	void *Z_PTR(zval);
+	void *Z_PTR_P(zval*);
+```
 
 #### zval赋值
 
 以下方法会变更变量的类型. 没有特殊声明不影响引用计数.
 
-	ZVAL_UNDEF(zval*) 					将变量设置为undefined
-	ZVAL_NULL(zval*) 					设置变量为null
-	ZVAL_FALSE(zval*) 					设置为false
-	ZVAL_TRUE(zval*) 					设置为true
-	ZVAL_BOOL(zval*, bool) 				同上两个
-	ZVAL_LONG(zval*, long) 				设置为long值
-	ZVAL_DOUBLE(zval*, double) 			设置为double值
-	ZVAL_STR(zval*, zend_string*) 		设置为zend_string值, 会考虑zend_string为internal的情况
-	ZVAL_NEW_STR(zval*, zend_string*) 	设置为zend_string值, 没有上述考虑
-	ZVAL_STR_COPY(zval*, zend_string*) 	设置zval*变量的值为zend_string, 会增加zend_string引用数
-	ZVAL_ARR(zval*, zend_array*) 		设置zval*变量的值为zend_array
-	ZVAL_NEW_ARR(zval*) 				分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1.
-	ZVAL_NEW_PERSISTENT_ARR(zval*) 		分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
-	ZVAL_OBJ(zval*, zend_object*)		设置zend_object值
-	ZVAL_RES(zval*, zend_resource*) 	zend_resource
-	ZVAL_NEW_RES(zval* p_zval, int handler, int type, void *p) 用handler, type, p初始化一个zend_resource结构, 并设置其值.
-	ZVAL_REF(zval*, zend_reference*)	设置zend_reference
-	ZVAL_NEW_EMPTY_REF(zval*) 			分配一个新的zend_reference结构, 并设置到zval作为其值. 引用计数为1.
-	ZVAL_NEW_REF(zval* p_val, zval* r)  分配一个新的zend_reference结构, 将引用r变量.
-	ZVAL_NEW_PERSISTENT_REF 			同上, 只是在系统内存中分配.
-	ZVAL_CE(zval* p, zend_function* v)
-	ZVAL_PTR(zval* p, void* v)
-	ZVAL_FUNC(zval* p, zend_function* v)
+```C
+	ZVAL_UNDEF(zval*); 					// 将变量设置为undefined
+	ZVAL_NULL(zval*); 					// 设置变量为null
+	ZVAL_FALSE(zval*); 					// 设置为false
+	ZVAL_TRUE(zval*); 					// 设置为true
+	ZVAL_BOOL(zval*, bool); 			// 同上两个
+	ZVAL_LONG(zval*, long); 			// 设置为long值
+	ZVAL_DOUBLE(zval*, double); 		// 设置为double值
+	ZVAL_STR(zval*, zend_string*); 		// 设置为zend_string值, 会考虑zend_string为internal的情况
+	ZVAL_NEW_STR(zval*, zend_string*); 	// 设置为zend_string值, 没有上述考虑
+	ZVAL_STR_COPY(zval*, zend_string*); // 设置zval*变量的值为zend_string, 会增加zend_string引用数
+	ZVAL_ARR(zval*, zend_array*); 		// 设置zval*变量的值为zend_array
+	ZVAL_NEW_ARR(zval*); 				// 分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1.
+	ZVAL_NEW_PERSISTENT_ARR(zval*); 	// 分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
+	ZVAL_OBJ(zval*, zend_object*);		// 设置zend_object值
+	ZVAL_RES(zval*, zend_resource*); 	// zend_resource
+	ZVAL_NEW_RES(zval* p_zval, int handler, int type, void *p); // 用handler, type, p初始化一个zend_resource结构, 并设置其值.
+	ZVAL_REF(zval*, zend_reference*);	// 设置zend_reference
+	ZVAL_NEW_EMPTY_REF(zval*); 			// 分配一个新的zend_reference结构, 并设置到zval作为其值. 引用计数为1.
+	ZVAL_NEW_REF(zval* p_val, zval* r); // 分配一个新的zend_reference结构, 将引用r变量.
+	ZVAL_NEW_PERSISTENT_REF(zval* p_zval, zend_reference* r); 			// 同上, 只是在系统内存中分配.
+	ZVAL_CE(zval* p, zend_function* v);
+	ZVAL_PTR(zval* p, void* v);
+	ZVAL_FUNC(zval* p, zend_function* v);
+```
 
 #### zval引用
 
@@ -144,7 +149,16 @@ PHP源码阅读笔记.
 #### 判断两个zend_string是否相等. 
 	zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
 
+### 数组
 
+	PHP中有一个Packed数组. 用于存储类似于数组的数据. 
+
+	int zend_hash_del(HashTable*, zend_string*)
+	void zend_hash_real_init(HashTable*, zend_bool packed)
+	void zend_hash_packed_to_hash(HashTable*)
+	void zend_hash_to_packed(HashTable*)
+
+	zend_bool HT_IS_WITHOUT_HOLES(HashTable *); 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞. 
 
 ### 参考文档
 

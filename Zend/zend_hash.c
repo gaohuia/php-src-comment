@@ -218,6 +218,7 @@ ZEND_API void ZEND_FASTCALL zend_hash_packed_to_hash(HashTable *ht)
 	zend_hash_rehash(ht);
 }
 
+// 
 ZEND_API void ZEND_FASTCALL zend_hash_to_packed(HashTable *ht)
 {
 	void *new_data, *old_data = HT_GET_DATA_ADDR(ht);

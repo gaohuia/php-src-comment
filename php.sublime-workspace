@@ -1,0 +1,1131 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"consum",
+				"consuming"
+			],
+			[
+				"strip",
+				"stripslashes"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Zend/zend_hash.h",
+			"settings":
+			{
+				"buffer_size": 34636,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_hash.c",
+			"settings":
+			{
+				"buffer_size": 68185,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Zend/zend_string.h",
+			"settings":
+			{
+				"buffer_size": 16012,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Zend/zend_API.h",
+			"settings":
+			{
+				"buffer_size": 61000,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_API.c",
+			"settings":
+			{
+				"buffer_size": 129998,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_types.h",
+			"settings":
+			{
+				"buffer_size": 34513,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_variables.h",
+			"settings":
+			{
+				"buffer_size": 4782,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_variables.c",
+			"settings":
+			{
+				"buffer_size": 5725,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ext/standard/array.c",
+			"settings":
+			{
+				"buffer_size": 182099,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_objects.c",
+			"settings":
+			{
+				"buffer_size": 8560,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_objects.h",
+			"settings":
+			{
+				"buffer_size": 1926,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_long.h",
+			"settings":
+			{
+				"buffer_size": 4461,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_alloc.h",
+			"settings":
+			{
+				"buffer_size": 19299,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Zend/zend_alloc.c",
+			"settings":
+			{
+				"buffer_size": 86499,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 4932,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "SELECT *\nFROM (`xdianshang_crm_5`.`member`)\nWHERE `company_id` =  '104279'\nAND `is_black` =  0\nAND (phone != '' or headimgurl!='')\nAND  `nickname`  LIKE '%Recoh1%'\nORDER BY `id` desc\nLIMIT 10;",
+			"settings":
+			{
+				"buffer_size": 192,
+				"line_ending": "Windows",
+				"name": "SELECT *"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"parse",
+				"URL Parse"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"urlp",
+				"URL Parse"
+			],
+			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Package Control:remove",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 211.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/241/project/php-7.2.9/php-7.2.9",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/jiaozi",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/jiaozi"
+	],
+	"file_history":
+	[
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_string.h",
+		"/D/241/project/commands/common_commands.log",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_variables.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_variables.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/bz2/bz2.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/intl/intl_convert.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/intl/collator/collator_convert.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/fileinfo/libmagic.patch",
+		"/D/241/project/php-7.2.9/php-7.2.9/README.input_filter",
+		"/D/241/project/php/scripts/show_diff.sh",
+		"/D/241/python/scrm/openapi/call_sms.py",
+		"/C/Users/Administrator/Desktop/tmp/xss.html",
+		"/D/241/python/scrm/test/test.py",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_types.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_object_handlers.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_compile.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_alloc.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_alloc.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/sapi/phpdbg/phpdbg_btree.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_multiply.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_long.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/main/php_stdint.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard/head.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_API.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_API.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_operators.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_operators.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_execute.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard/array.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/jiaozi/jiaozi.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/main/spprintf.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_smart_str.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_smart_str_public.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_hash.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_hash.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_portability.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/main/SAPI.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/main/php.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend.h",
+		"/D/241/project/php/scripts/test_empty.php",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_modules.h",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/date/lib/timelib.h",
+		"/D/241/project/php/scripts/expect.csv",
+		"/D/241/project/php/scripts/result2.csv",
+		"/D/241/project/php/scripts/expect2.csv",
+		"/D/241/project/php/scripts/result.csv",
+		"/D/241/project/php/scripts/compare.result.txt",
+		"/D/241/project/php/scripts/compare.expect.txt",
+		"/D/241/project/php/scripts/report.csv",
+		"/D/241/project/php/scripts/repeat.csv",
+		"/D/241/project/php/scripts/result.diff",
+		"/C/Users/Administrator/Desktop/tmp/test_forward.js",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/Nodejs/Nodejs.py",
+		"/C/Users/Administrator/Desktop/test.html",
+		"/C/Users/Administrator/Documents/NetSarang/Xftp/Temporary/auto-clean-logs.sh",
+		"/C/Users/Administrator/Documents/NetSarang/Xftp/Temporary/auto-clean-logs [2].py",
+		"/D/daily-work/2018-07-31_Order_Remark.md",
+		"/D/daily-work/2018-08-01_jieba_chinese_word_segmentation.py",
+		"/C/Users/Administrator/Documents/NetSarang/Xftp/Temporary/auto-clean-logs.py",
+		"/D/php-scripts/tes_regexp.php",
+		"/C/Users/Administrator/Desktop/数据.json",
+		"/D/php-scripts/generate_sql.php",
+		"/D/php-scripts/test_strip_slash.php",
+		"/D/241/project/config/database.php",
+		"/D/241/project/system/config/config.php",
+		"/C/Users/Administrator/Documents/ziliao/待办.txt",
+		"/C/Users/Administrator/Documents/python/test_search.py",
+		"/C/Users/Administrator/Documents/python/test_taobao_order_detail.py",
+		"/C/Users/Administrator/Desktop/tmp/201807271532681691.csv",
+		"/D/data/logs/aj_pull/jd_sync_error_log_2018-07-27.php",
+		"/D/241/project/php/test_empty.php",
+		"/C/Users/Administrator/Desktop/tmp/小白茶呀商品列表.txt",
+		"/D/241/project/gopath/src/http_proxy/http_proxy.go",
+		"/D/tools/proxy.pac",
+		"/C/Users/Administrator/Documents/Tencent Files/593953978/FileRecv/.htaccess",
+		"/C/Users/Administrator/Documents/python/test_get.py",
+		"/C/Users/Administrator/Desktop/tmp/examples/https.php",
+		"/C/Users/Administrator/Desktop/tmp/examples/buffer_proxy.php",
+		"/C/Users/Administrator/Desktop/tmp/examples/ssl-connection.php",
+		"/C/Users/Administrator/Desktop/tmp/examples/timer.php",
+		"/C/Users/Administrator/AppData/Roaming/Sublime Text 3/Packages/User/php.sublime-build",
+		"/D/241/project/gopath/src/http_proxy/proxy_server.go",
+		"/D/241/project/gopath/src/http_proxy/port_mapper.go",
+		"/C/Users/Administrator/Desktop/tmp/sqkeyword.csv",
+		"/C/Users/Administrator/Documents/python/spider_utils.py",
+		"/C/Users/Administrator/Desktop/index.html",
+		"/C/Users/Administrator/Desktop/tmp/examples/http.php",
+		"/D/work/DNS域名/账户.txt",
+		"/C/Users/Administrator/Desktop/tmp/settings.jar"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"D:\\241\\project\\php-7.2.9\\php-7.2.9",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"init",
+			"_zend_hash_init",
+			"zend_hash_add",
+			"add",
+			"zend_string_equals",
+			"Z_REFCOUNT_P",
+			"Z_REFVAL",
+			"sort",
+			"ZVAL_NEW_STR",
+			"zend_hash",
+			"Z_TYPE_INFO",
+			"ZVAL_",
+			"zval",
+			"zend_string",
+			"ZVAL_NEW_STR",
+			"ALLOC_ZVAL",
+			"Z_STRVAL",
+			"zend_printf_to_smart_str",
+			"confirm_jiaozi_compiled",
+			"zend_hash_find",
+			"zend_hash_find = ",
+			"zend_hash_find",
+			"zend_hash_find(HashTable",
+			"* zend_hash_find(",
+			"*zend_hash_find(",
+			"zend_hash_find(",
+			"zend_hash_find",
+			"zval *zend_hash_find(",
+			"zend_hash_find",
+			"zend_parse_arg_str",
+			"zend_parse_arg_array_ht",
+			"zend_parse_arg_array",
+			"zend_parse_arg_long",
+			"zend_parse_arg_long(",
+			"zend_parse_arg_long（",
+			"zend_parse_arg_long",
+			"zend_parse_arg_bool",
+			"zend_parse_arg_string",
+			"云店宝版本更新，对接风达配送",
+			"【海拍客】",
+			".*木雅典居】.*",
+			".*巴田火锅.*",
+			".*预充值金额太高？现在拨打电话：.*",
+			".*预充值金额太高.*",
+			"【巴田火锅】",
+			"【木雅典居】",
+			"木雅典居",
+			"1913",
+			"木雅典居",
+			"预充值金额太高",
+			"8888",
+			"【电商宝scrm】新用户注册成功，请注意",
+			"adopts ",
+			"then",
+			"(){",
+			"getConn()",
+			"getConn(",
+			"创",
+			"惠容水族",
+			"MSG_TYPE_DELIVER_GOODS",
+			"【电商宝】订单",
+			"订单",
+			"汽摩惠利商城",
+			"尊敬的用户您好，您的微信红包余额不足",
+			"0",
+			".*预充值金额太高.*",
+			".*恭喜您获得淘宝达人称号.*",
+			"恭喜您获得淘宝达人称号",
+			"18067983439 【电商宝】有一个新用户注册,",
+			"【电商宝】有一个新用户注册",
+			"^\\+18067983439 【电商宝】CRM后台.*$",
+			"18067983439 【电商宝】CRM后台.*$",
+			"18067983439 【电商宝】CRM后台有",
+			"18067983439 【电商宝】CRM后台有1条短信待审核",
+			"13001383875 【返利】亲，恭喜您获得淘宝达人称号，",
+			"\t",
+			"19999115858\t【电商宝】预充值金额太高？现在拨打电"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"getConnPool()",
+			"getConnPool",
+			"",
+			" "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Zend/zend_hash.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34636,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3577,
+								3577
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 621.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Zend/zend_hash.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 68185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27493,
+								27493
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 14007.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Zend/zend_string.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16012,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3964,
+								3964
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1137.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Zend/zend_API.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61000,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44418,
+								44418
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 12201.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Zend/zend_API.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 129998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								49595,
+								49598
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 29821.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Zend/zend_types.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10372,
+								10372
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4521.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Zend/zend_variables.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4782,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1709,
+								1709
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 81.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "Zend/zend_variables.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5725,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4594,
+								4594
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2213.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "ext/standard/array.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 182099,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								71775,
+								71775
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 42605.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Zend/zend_objects.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "Zend/zend_objects.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1221,
+								1221
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Zend/zend_long.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4461,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1157,
+								1157
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 65.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "Zend/zend_alloc.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19299,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1185,
+								1185
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 145.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "Zend/zend_alloc.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 86499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								79849,
+								79849
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 41345.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 14,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4932,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4548,
+								4548
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2801.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Zend/zend_types.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34513,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8176,
+								8176
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3721.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 192,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								192,
+								192
+							]
+						],
+						"settings":
+						{
+							"auto_name": "SELECT *",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.553645833334,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 422.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "php.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"zend_hash",
+				"php-7.2.9\\Zend\\zend_hash.h"
+			],
+			[
+				"array.c",
+				"php-7.2.9\\ext\\standard\\array.c"
+			],
+			[
+				"zend_string",
+				"php-7.2.9\\Zend\\zend_string.h"
+			],
+			[
+				"readme",
+				"php-7.2.9\\README.md"
+			],
+			[
+				"zend_objects.h",
+				"php-7.2.9\\Zend\\zend_objects.h"
+			],
+			[
+				"zend_objec",
+				"php-7.2.9\\Zend\\zend_objects.c"
+			],
+			[
+				"zend_alloc.h",
+				"php-7.2.9\\Zend\\zend_alloc.h"
+			],
+			[
+				"zend_api",
+				"php-7.2.9\\Zend\\zend_API.h"
+			],
+			[
+				"zend_long",
+				"php-7.2.9\\Zend\\zend_long.h"
+			],
+			[
+				"test_empty",
+				"D:\\241\\project\\php\\scripts\\test_empty.php"
+			],
+			[
+				"smar",
+				"php-7.2.9\\Zend\\zend_smart_str.c"
+			],
+			[
+				"smart_str.c",
+				"php-7.2.9\\Zend\\zend_smart_str.c"
+			],
+			[
+				"jiaozi",
+				"jiaozi\\jiaozi.c"
+			],
+			[
+				"head.c",
+				"php-7.2.9\\ext\\standard\\head.c"
+			],
+			[
+				"head",
+				"php-7.2.9\\ext\\standard\\head.c"
+			],
+			[
+				"test_for",
+				"C:\\Users\\Administrator\\Desktop\\tmp\\test_forward.js"
+			],
+			[
+				"gen",
+				"D:\\php-scripts\\generate_sql.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 340.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
