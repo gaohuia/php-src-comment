@@ -87,6 +87,13 @@ PHP源码阅读笔记.
 	ZVAL_PTR(zval* p, void* v)
 	ZVAL_FUNC(zval* p, zend_function* v)
 
+#### zval引用
+
+	zval* Z_REFVAL(zval) 	返回所引用的zval
+	zval* Z_REFVAL_P(zval*) 同上
+	ZVAL_DEREF(zval* p_zval)		解引用, 如果p_zval是一个引用的变量, p_zval将会被设置为它所引用的zval地址
+	ZVAL_MAKE_REF(zval* p_zval) 	做引用, 与上面的方法相反. 如果p_zval并非一个引用变量. 将会创建一个新的zval变量引用p_zval, 并将p_zval设置为新的变量地址
+	ZVAL_UNREF(zval* p_zval) 		强制取消引用. 原来的引用变量被强行转换成非引用变量
 
 #### ZVAL COPY
 

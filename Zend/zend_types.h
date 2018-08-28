@@ -994,6 +994,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		}												\
 	} while (0)
 
+// 创建一个新的引用
 #define ZVAL_MAKE_REF(zv) do {							\
 		zval *__zv = (zv);								\
 		if (!Z_ISREF_P(__zv)) {							\
@@ -1001,6 +1002,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		}												\
 	} while (0)
 
+// 强制取消引用. 
+// 
 #define ZVAL_UNREF(z) do {								\
 		zval *_z = (z);									\
 		zend_reference *ref;							\
@@ -1052,6 +1055,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		zval *_zv = (zv);								\
 		ZEND_ASSERT(Z_TYPE_P(_zv) != IS_REFERENCE);		\
 		if (Z_COPYABLE_P(_zv)) {						\
+			/*如果引用数大于1*/
 			if (Z_REFCOUNT_P(_zv) > 1) {				\
 				if (Z_REFCOUNTED_P(_zv)) {				\
 					Z_DELREF_P(_zv);					\
