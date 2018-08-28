@@ -469,6 +469,8 @@ ZEND_API void ZEND_FASTCALL _zend_hash_iterators_update(HashTable *ht, HashPosit
 	}
 }
 
+// 查找一个给定zend_string的Bucket
+// 如果找不到会返回一个NULL
 static zend_always_inline Bucket *zend_hash_find_bucket(const HashTable *ht, zend_string *key)
 {
 	zend_ulong h;
@@ -482,6 +484,7 @@ static zend_always_inline Bucket *zend_hash_find_bucket(const HashTable *ht, zen
 	nIndex = h | ht->nTableMask;
 	idx = HT_HASH_EX(arData, nIndex);
 	while (EXPECTED(idx != HT_INVALID_IDX)) {
+		// 简单的取arData[idx]
 		p = HT_HASH_TO_BUCKET_EX(arData, idx);
 		if (EXPECTED(p->key == key)) { /* check for the same interned string */
 			return p;
@@ -491,6 +494,7 @@ static zend_always_inline Bucket *zend_hash_find_bucket(const HashTable *ht, zen
 		     EXPECTED(memcmp(ZSTR_VAL(p->key), ZSTR_VAL(key), ZSTR_LEN(key)) == 0)) {
 			return p;
 		}
+		// 根据zval的冗余字段去找冲突的数据的下一个位置. 
 		idx = Z_NEXT(p->val);
 	}
 	return NULL;
@@ -539,6 +543,7 @@ static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *h
 	return NULL;
 }
 
+// 抛入一个元素
 static zend_always_inline zval *_zend_hash_add_or_update_i(HashTable *ht, zend_string *key, zval *pData, uint32_t flag ZEND_FILE_LINE_DC)
 {
 	zend_ulong h;
@@ -589,26 +594,42 @@ static zend_always_inline zval *_zend_hash_add_or_update_i(HashTable *ht, zend_s
 		}
 	}
 
+	// resize, 如果 nNumUsed >= nTableSize 要么修正, 要么修整. 
 	ZEND_HASH_IF_FULL_DO_RESIZE(ht);		/* If the Hash table is full, resize it */
 
 add_to_hash:
+	// 增加元素
+	// idx当前Bucket的位置, 新Bucket的位置
 	idx = ht->nNumUsed++;
 	ht->nNumOfElements++;
 	if (ht->nInternalPointer == HT_INVALID_IDX) {
 		ht->nInternalPointer = idx;
 	}
 	zend_hash_iterators_update(ht, HT_INVALID_IDX, idx);
+	// bucket
 	p = ht->arData + idx;
+	// bucket->key
 	p->key = key;
+
 	if (!ZSTR_IS_INTERNED(key)) {
+		// 为key增加一个引用计数. 
 		zend_string_addref(key);
 		ht->u.flags &= ~HASH_FLAG_STATIC_KEYS;
+		// 计算key的hash值. 
 		zend_string_hash_val(key);
 	}
+
+	// bucket->h
 	p->h = h = ZSTR_H(key);
+	// 简单考值
 	ZVAL_COPY_VALUE(&p->val, pData);
+	// 计算key在数组内的位置. 所以nIndex, 民nIndex在arData中的位置. 
 	nIndex = h | ht->nTableMask;
+
+	// 以下两句. 相当于把新元素插入到链表的首位. 
+	// 保存原链表首位的index到zval的next字段. 
 	Z_NEXT(p->val) = HT_HASH(ht, nIndex);
+	// 再将当前元素的idx写入到hash表. 
 	HT_HASH(ht, nIndex) = HT_IDX_TO_HASH(idx);
 
 	return &p->val;
