@@ -14,20 +14,28 @@ PHP源码阅读笔记.
 ## zval
 
 #### 取得变量类型, 如: IS_NULL, IS_LONG, IS_STRING 等
-    zend_uchar zval_get_type(const zval* pz)
-    zend_uchar Z_TYPE(zval)
-    zend_uchar Z_TYPE_P(zval*)
+```C
+    zend_uchar zval_get_type(const zval* pz);
+    zend_uchar Z_TYPE(zval);
+    zend_uchar Z_TYPE_P(zval*);
+```
 
 #### 取得变量类型, TYPE_INFO. 如IS_STRING_EX, IS_ARRAY_EX 等.
-    uint32_t Z_TYPE_INFO(zval)
-    uint32_t Z_TYPE_INFO_P(zval*)
+```C
+    uint32_t Z_TYPE_INFO(zval);
+    uint32_t Z_TYPE_INFO_P(zval*);
+```
 
 #### 取得变量的counted, zend_refcounted_h结构指针. 此值同时是str,arr等指向的内存的开始.
-    zend_refcounted_h* Z_COUNTED(zval)
-    zend_refcounted_h* Z_COUNTED_P(zval*)
+```C
+    zend_refcounted_h* Z_COUNTED(zval);
+    zend_refcounted_h* Z_COUNTED_P(zval*);
+```
 
 #### 返回引用计数, 数字.
-    uint32_t GC_REFCOUNT(zend_refcounted_h*)
+```C
+    uint32_t GC_REFCOUNT(zend_refcounted_h*);
+```
 
 #### zval取值
 
