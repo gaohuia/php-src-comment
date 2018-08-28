@@ -158,11 +158,11 @@ typedef uintptr_t zend_type;
 
 // 大小64位
 typedef union _zend_value {
-	// 不需要处理内存问题, 与zval结构共享内存.
+	// 不需要处理内存问题, 与zval结构共享内存. 
 	zend_long         lval;				/* long value */
-	// 同上.
+	// 同上. 
 	double            dval;				/* double value */
-	// 可以指向下面各种内存变量, 不会单独使用.
+	// 可以指向下面各种内存变量, 不会单独使用. 
 	zend_refcounted  *counted;			// 可以理解为, 一种多态.
 
 	// 字符串
@@ -185,7 +185,7 @@ typedef union _zend_value {
 	} ww;
 } zend_value;
 
-//
+// 
 struct _zval_struct {
 	zend_value        value;			/* value */
 	union {
@@ -199,10 +199,12 @@ struct _zval_struct {
 		uint32_t type_info;
 	} u1;
 	union {
+		// 支持PHP7的新数组结构
+		// 解决数组Hash冲突问题
 		uint32_t     next;                 /* hash collision chain */
 		uint32_t     cache_slot;           /* literal cache slot */
 		uint32_t     lineno;               /* line number (for ast nodes) */
-		uint32_t     num_args;             /* arguments number for EX(This) */ // 当他是一个execute_data的This时, 此处记录了参数的个数.
+		uint32_t     num_args;             /* arguments number for EX(This) */ // 当他是一个execute_data的This时, 此处记录了参数的个数. 
 		uint32_t     fe_pos;               /* foreach position */
 		uint32_t     fe_iter_idx;          /* foreach iterator index */
 		uint32_t     access_flags;         /* class constant access flags */
@@ -459,7 +461,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define GC_FLAGS(p)					(p)->gc.u.v.flags
 #define GC_INFO(p)					(p)->gc.u.v.gc_info
 #define GC_TYPE_INFO(p)				(p)->gc.u.type_info
-//
+// 
 
 #define Z_GC_TYPE(zval)				GC_TYPE(Z_COUNTED(zval))
 #define Z_GC_TYPE_P(zval_p)			Z_GC_TYPE(*(zval_p))
@@ -490,7 +492,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 /* extended types */
 #define IS_INTERNED_STRING_EX		IS_STRING
 
-// 一次赋值.
+// 一次赋值. 
 #define IS_STRING_EX				(IS_STRING         | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_ARRAY_EX					(IS_ARRAY          | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_OBJECT_EX				(IS_OBJECT         | ((                   IS_TYPE_REFCOUNTED                   ) << Z_TYPE_FLAGS_SHIFT))
@@ -552,8 +554,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_CONSTANT_P(zval_p)		Z_CONSTANT(*(zval_p))
 
 // 一般带_P的，需要传入一个　zval*
-// 不带_P的，传入一个zval结构.
-// 判断一个zval变量是否需要引用计数
+// 不带_P的，传入一个zval结构. 
 #define Z_REFCOUNTED(zval)			((Z_TYPE_FLAGS(zval) & IS_TYPE_REFCOUNTED) != 0)
 #define Z_REFCOUNTED_P(zval_p)		Z_REFCOUNTED(*(zval_p))
 
@@ -600,7 +601,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_DVAL(zval)				(zval).value.dval
 #define Z_DVAL_P(zval_p)			Z_DVAL(*(zval_p))
 
-// 返回zval内的str值.
+// 返回zval内的str值. 
 #define Z_STR(zval)					(zval).value.str
 #define Z_STR_P(zval_p)				Z_STR(*(zval_p))
 
@@ -929,7 +930,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 # define ZVAL_COPY_VALUE_EX(z, v, gc, t)				\
 	do {												\
 		uint32_t _w2 = v->value.ww.w2;					\
-		//
+		// 
 		Z_COUNTED_P(z) = gc;							\
 		z->value.ww.w2 = _w2;							\
 		Z_TYPE_INFO_P(z) = t;							\
@@ -949,7 +950,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 	do {												\
 		zval *_z1 = (z);								\
 		const zval *_z2 = (v);							\
-		// 实际上代表了所有Value值. 64位
+		// 实际上代表了所有Value值. 64位 
 		zend_refcounted *_gc = Z_COUNTED_P(_z2);		\
 		uint32_t _t = Z_TYPE_INFO_P(_z2);				\
 		ZVAL_COPY_VALUE_EX(_z1, _z2, _gc, _t);			\

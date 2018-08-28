@@ -140,3 +140,6 @@ PHP源码阅读笔记.
 
 #### 释放一个HashTable指针的内存.
 	FREE_HASHTABLE(HashTable *ht)
+
+#### 判断两个zend_string是否相等. 
+	zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
