@@ -139,7 +139,7 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 6000,
+				"buffer_size": 6151,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -348,7 +348,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 25.0
 	},
 	"find_in_files":
 	{
@@ -468,7 +468,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -484,8 +484,8 @@
 						"selection":
 						[
 							[
-								3576,
-								3576
+								1965,
+								1953
 							]
 						],
 						"settings":
@@ -494,10 +494,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 793.0,
+						"translation.y": 480.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -513,8 +513,8 @@
 						"selection":
 						[
 							[
-								28782,
-								28782
+								10057,
+								10073
 							]
 						],
 						"settings":
@@ -523,10 +523,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 14841.0,
+						"translation.y": 3513.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -642,7 +642,7 @@
 						"translation.y": 4809.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -889,15 +889,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6000,
+						"buffer_size": 6151,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5467,
-								5526
+								5444,
+								5444
 							]
 						],
 						"settings":
@@ -907,10 +907,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1440.0,
+						"translation.y": 2584.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1001,7 +1001,7 @@
 		"cols":
 		[
 			0.0,
-			0.651041666667,
+			0.596875,
 			1.0
 		],
 		"rows":
@@ -1023,7 +1023,7 @@
 	"project": "php.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1121,7 +1121,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

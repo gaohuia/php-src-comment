@@ -127,6 +127,7 @@ static zend_always_inline uint32_t zend_hash_check_size(uint32_t nSize)
 #endif
 }
 
+// 分配内存并初始化它. 
 static zend_always_inline void zend_hash_real_init_ex(HashTable *ht, int packed)
 {
 	HT_ASSERT_RC1(ht);
@@ -170,6 +171,7 @@ static zend_always_inline void zend_hash_check_init(HashTable *ht, int packed)
 static const uint32_t uninitialized_bucket[-HT_MIN_MASK] =
 	{HT_INVALID_IDX, HT_INVALID_IDX};
 
+// 为HashTable分配内存. 
 ZEND_API void ZEND_FASTCALL _zend_hash_init(HashTable *ht, uint32_t nSize, dtor_func_t pDestructor, zend_bool persistent ZEND_FILE_LINE_DC)
 {
 	GC_REFCOUNT(ht) = 1;
@@ -220,7 +222,8 @@ ZEND_API void ZEND_FASTCALL zend_hash_packed_to_hash(HashTable *ht)
 	zend_hash_rehash(ht);
 }
 
-// 
+// hash转packed, 其实键是还在的, hash表被丢弃了. 
+// 这个数组只能拿来遍历, 无法进行键值查找. 
 ZEND_API void ZEND_FASTCALL zend_hash_to_packed(HashTable *ht)
 {
 	// 求分配内存块的起始位置. 
@@ -535,6 +538,7 @@ static zend_always_inline Bucket *zend_hash_str_find_bucket(const HashTable *ht,
 	return NULL;
 }
 
+// 查找整数
 static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *ht, zend_ulong h)
 {
 	uint32_t nIndex;
@@ -542,7 +546,10 @@ static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *h
 	Bucket *p, *arData;
 
 	arData = ht->arData;
+
+	// 执行一个或之后, nIndex将会是一个负值. 
 	nIndex = h | ht->nTableMask;
+	// 这个Hash值坑位指定的Bucket位置. 
 	idx = HT_HASH_EX(arData, nIndex);
 	while (idx != HT_INVALID_IDX) {
 		ZEND_ASSERT(idx < HT_IDX_TO_HASH(ht->nTableSize));

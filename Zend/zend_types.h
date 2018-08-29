@@ -284,6 +284,7 @@ struct _zend_array {
  *                 +=============================+
  */
 
+// 0xFFFFFFFFF
 #define HT_INVALID_IDX ((uint32_t) -1)
 
 #define HT_MIN_MASK ((uint32_t) -2)
@@ -311,12 +312,16 @@ struct _zend_array {
 
 #define HT_HASH_EX(data, idx) \
 	((uint32_t*)(data))[(int32_t)(idx)]
+
+// Hash表, 引用Hash表坑位. 
 #define HT_HASH(ht, idx) \
 	HT_HASH_EX((ht)->arData, idx)
 
 // Hash区域内存大小, 每个元素是一个32位无符号整数, 是Bucket索引
 #define HT_HASH_SIZE(nTableMask) \
 	(((size_t)(uint32_t)-(int32_t)(nTableMask)) * sizeof(uint32_t))
+
+// 通过tableSize计算Bucket区域所需要内存大小
 #define HT_DATA_SIZE(nTableSize) \
 	((size_t)(nTableSize) * sizeof(Bucket))
 
@@ -325,20 +330,31 @@ struct _zend_array {
 	(HT_DATA_SIZE((nTableSize)) + HT_HASH_SIZE((nTableMask)))
 #define HT_SIZE(ht) \
 	HT_SIZE_EX((ht)->nTableSize, (ht)->nTableMask)
+
+// 已经使用过的内存大小.  Hash区域大小+已使用的Bucket区域大小(包含空洞)
 #define HT_USED_SIZE(ht) \
 	(HT_HASH_SIZE((ht)->nTableMask) + ((size_t)(ht)->nNumUsed * sizeof(Bucket)))
+
+// 将Hash表区域全部重围为INVALID
 #define HT_HASH_RESET(ht) \
 	memset(&HT_HASH(ht, (ht)->nTableMask), HT_INVALID_IDX, HT_HASH_SIZE((ht)->nTableMask))
+
+// 因为Packet保留了hash表的两个坑位. 所以需要重置一下. 
 #define HT_HASH_RESET_PACKED(ht) do { \
 		HT_HASH(ht, -2) = HT_INVALID_IDX; \
 		HT_HASH(ht, -1) = HT_INVALID_IDX; \
 	} while (0)
+
+// 通过Hash值, 取得一个Bucket指针. 	
 #define HT_HASH_TO_BUCKET(ht, idx) \
 	HT_HASH_TO_BUCKET_EX((ht)->arData, idx)
 
+// 设置数据区域, 将数据区域偏移一个hash区的大小后赋值到arData. 
 #define HT_SET_DATA_ADDR(ht, ptr) do { \
 		(ht)->arData = (Bucket*)(((char*)(ptr)) + HT_HASH_SIZE((ht)->nTableMask)); \
 	} while (0)
+
+// 取得数据区域指针. 
 #define HT_GET_DATA_ADDR(ht) \
 	((char*)((ht)->arData) - HT_HASH_SIZE((ht)->nTableMask))
 

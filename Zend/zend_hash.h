@@ -39,13 +39,18 @@
 #define HASH_FLAG_APPLY_PROTECTION (1<<1)
 #define HASH_FLAG_PACKED           (1<<2)
 #define HASH_FLAG_INITIALIZED      (1<<3)
+
+// 是否只有静态Key值. 
+// 当添加一个zend_string类型的key时, 此标记将会被取消. 
 #define HASH_FLAG_STATIC_KEYS      (1<<4) /* long and interned strings */
 #define HASH_FLAG_HAS_EMPTY_IND    (1<<5)
 #define HASH_FLAG_ALLOW_COW_VIOLATION (1<<6)
 
+// 判断数组是否Packed
 #define HT_IS_PACKED(ht) \
 	(((ht)->u.flags & HASH_FLAG_PACKED) != 0)
 
+// 判断数组是否有空洞
 #define HT_IS_WITHOUT_HOLES(ht) \
 	((ht)->nNumUsed == (ht)->nNumOfElements)
 
