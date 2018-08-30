@@ -92,8 +92,10 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_update_ind(HashTable *ht, zend_string *k
 ZEND_API zval* ZEND_FASTCALL _zend_hash_add(HashTable *ht, zend_string *key,zval *pData ZEND_FILE_LINE_DC);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_add_new(HashTable *ht, zend_string *key,zval *pData ZEND_FILE_LINE_DC);
 
+// 通过宏的方式将当前行号带入调用. 
 #define zend_hash_update(ht, key, pData) \
 		_zend_hash_update(ht, key, pData ZEND_FILE_LINE_CC)
+// 间接的(还不知道什么时候会发生)....pData是一个zval指针, 但这是一个间接的变量. zend_value区域保存着真实的zval指针. 	
 #define zend_hash_update_ind(ht, key, pData) \
 		_zend_hash_update_ind(ht, key, pData ZEND_FILE_LINE_CC)
 #define zend_hash_add(ht, key, pData) \
@@ -203,7 +205,7 @@ ZEND_API zend_bool ZEND_FASTCALL zend_hash_index_exists(const HashTable *ht, zen
 #define zend_hash_has_more_elements_ex(ht, pos) \
 	(zend_hash_get_current_key_type_ex(ht, pos) == HASH_KEY_NON_EXISTENT ? FAILURE : SUCCESS)
 ZEND_API int   ZEND_FASTCALL zend_hash_move_forward_ex(HashTable *ht, HashPosition *pos);
-ZEND_API int   ZEND_FASTCALL zend_hash_move_backwards_ex(HashTable *ht, HashPosition *pos);
+ZEND_API int   ZEND_FASTCALL  (HashTable *ht, HashPosition *pos);
 ZEND_API int   ZEND_FASTCALL zend_hash_get_current_key_ex(const HashTable *ht, zend_string **str_index, zend_ulong *num_index, HashPosition *pos);
 ZEND_API void  ZEND_FASTCALL zend_hash_get_current_key_zval_ex(const HashTable *ht, zval *key, HashPosition *pos);
 ZEND_API int   ZEND_FASTCALL zend_hash_get_current_key_type_ex(HashTable *ht, HashPosition *pos);

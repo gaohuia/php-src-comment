@@ -122,6 +122,7 @@ PHP源码阅读笔记.
 ```C
     Z_TRY_ADDREF(zval* p);  // 如果是可以引用计数的, 那么增加它.
     Z_TRY_DELREF(zval* p);  // 尝试, 减少引用.
+    add_index_long
 ```
 
 ## 数据类型及常用操作
@@ -162,7 +163,7 @@ PHP源码阅读笔记.
 #### 判断两个zend_string是否相等. 
     zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
 
-### 数组
+### 数组(HashTable)
 
     PHP中有一个Packed数组. 用于存储类似于数组的数据. 
 
@@ -178,6 +179,28 @@ PHP源码阅读笔记.
     void zend_hash_packed_to_hash(HashTable*);                  // 把packed数组转为hash
     void zend_hash_to_packed(HashTable*);                       // hash转为packed数组
     uint32_t zend_array_count(HashTable *);                     // 返回数组长度.
+
+    // zend_hash_str_* 系统的方法, 它的参数都是原始的C字符串
+    // _ind方法. 如果zval变量为IS_INDIRECT类型, 需要解析出他的真实值存入. 
+    zval *zend_hash_str_update(HashTable *, char *, size_t len, zval *pData); // 更新一个Hash类型的Key.  返回一个新的zval指针
+    zval *zend_hash_str_update_ind(HashTable *, char *, size_t len, zval *pData); // pData是一个间接的变量...(还不明白这里的用意)
+    zval *zzend_hash_str_add(HashTable *, char*, size_t len, zval *pData);
+    zval *zzend_hash_str_add_new(HashTable *, char*, size_t len, zval *pData);
+
+    // 
+    zval *zend_hash_update(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
+    zval *zend_hash_update_ind(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
+    zval *zend_hash_add(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
+    zval *zend_hash_add_new(HashTable *, zend_string *, zval);       // 跳过查询原来的key阶段, 直接添加新值. 有些情况下, 可以断言key不存在于HashTable中, 就可以直接调用此函数提高效率. 
+
+
+
+
+    // 遍历
+    ZEND_HASH_FOREACH_STR_KEY_VAL(HashTable *, zend_string *key, zval *value);
+    // 可以使用 key && value
+    // 如果key不存在, 将会是null
+    ZEND_HASH_FOREACH_END();
 ```
 
 ### 参考文档

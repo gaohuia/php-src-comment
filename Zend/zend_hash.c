@@ -454,18 +454,26 @@ static zend_always_inline void zend_hash_iterators_remove(HashTable *ht)
 	}
 }
 
+
+// 也就是找到迭代器中位置>=start的最小的那个位置. (还不知道干啥用. )
 ZEND_API HashPosition ZEND_FASTCALL zend_hash_iterators_lower_pos(HashTable *ht, HashPosition start)
 {
+	// 估计是一个全局的迭代器数组
 	HashTableIterator *iter = EG(ht_iterators);
+	// 末尾的那一个. (无效)
 	HashTableIterator *end  = iter + EG(ht_iterators_used);
 	HashPosition res = HT_INVALID_IDX;
 
 	while (iter != end) {
+		// 如果这个迭代器的数组是ht
 		if (iter->ht == ht) {
+			// 看看这个迭代器是不是 >= start
 			if (iter->pos >= start && iter->pos < res) {
 				res = iter->pos;
 			}
 		}
+
+		// 向前走
 		iter++;
 	}
 	return res;
@@ -486,6 +494,7 @@ ZEND_API void ZEND_FASTCALL _zend_hash_iterators_update(HashTable *ht, HashPosit
 
 // 查找一个给定zend_string的Bucket
 // 如果找不到会返回一个NULL
+// 私有方法. 
 static zend_always_inline Bucket *zend_hash_find_bucket(const HashTable *ht, zend_string *key)
 {
 	zend_ulong h;
@@ -549,7 +558,7 @@ static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *h
 
 	// 执行一个或之后, nIndex将会是一个负值. 
 	nIndex = h | ht->nTableMask;
-	// 这个Hash值坑位指定的Bucket位置. 
+	// 这个Has_zend_hash_next_index_insert_newh值坑位指定的Bucket位置. 
 	idx = HT_HASH_EX(arData, nIndex);
 	while (idx != HT_INVALID_IDX) {
 		ZEND_ASSERT(idx < HT_IDX_TO_HASH(ht->nTableSize));
@@ -562,7 +571,17 @@ static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *h
 	return NULL;
 }
 
+// 
 // 抛入一个元素
+// FLAG参数控制了这个函数的一些行为
+// 如果有 HASH_ADD_NEW 的情况下, 就是简单的 set 操作, 无论原来存不存在key, 都添加一个key
+// HASH_ADD_NEW不存在时, 要先找找原来是否存在KEY
+//  存在:
+// 		更新 key => value. 
+//  不存在:
+// 		增加 key => value
+// 
+// IS_INDIRECT: 如果变量是IS_INDIRECT类型, 需要解析出它的真实值. 即间接变量转直接变量. 
 static zend_always_inline zval *_zend_hash_add_or_update_i(HashTable *ht, zend_string *key, zval *pData, uint32_t flag ZEND_FILE_LINE_DC)
 {
 	zend_ulong h;
@@ -574,18 +593,26 @@ static zend_always_inline zval *_zend_hash_add_or_update_i(HashTable *ht, zend_s
 	HT_ASSERT_RC1(ht);
 
 	if (UNEXPECTED(!(ht->u.flags & HASH_FLAG_INITIALIZED))) {
+		// 未初始化的情况下， 就初始化之. 也不需要查 Bucket. 也不需要Resize. 
 		CHECK_INIT(ht, 0);
 		goto add_to_hash;
 	} else if (ht->u.flags & HASH_FLAG_PACKED) {
+		// 如果原来的HashTable是PACKED的，先转. 并且不需要查Bucket了。 
 		zend_hash_packed_to_hash(ht);
 	} else if ((flag & HASH_ADD_NEW) == 0) {
+		// 没有 HASH_ADD_NEW的情况. 
+		// 通过key指寻找Bucket. 
 		p = zend_hash_find_bucket(ht, key);
 
+		// 如果找到了, 就直接更新了. 
 		if (p) {
+			// 找到了Bucket. 
 			zval *data;
 
+			// 如果flag指数指定了HASH_ADD
 			if (flag & HASH_ADD) {
 				if (!(flag & HASH_UPDATE_INDIRECT)) {
+					// 如果没有指定 HASH_UPDATE_INDIRECT 就直接退出不处理了。 
 					return NULL;
 				}
 				ZEND_ASSERT(&p->val != pData);

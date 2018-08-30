@@ -3405,6 +3405,8 @@ PHP_FUNCTION(array_shift)
    Pushes elements onto the beginning of the array */
 PHP_FUNCTION(array_unshift)
 {
+	// 变量将要从数组的前部进入. 
+
 	zval   *args,			/* Function arguments array */
 		   *stack;			/* Input stack */
 	HashTable new_hash;		/* New hashtable for the stack */
@@ -3418,15 +3420,24 @@ PHP_FUNCTION(array_unshift)
 		Z_PARAM_VARIADIC('+', args, argc)
 	ZEND_PARSE_PARAMETERS_END();
 
+	// 创建一个新的HashTable
 	zend_hash_init(&new_hash, zend_hash_num_elements(Z_ARRVAL_P(stack)) + argc, NULL, ZVAL_PTR_DTOR, 0);
 	for (i = 0; i < argc; i++) {
+		// 对所有传入的参数进行增加引用数. 
 		if (Z_REFCOUNTED(args[i])) {
 			Z_ADDREF(args[i]);
 		}
+
+		// 参数依次加入到新数组中. 
 		zend_hash_next_index_insert_new(&new_hash, &args[i]);
 	}
+
+	// 看起来是在判断, 当前数组是否在遍历中. 
 	if (EXPECTED(Z_ARRVAL_P(stack)->u.v.nIteratorsCount == 0)) {
+		// 未处于遍历中. 
+		// 直接foreach并添加到新的Hashtable的末尾. 
 		ZEND_HASH_FOREACH_STR_KEY_VAL(Z_ARRVAL_P(stack), key, value) {
+			// 有Key添加Key
 			if (key) {
 				zend_hash_add_new(&new_hash, key, value);
 			} else {
@@ -3444,6 +3455,8 @@ PHP_FUNCTION(array_unshift)
 			} else {
 				zend_hash_next_index_insert_new(&new_hash, value);
 			}
+
+			// 当前是第几个
 			old_idx = (Bucket*)value - Z_ARRVAL_P(stack)->arData;
 			if (old_idx == iter_pos) {
 				zend_hash_iterators_update(Z_ARRVAL_P(stack), old_idx, new_idx);
@@ -3456,6 +3469,8 @@ PHP_FUNCTION(array_unshift)
 	/* replace HashTable data */
 	Z_ARRVAL_P(stack)->u.v.nIteratorsCount = 0;
 	Z_ARRVAL_P(stack)->pDestructor = NULL;
+
+	// 摧毁原数组. 
 	zend_hash_destroy(Z_ARRVAL_P(stack));
 
 	Z_ARRVAL_P(stack)->u.v.flags         = new_hash.u.v.flags;
