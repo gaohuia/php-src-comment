@@ -208,3 +208,4 @@ PHP源码阅读笔记.
 * [Blog by nikic](http://nikic.github.io/)
 * [PHP Internals Book](http://www.phpinternalsbook.com/index.html)
 * [PHP at the Core: A Hacker's Guide](http://php.net/manual/en/internals2.php)
+* [盘古大叔](https://github.com/pangudashu/php7-internal)
