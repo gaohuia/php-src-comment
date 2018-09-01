@@ -5,11 +5,12 @@ PHP源码阅读笔记.
 
 ## 重要文件
 
-* Zend/zend_types.h         定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
-* Zend/zend_string.h         定义了zend_string相关操作.
+* Zend/zend_types.h       定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
+* Zend/zend_string.h      定义了zend_string相关操作.
 * Zend/zend_API.h         定义了扩展相关的宏和函数.
-* Zend/zend_alloc.h         定义了内存分配相关的方法.
-* Zend/zend_hash.h         定义了hash表相关的方法和宏.
+* Zend/zend_alloc.h       定义了内存分配相关的方法.
+* Zend/zend_hash.h        定义了hash表相关的方法和宏.
+* Zend/zend_vm_def.h      定义了所有的Opcode handle
 
 ## zval
 
@@ -122,7 +123,8 @@ PHP源码阅读笔记.
 ```C
     Z_TRY_ADDREF(zval* p);  // 如果是可以引用计数的, 那么增加它.
     Z_TRY_DELREF(zval* p);  // 尝试, 减少引用.
-    add_index_long
+    zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存. 
+    zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法. 
 ```
 
 ## 数据类型及常用操作

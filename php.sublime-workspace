@@ -140,7 +140,7 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 7356,
+				"buffer_size": 7410,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -365,6 +365,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"remove",
+			"delete",
 			"zend_hash_add_new",
 			"_zend_hash_add",
 			"zend_hash_str_update",
@@ -490,7 +492,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -535,8 +537,8 @@
 						"selection":
 						[
 							[
-								14776,
-								14776
+								15221,
+								15221
 							]
 						],
 						"settings":
@@ -548,7 +550,7 @@
 						"translation.y": 3897.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -564,8 +566,8 @@
 						"selection":
 						[
 							[
-								14252,
-								14252
+								41088,
+								41088
 							]
 						],
 						"settings":
@@ -574,10 +576,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6841.0,
+						"translation.y": 23893.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -737,8 +739,8 @@
 						"selection":
 						[
 							[
-								5145,
-								5145
+								1310,
+								1310
 							]
 						],
 						"settings":
@@ -747,10 +749,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2213.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -766,8 +768,8 @@
 						"selection":
 						[
 							[
-								92948,
-								92948
+								99985,
+								99985
 							]
 						],
 						"settings":
@@ -776,10 +778,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 55021.0,
+						"translation.y": 57709.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -940,15 +942,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7356,
+						"buffer_size": 7410,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6982,
-								6982
+								7410,
+								7410
 							]
 						],
 						"settings":
@@ -959,10 +961,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3040.0,
+						"translation.y": 3056.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1165,6 +1167,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"D:\\241\\python\\python_request.sublime-project"
+			]
 		],
 		"width": 380.0
 	},
