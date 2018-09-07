@@ -7,7 +7,7 @@ PHP源码阅读笔记.
 
 * Zend/zend_types.h       定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
 * Zend/zend_string.h      定义了zend_string相关操作.
-* Zend/zend_API.h         定义了扩展相关的宏和函数.
+* Zend/zend_API.h         定义了扩展相关的宏和函数. zend_parse_arg_*系列
 * Zend/zend_alloc.h       定义了内存分配相关的方法.
 * Zend/zend_hash.h        定义了hash表相关的方法和宏.
 * Zend/zend_vm_def.h      定义了所有的Opcode handle
@@ -39,6 +39,8 @@ PHP源码阅读笔记.
 ```
 
 #### zval取值
+
+宏并非函数, 只是快捷方式. 
 
 ```C
     zend_long Z_LVAL(zval);         // 取long值
@@ -203,6 +205,42 @@ PHP源码阅读笔记.
     // 可以使用 key && value
     // 如果key不存在, 将会是null
     ZEND_HASH_FOREACH_END();
+```
+
+### 扩展开发
+
+```C
+    ZEND_PARSE_PARAMETERS_START(int minArguments, int maxArguments)
+    // ----开始参数定义------
+    Z_PARAM_ARRAY_EX2(zval *pzval, int check_null, int deref, int separate);
+    Z_PARAM_ARRAY_EX(zval *pzval, int check_null, int separate);                 // 当separate为1是, 将会对参数进行解引用
+    Z_PARAM_ZVAL(zval *pzval);
+    Z_PARAM_BOOL(zend_bool *p)
+    Z_PARAM_DOUBLE(double *p)
+    // ----结束参数定义------
+    ZEND_PARSE_PARAMETERS_END()
+    ZEND_PARSE_PARAMETERS_END_EX()
+
+
+    // 返回数据相关方法. 
+
+    RETURN_BOOL(zend_bool b);
+    RETURN_NULL();
+    RETURN_LONG(zend_long l);
+    RETURN_DOUBLE(double d);
+    RETURN_STR(zend_string*);
+    RETURN_INTERNED_STR();
+    RETURN_NEW_STR();
+    RETURN_STR_COPY();
+    RETURN_STRING();
+    RETURN_STRINGL();
+    RETURN_EMPTY_STRING();
+    RETURN_RES();
+    RETURN_ARR(HashTable *);
+    RETURN_OBJ();
+    RETURN_ZVAL();
+    RETURN_FALSE();
+    RETURN_TRUE();
 ```
 
 ### 参考文档

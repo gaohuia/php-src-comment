@@ -616,13 +616,15 @@ END_EXTERN_C()
 		ZVAL_PSTRINGL(z, "", 0);				\
 	} while (0)
 
+// 如果dtor设置为1 或 copy设置为0, 则值的引用数不变, 因为新的zval对zend_value的引用增加1, 老值引用减少1. 
+// ZVAL_ZVAL(zval *z, zval *zv, int copy, int dtor)
 #define ZVAL_ZVAL(z, zv, copy, dtor) do {		\
 		zval *__z = (z);						\
 		zval *__zv = (zv);						\
 		if (EXPECTED(!Z_ISREF_P(__zv))) {		\
 			if (copy && !dtor) {				\
 				ZVAL_COPY(__z, __zv);			\
-			} else {							\
+			} else { 							\
 				ZVAL_COPY_VALUE(__z, __zv);		\
 			}									\
 		} else {								\
@@ -732,6 +734,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 #define ZPP_ERROR_WRONG_ARG      4
 #define ZPP_ERROR_WRONG_COUNT    5
 
+// 参数解析循环.  START
 #define ZEND_PARSE_PARAMETERS_START_EX(flags, min_num_args, max_num_args) do { \
 		const int _flags = (flags); \
 		int _min_num_args = (min_num_args); \		// 最小参数个数
@@ -770,6 +773,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 #define ZEND_PARSE_PARAMETERS_START(min_num_args, max_num_args) \
 	ZEND_PARSE_PARAMETERS_START_EX(0, min_num_args, max_num_args)
 
+// 参数解析循环, END
 #define ZEND_PARSE_PARAMETERS_END_EX(failure) \
 		} while (0); \
 		if (UNEXPECTED(error_code != ZPP_ERROR_OK)) { \
