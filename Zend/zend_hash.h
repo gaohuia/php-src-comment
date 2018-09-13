@@ -77,7 +77,10 @@ ZEND_API void ZEND_FASTCALL _zend_hash_init(HashTable *ht, uint32_t nSize, dtor_
 ZEND_API void ZEND_FASTCALL _zend_hash_init_ex(HashTable *ht, uint32_t nSize, dtor_func_t pDestructor, zend_bool persistent, zend_bool bApplyProtection ZEND_FILE_LINE_DC);
 ZEND_API void ZEND_FASTCALL zend_hash_destroy(HashTable *ht);
 ZEND_API void ZEND_FASTCALL zend_hash_clean(HashTable *ht);
+
+// 初始化一个数组变量. 
 #define zend_hash_init(ht, nSize, pHashFunction, pDestructor, persistent)						_zend_hash_init((ht), (nSize), (pDestructor), (persistent) ZEND_FILE_LINE_CC)
+// 初始化一个数组变量, 并指定容量. 可一次性分配足够的内存, 避免插入大量数据时反复COPY数据. 
 #define zend_hash_init_ex(ht, nSize, pHashFunction, pDestructor, persistent, bApplyProtection)		_zend_hash_init_ex((ht), (nSize), (pDestructor), (persistent), (bApplyProtection) ZEND_FILE_LINE_CC)
 
 ZEND_API void ZEND_FASTCALL zend_hash_real_init(HashTable *ht, zend_bool packed);
@@ -98,8 +101,11 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_add_new(HashTable *ht, zend_string *key,
 // 间接的(还不知道什么时候会发生)....pData是一个zval指针, 但这是一个间接的变量. zend_value区域保存着真实的zval指针. 	
 #define zend_hash_update_ind(ht, key, pData) \
 		_zend_hash_update_ind(ht, key, pData ZEND_FILE_LINE_CC)
+// 增加一个key, 如果key存在, 将会更新. 
 #define zend_hash_add(ht, key, pData) \
 		_zend_hash_add(ht, key, pData ZEND_FILE_LINE_CC)
+// 增加一个key, 并跳过hash查找阶段. 
+// 只有可以确定key不会冲突时才使用这个方法. 可以提高插入性能. 
 #define zend_hash_add_new(ht, key, pData) \
 		_zend_hash_add_new(ht, key, pData ZEND_FILE_LINE_CC)
 
@@ -109,6 +115,7 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_str_update_ind(HashTable *ht, const char
 ZEND_API zval* ZEND_FASTCALL _zend_hash_str_add(HashTable *ht, const char *key, size_t len, zval *pData ZEND_FILE_LINE_DC);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_str_add_new(HashTable *ht, const char *key, size_t len, zval *pData ZEND_FILE_LINE_DC);
 
+// 更新key值, 和上面那组不同的是直接使用char*作为值. 
 #define zend_hash_str_update(ht, key, len, pData) \
 		_zend_hash_str_update(ht, key, len, pData ZEND_FILE_LINE_CC)
 #define zend_hash_str_update_ind(ht, key, len, pData) \
@@ -125,18 +132,26 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_index_update(HashTable *ht, zend_ulong h
 ZEND_API zval* ZEND_FASTCALL _zend_hash_next_index_insert(HashTable *ht, zval *pData ZEND_FILE_LINE_DC);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_next_index_insert_new(HashTable *ht, zval *pData ZEND_FILE_LINE_DC);
 
+// 设置某个位置的值
 #define zend_hash_index_add(ht, h, pData) \
 		_zend_hash_index_add(ht, h, pData ZEND_FILE_LINE_CC)
+// 
 #define zend_hash_index_add_new(ht, h, pData) \
 		_zend_hash_index_add_new(ht, h, pData ZEND_FILE_LINE_CC)
+// 更新
 #define zend_hash_index_update(ht, h, pData) \
 		_zend_hash_index_update(ht, h, pData ZEND_FILE_LINE_CC)
+// 直接插入到尾部
 #define zend_hash_next_index_insert(ht, pData) \
 		_zend_hash_next_index_insert(ht, pData ZEND_FILE_LINE_CC)
+// 还没搞清楚和上面这个函数有什么不同. 
 #define zend_hash_next_index_insert_new(ht, pData) \
 		_zend_hash_next_index_insert_new(ht, pData ZEND_FILE_LINE_CC)
 
+// 添加一个null
 ZEND_API zval* ZEND_FASTCALL zend_hash_index_add_empty_element(HashTable *ht, zend_ulong h);
+
+// 将某个值设置为null
 ZEND_API zval* ZEND_FASTCALL zend_hash_add_empty_element(HashTable *ht, zend_string *key);
 ZEND_API zval* ZEND_FASTCALL zend_hash_str_add_empty_element(HashTable *ht, const char *key, size_t len);
 

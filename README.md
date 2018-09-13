@@ -89,7 +89,7 @@ PHP源码阅读笔记.
     ZVAL_NEW_STR(zval*, zend_string*);  // 设置为zend_string值, 没有上述考虑
     ZVAL_STR_COPY(zval*, zend_string*); // 设置zval*变量的值为zend_string, 会增加zend_string引用数
     ZVAL_ARR(zval*, zend_array*);       // 设置zval*变量的值为zend_array
-    ZVAL_NEW_ARR(zval*);                // 分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1.
+    ZVAL_NEW_ARR(zval*);                // 分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1. 并设置zval为IS_ARRAY
     ZVAL_NEW_PERSISTENT_ARR(zval*);     // 分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
     ZVAL_OBJ(zval*, zend_object*);      // 设置zend_object值
     ZVAL_RES(zval*, zend_resource*);    // zend_resource
@@ -123,8 +123,8 @@ PHP源码阅读笔记.
 #### 引用计数
 
 ```C
-    Z_TRY_ADDREF(zval* p);  // 如果是可以引用计数的, 那么增加它.
-    Z_TRY_DELREF(zval* p);  // 尝试, 减少引用.
+    Z_TRY_ADDREF(zval p);  // 如果是可以引用计数的, 那么增加它.
+    Z_TRY_DELREF(zval p);  // 尝试, 减少引用.
     zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存. 
     zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法. 
 ```
@@ -178,6 +178,10 @@ PHP源码阅读笔记.
     zend_bool HT_HAS_STATIC_KEYS_ONLY(HashTable*);  // 是否只有静态KEY
 
 
+    // 数据变量未初始化之前不能使用. 
+    void array_init(zval *pzval);                   // 对一个数组变量进行初始化. 
+    void array_init_size(zval *pzval, size_t size); // 对一个数组变量进行初始化, 并指定大小. 
+
     void zend_hash_real_init(HashTable*, zend_bool packed);     // 初始化一个HashTable
     int zend_hash_del(HashTable*, zend_string*);                // 删除一个key
     void zend_hash_packed_to_hash(HashTable*);                  // 把packed数组转为hash
@@ -188,8 +192,8 @@ PHP源码阅读笔记.
     // _ind方法. 如果zval变量为IS_INDIRECT类型, 需要解析出他的真实值存入. 
     zval *zend_hash_str_update(HashTable *, char *, size_t len, zval *pData); // 更新一个Hash类型的Key.  返回一个新的zval指针
     zval *zend_hash_str_update_ind(HashTable *, char *, size_t len, zval *pData); // pData是一个间接的变量...(还不明白这里的用意)
-    zval *zzend_hash_str_add(HashTable *, char*, size_t len, zval *pData);
-    zval *zzend_hash_str_add_new(HashTable *, char*, size_t len, zval *pData);
+    zval *zend_hash_str_add(HashTable *, char*, size_t len, zval *pData);
+    zval *zend_hash_str_add_new(HashTable *, char*, size_t len, zval *pData);   // 在可以确定数组中没有冲突的键的情况下, 可以使用_new方法. 可以避免一次hash查找. 
 
     // 
     zval *zend_hash_update(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
@@ -244,7 +248,7 @@ PHP源码阅读笔记.
     RETURN_RES();
     RETURN_ARR(HashTable *);
     RETURN_OBJ();
-    RETURN_ZVAL();
+    RETURN_ZVAL(zval *);
     RETURN_FALSE();
     RETURN_TRUE();
 ```
