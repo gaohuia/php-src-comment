@@ -192,6 +192,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_str_find(const HashTable *ht, const char 
 ZEND_API zval* ZEND_FASTCALL zend_hash_index_find(const HashTable *ht, zend_ulong h);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_index_find(const HashTable *ht, zend_ulong h);
 
+// _not_found是一个锚点. 
 #define ZEND_HASH_INDEX_FIND(_ht, _h, _ret, _not_found) do { \
 		if (EXPECTED((_ht)->u.flags & HASH_FLAG_PACKED)) { \
 			if (EXPECTED((zend_ulong)(_h) < (zend_ulong)(_ht)->nNumUsed)) { \
@@ -228,6 +229,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_get_current_data_ex(HashTable *ht, HashPo
 ZEND_API void  ZEND_FASTCALL zend_hash_internal_pointer_reset_ex(HashTable *ht, HashPosition *pos);
 ZEND_API void  ZEND_FASTCALL zend_hash_internal_pointer_end_ex(HashTable *ht, HashPosition *pos);
 
+// 看起来像量数组遍历需要用到的一些函数. 
 #define zend_hash_has_more_elements(ht) \
 	zend_hash_has_more_elements_ex(ht, &(ht)->nInternalPointer)
 #define zend_hash_move_forward(ht) \
@@ -248,6 +250,7 @@ ZEND_API void  ZEND_FASTCALL zend_hash_internal_pointer_end_ex(HashTable *ht, Ha
 	zend_hash_internal_pointer_end_ex(ht, &(ht)->nInternalPointer)
 
 /* Copying, merging and sorting */
+// 数据操作
 ZEND_API void  ZEND_FASTCALL zend_hash_copy(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor);
 ZEND_API void  ZEND_FASTCALL _zend_hash_merge(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, zend_bool overwrite ZEND_FILE_LINE_DC);
 ZEND_API void  ZEND_FASTCALL zend_hash_merge_ex(HashTable *target, HashTable *source, copy_ctor_func_t pCopyConstructor, merge_checker_func_t pMergeSource, void *pParam);

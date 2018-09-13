@@ -697,6 +697,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_PTR(zval)					(zval).value.ptr
 #define Z_PTR_P(zval_p)				Z_PTR(*(zval_p))
 
+// ZVAL_
 #define ZVAL_UNDEF(z) do {				\
 		Z_TYPE_INFO_P(z) = IS_UNDEF;	\
 	} while (0)
@@ -747,6 +748,9 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_INTERNED_STRING_EX;	\
 	} while (0)
 
+// 设置zval的zend_string值.
+// 当zend_string为新值, 所以此时不增加引用计数. 
+// 与ZVAL_STR基本一样. 
 #define ZVAL_NEW_STR(z, s) do {					\
 		zval *__z = (z);						\
 		zend_string *__s = (s);					\
@@ -754,6 +758,9 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_STRING_EX;		\
 	} while (0)
 
+// COPY语义
+// 认为zend_string原来有在别的地方使用
+// 所以COPY时会增加引用数. 
 #define ZVAL_STR_COPY(z, s) do {						\
 		zval *__z = (z);								\
 		zend_string *__s = (s);							\
@@ -767,12 +774,15 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		}												\
 	} while (0)
 
+// 简单设置zval值. 
+// ZVAL_设置后, 都重置量类型. 
 #define ZVAL_ARR(z, a) do {						\
 		zval *__z = (z);						\
 		Z_ARR_P(__z) = (a);						\
 		Z_TYPE_INFO_P(__z) = IS_ARRAY_EX;		\
 	} while (0)
 
+// 只分配了zend_array的内存, 但并不对这个变量进行初始化. 
 #define ZVAL_NEW_ARR(z) do {									\
 		zval *__z = (z);										\
 		zend_array *_arr =										\
@@ -781,6 +791,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_ARRAY_EX;						\
 	} while (0)
 
+// 
 #define ZVAL_NEW_PERSISTENT_ARR(z) do {							\
 		zval *__z = (z);										\
 		zend_array *_arr =										\
@@ -829,12 +840,14 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_RESOURCE_EX;					\
 	} while (0)
 
+// 设置z引用r
 #define ZVAL_REF(z, r) do {										\
 		zval *__z = (z);										\
 		Z_REF_P(__z) = (r);										\
 		Z_TYPE_INFO_P(__z) = IS_REFERENCE_EX;					\
 	} while (0)
 
+// 
 #define ZVAL_NEW_EMPTY_REF(z) do {								\
 		zend_reference *_ref =									\
 		(zend_reference *) emalloc(sizeof(zend_reference));		\
@@ -909,6 +922,8 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_ADDREF(z)					Z_ADDREF_P(&(z))
 #define Z_DELREF(z)					Z_DELREF_P(&(z))
 
+// 判断变量的值是否为可引用变量
+// 如果
 #define Z_TRY_ADDREF_P(pz) do {		\
 	if (Z_REFCOUNTED_P((pz))) {		\
 		Z_ADDREF_P((pz));			\
@@ -920,6 +935,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_DELREF_P((pz));			\
 	}								\
 } while (0)
+
 
 #define Z_TRY_ADDREF(z)				Z_TRY_ADDREF_P(&(z))
 #define Z_TRY_DELREF(z)				Z_TRY_DELREF_P(&(z))
@@ -965,6 +981,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 # error "Unknown SIZEOF_SIZE_T"
 #endif
 
+// COPY值的部分
+// 不影响引用计数
 #define ZVAL_COPY_VALUE(z, v)							\
 	do {												\
 		zval *_z1 = (z);								\
@@ -975,6 +993,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		ZVAL_COPY_VALUE_EX(_z1, _z2, _gc, _t);			\
 	} while (0)
 
+// COPY变量
+// 同时增加引用计数. 
 #define ZVAL_COPY(z, v)									\
 	do {												\
 		zval *_z1 = (z);								\
@@ -987,6 +1007,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		}												\
 	} while (0)
 
+// gc实际上就是值的部分
+// 非引用计数的变量
 #define ZVAL_DUP(z, v)									\
 	do {												\
 		zval *_z1 = (z);								\

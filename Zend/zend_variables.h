@@ -45,6 +45,8 @@ static zend_always_inline void i_zval_ptr_dtor(zval *zval_ptr ZEND_FILE_LINE_DC)
 {
 	if (Z_REFCOUNTED_P(zval_ptr)) {
 		zend_refcounted *ref = Z_COUNTED_P(zval_ptr);
+
+		// 如果引用计数减为0
 		if (!--GC_REFCOUNT(ref)) {
 			_zval_dtor_func(ref ZEND_FILE_LINE_RELAY_CC);
 		} else {

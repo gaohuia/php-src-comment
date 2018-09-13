@@ -572,7 +572,7 @@ static zend_always_inline Bucket *zend_hash_index_find_bucket(const HashTable *h
 }
 
 // 
-// 抛入一个元素
+// 插入一个元素. 不增加这个元素的引用记数. 
 // FLAG参数控制了这个函数的一些行为
 // 如果有 HASH_ADD_NEW 的情况下, 就是简单的 set 操作, 无论原来存不存在key, 都添加一个key
 // HASH_ADD_NEW不存在时, 要先找找原来是否存在KEY

@@ -169,7 +169,10 @@ PHP源码阅读笔记.
 
 ### 数组(HashTable)
 
-    PHP中有一个Packed数组. 用于存储类似于数组的数据. 
+    PHP数据的要点. 
+
+    * PHP中有一个Packed数组. 用于存储类似于数组的数据. 
+    * PHP zend_hash可以指定一个析构函数. 这个函数将会在每个元素被删除时调用. 默认情况下这个析构函数只是去减少变量的引用计数， 如果引用计数减为0， 再调用相应类型的析构函数. 
 
 ```C
 
@@ -182,6 +185,7 @@ PHP源码阅读笔记.
     void array_init(zval *pzval);                   // 对一个数组变量进行初始化. 
     void array_init_size(zval *pzval, size_t size); // 对一个数组变量进行初始化, 并指定大小. 
 
+    // 看样子这个方法没啥软用. 
     void zend_hash_real_init(HashTable*, zend_bool packed);     // 初始化一个HashTable
     int zend_hash_del(HashTable*, zend_string*);                // 删除一个key
     void zend_hash_packed_to_hash(HashTable*);                  // 把packed数组转为hash

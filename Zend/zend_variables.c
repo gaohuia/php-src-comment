@@ -28,6 +28,7 @@
 #include "zend_constants.h"
 #include "zend_list.h"
 
+// 各种类型的变量的析构函数
 ZEND_API void ZEND_FASTCALL _zval_dtor_func(zend_refcounted *p ZEND_FILE_LINE_DC)
 {
 	switch (GC_TYPE(p)) {
@@ -165,10 +166,15 @@ ZEND_API void zval_add_ref_unref(zval *p)
 	}
 }
 
+// 私有方法. 
+// 根据zval变量的现在的值
+// 再根据变量的类型调用不同的COPY方法
+// 返回后zval的值与原来的值分离. 
+// 它不控制任何一方的引用数, 由调用方控制. 
 ZEND_API void ZEND_FASTCALL _zval_copy_ctor_func(zval *zvalue ZEND_FILE_LINE_DC)
 {
 	// 执行各种类型的COPYABLE的zend_value的COPY动作.
-	//
+	// COPYABLE的类型 ARRAY, STRING
 	if (EXPECTED(Z_TYPE_P(zvalue) == IS_ARRAY)) {
 		ZVAL_ARR(zvalue, zend_array_dup(Z_ARRVAL_P(zvalue)));
 	} else if (EXPECTED(Z_TYPE_P(zvalue) == IS_STRING)) {
