@@ -209,6 +209,12 @@ PHP源码阅读笔记.
 
 ### 扩展开发
 
+参数: 
+
+* check_null 检测参数是否为null
+* deref 对变量进行解引用
+* separate 对变量进行分离. 如果这个变量原来与其它变量共享zend_value, 那就把这个zend_value分离出来. 
+
 ```C
     ZEND_PARSE_PARAMETERS_START(int minArguments, int maxArguments)
     // ----开始参数定义------

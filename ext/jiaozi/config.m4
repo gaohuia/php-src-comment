@@ -7,9 +7,8 @@ dnl without editing.
 
 dnl If your extension references something external, use with:
 
-dnl PHP_ARG_WITH(jiaozi, for jiaozi support,
-dnl Make sure that the comment is aligned:
-dnl [  --with-jiaozi             Include jiaozi support])
+PHP_ARG_WITH(jiaozi, for jiaozi support,
+[  --with-jiaozi             Include jiaozi support])
 
 dnl Otherwise use enable:
 

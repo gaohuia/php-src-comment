@@ -1003,6 +1003,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		}												\
 	} while (0)
 
+// 如果变量是一个引用类型, 对变量解引用.
+// 否则, 不产生任何效果. 
 #define ZVAL_DEREF(z) do {								\
 		if (UNEXPECTED(Z_ISREF_P(z))) {					\
 			(z) = Z_REFVAL_P(z);						\

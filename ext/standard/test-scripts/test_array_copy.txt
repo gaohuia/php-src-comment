@@ -1,0 +1,55 @@
+Finding entry points
+Branch analysis from position: 0
+Jump found. (Code = 43) Position 1 = 5, Position 2 = 8
+Branch analysis from position: 5
+Jump found. (Code = 42) Position 1 = 10
+Branch analysis from position: 10
+Jump found. (Code = 62) Position 1 = -2
+Branch analysis from position: 8
+Jump found. (Code = 62) Position 1 = -2
+filename:       D:\241\project\php-7.2.9\php-7.2.9\ext\standard\test-scripts\test_array_copy.php
+function name:  (null)
+number of ops:  21
+compiled vars:  !0 = $a
+line     #* E I O op                           fetch          ext  return  operands
+-------------------------------------------------------------------------------------
+   3     0  E >   EXT_STMT                                                 
+         1        ASSIGN                                                   !0, 1
+   4     2        EXT_STMT                                                 
+         3        IS_EQUAL                                         ~2      !0, 1
+         4      > JMPZ                                                     ~2, ->8
+   5     5    >   EXT_STMT                                                 
+         6        ASSIGN_ADD                                    0          !0, 1
+         7      > JMP                                                      ->10
+   7     8    >   EXT_STMT                                                 
+         9        ASSIGN_ADD                                    0          !0, 2
+  10    10    >   EXT_STMT                                                 
+        11        NOP                                                      
+  15    12        EXT_STMT                                                 
+        13        ROPE_INIT                                     6  ~6      'hello+world+'
+        14        ROPE_ADD                                      1  ~6      ~6, !0
+        15        ROPE_ADD                                      2  ~6      ~6, '+'
+        16        ROPE_ADD                                      3  ~6      ~6, !0
+        17        ROPE_ADD                                      4  ~6      ~6, '+'
+        18        ROPE_END                                      5  ~5      ~6, !0
+        19      > RETURN                                                   ~5
+        20*     > RETURN                                                   1
+
+Function b:
+Finding entry points
+Branch analysis from position: 0
+Jump found. (Code = 62) Position 1 = -2
+filename:       D:\241\project\php-7.2.9\php-7.2.9\ext\standard\test-scripts\test_array_copy.php
+function name:  b
+number of ops:  5
+compiled vars:  none
+line     #* E I O op                           fetch          ext  return  operands
+-------------------------------------------------------------------------------------
+  10     0  E >   EXT_NOP                                                  
+  12     1        EXT_STMT                                                 
+         2      > RETURN                                                   1
+  13     3*       EXT_STMT                                                 
+         4*     > RETURN                                                   null
+
+End of function b
+

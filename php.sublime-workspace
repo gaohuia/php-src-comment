@@ -34,10 +34,11 @@
 			}
 		},
 		{
-			"file": "/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/yaf_loader.c",
+			"file": "Zend/zend_types.h",
 			"settings":
 			{
-				"buffer_size": 22215,
+				"buffer_size": 34832,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -47,15 +48,6 @@
 			{
 				"buffer_size": 3458,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/241/project/commands/common_commands.log",
-			"settings":
-			{
-				"buffer_size": 10795,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
 			}
 		},
 		{
@@ -77,11 +69,193 @@
 			}
 		},
 		{
+			"file": "Zend/zend_compile.h",
+			"settings":
+			{
+				"buffer_size": 33715,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext/jiaozi/jiaozi.c",
+			"settings":
+			{
+				"buffer_size": 5581,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext/standard/credits.c",
+			"settings":
+			{
+				"buffer_size": 6131,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext/standard/array.c",
+			"settings":
+			{
+				"buffer_size": 182301,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext/standard/test-scripts/test_array_copy.php",
+			"settings":
+			{
+				"buffer_size": 127,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ext/standard/php_array.h",
+			"settings":
+			{
+				"buffer_size": 4483,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 4251 files for \"ZEND_BEGIN_ARG_INFO_EX\"\n\nD:\\241\\project\\php-7.2.9\\php-7.2.9\\ext\\standard\\basic_functions.c:\n  147  \n  148  /* {{{ main/output.c */\n  149: ZEND_BEGIN_ARG_INFO_EX(arginfo_ob_start, 0, 0, 0)\n  150  \tZEND_ARG_INFO(0, user_function)\n  151  \tZEND_ARG_INFO(0, chunk_size)\n  ...\n  183  ZEND_END_ARG_INFO()\n  184  \n  185: ZEND_BEGIN_ARG_INFO_EX(arginfo_ob_get_status, 0, 0, 0)\n  186  \tZEND_ARG_INFO(0, full_status)\n  187  ZEND_END_ARG_INFO()\n  188  \n  189: ZEND_BEGIN_ARG_INFO_EX(arginfo_ob_implicit_flush, 0, 0, 0)\n  190  \tZEND_ARG_INFO(0, flag)\n  191  ZEND_END_ARG_INFO()\n  ...\n  200  /* }}} */\n  201  /* {{{ main/streams/userspace.c */\n  202: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_wrapper_register, 0, 0, 2)\n  203  \tZEND_ARG_INFO(0, protocol)\n  204  \tZEND_ARG_INFO(0, classname)\n  ...\n  215  /* }}} */\n  216  /* {{{ array.c */\n  217: ZEND_BEGIN_ARG_INFO_EX(arginfo_krsort, 0, 0, 1)\n  218  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  219  \tZEND_ARG_INFO(0, sort_flags)\n  220  ZEND_END_ARG_INFO()\n  221  \n  222: ZEND_BEGIN_ARG_INFO_EX(arginfo_ksort, 0, 0, 1)\n  223  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  224  \tZEND_ARG_INFO(0, sort_flags)\n  225  ZEND_END_ARG_INFO()\n  226  \n  227: ZEND_BEGIN_ARG_INFO_EX(arginfo_count, 0, 0, 1)\n  228  \tZEND_ARG_INFO(0, var)\n  229  \tZEND_ARG_INFO(0, mode)\n  ...\n  238  ZEND_END_ARG_INFO()\n  239  \n  240: ZEND_BEGIN_ARG_INFO_EX(arginfo_asort, 0, 0, 1)\n  241  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  242  \tZEND_ARG_INFO(0, sort_flags)\n  243  ZEND_END_ARG_INFO()\n  244  \n  245: ZEND_BEGIN_ARG_INFO_EX(arginfo_arsort, 0, 0, 1)\n  246  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  247  \tZEND_ARG_INFO(0, sort_flags)\n  248  ZEND_END_ARG_INFO()\n  249  \n  250: ZEND_BEGIN_ARG_INFO_EX(arginfo_sort, 0, 0, 1)\n  251  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  252  \tZEND_ARG_INFO(0, sort_flags)\n  253  ZEND_END_ARG_INFO()\n  254  \n  255: ZEND_BEGIN_ARG_INFO_EX(arginfo_rsort, 0, 0, 1)\n  256  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  257  \tZEND_ARG_INFO(0, sort_flags)\n  ...\n  297  ZEND_END_ARG_INFO()\n  298  \n  299: ZEND_BEGIN_ARG_INFO_EX(arginfo_min, 0, 0, 1)\n  300  \tZEND_ARG_VARIADIC_INFO(0, args)\n  301  ZEND_END_ARG_INFO()\n  302  \n  303: ZEND_BEGIN_ARG_INFO_EX(arginfo_max, 0, 0, 1)\n  304  \tZEND_ARG_VARIADIC_INFO(0, args)\n  305  ZEND_END_ARG_INFO()\n  306  \n  307: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_walk, 0, 0, 2)\n  308  \tZEND_ARG_INFO(1, input) /* ARRAY_INFO(1, arg, 0) */\n  309  \tZEND_ARG_INFO(0, funcname)\n  ...\n  311  ZEND_END_ARG_INFO()\n  312  \n  313: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_walk_recursive, 0, 0, 2)\n  314  \tZEND_ARG_INFO(1, input) /* ARRAY_INFO(1, arg, 0) */\n  315  \tZEND_ARG_INFO(0, funcname)\n  ...\n  317  ZEND_END_ARG_INFO()\n  318  \n  319: ZEND_BEGIN_ARG_INFO_EX(arginfo_in_array, 0, 0, 2)\n  320  \tZEND_ARG_INFO(0, needle)\n  321  \tZEND_ARG_INFO(0, haystack) /* ARRAY_INFO(0, haystack, 0) */\n  ...\n  323  ZEND_END_ARG_INFO()\n  324  \n  325: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_search, 0, 0, 2)\n  326  \tZEND_ARG_INFO(0, needle)\n  327  \tZEND_ARG_INFO(0, haystack) /* ARRAY_INFO(0, haystack, 0) */\n  ...\n  329  ZEND_END_ARG_INFO()\n  330  \n  331: ZEND_BEGIN_ARG_INFO_EX(arginfo_extract, 0, 0, 1)\n  332  \tZEND_ARG_INFO(ZEND_SEND_PREFER_REF, arg) /* ARRAY_INFO(0, arg, 0) */\n  333  \tZEND_ARG_INFO(0, extract_type)\n  ...\n  335  ZEND_END_ARG_INFO()\n  336  \n  337: ZEND_BEGIN_ARG_INFO_EX(arginfo_compact, 0, 0, 1)\n  338  \tZEND_ARG_VARIADIC_INFO(0, var_names)\n  339  ZEND_END_ARG_INFO()\n  ...\n  350  ZEND_END_ARG_INFO()\n  351  \n  352: ZEND_BEGIN_ARG_INFO_EX(arginfo_range, 0, 0, 2)\n  353  \tZEND_ARG_INFO(0, low)\n  354  \tZEND_ARG_INFO(0, high)\n  ...\n  360  ZEND_END_ARG_INFO()\n  361  \n  362: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_push, 0, 0, 2)\n  363  \tZEND_ARG_INFO(1, stack) /* ARRAY_INFO(1, stack, 0) */\n  364  \tZEND_ARG_VARIADIC_INFO(0, vars)\n  ...\n  373  ZEND_END_ARG_INFO()\n  374  \n  375: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_unshift, 0, 0, 2)\n  376  \tZEND_ARG_INFO(1, stack) /* ARRAY_INFO(1, stack, 0) */\n  377  \tZEND_ARG_VARIADIC_INFO(0, vars)\n  378  ZEND_END_ARG_INFO()\n  379  \n  380: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_splice, 0, 0, 2)\n  381  \tZEND_ARG_INFO(1, arg) /* ARRAY_INFO(1, arg, 0) */\n  382  \tZEND_ARG_INFO(0, offset)\n  ...\n  385  ZEND_END_ARG_INFO()\n  386  \n  387: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_slice, 0, 0, 2)\n  388  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(1, arg, 0) */\n  389  \tZEND_ARG_INFO(0, offset)\n  ...\n  392  ZEND_END_ARG_INFO()\n  393  \n  394: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_merge, 0, 0, 1)\n  395  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg, 0) */\n  396  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  397  ZEND_END_ARG_INFO()\n  398  \n  399: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_merge_recursive, 0, 0, 1)\n  400  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg, 0) */\n  401  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  402  ZEND_END_ARG_INFO()\n  403  \n  404: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_replace, 0, 0, 1)\n  405  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg, 0) */\n  406  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  407  ZEND_END_ARG_INFO()\n  408  \n  409: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_replace_recursive, 0, 0, 1)\n  410  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg, 0) */\n  411  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  412  ZEND_END_ARG_INFO()\n  413  \n  414: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_keys, 0, 0, 1)\n  415  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  416  \tZEND_ARG_INFO(0, search_value)\n  ...\n  426  ZEND_END_ARG_INFO()\n  427  \n  428: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_column, 0, 0, 2)\n  429  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  430  \tZEND_ARG_INFO(0, column_key)\n  ...\n  432  ZEND_END_ARG_INFO()\n  433  \n  434: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_reverse, 0, 0, 1)\n  435  \tZEND_ARG_INFO(0, input) /* ARRAY_INFO(0, arg, 0) */\n  436  \tZEND_ARG_INFO(0, preserve_keys)\n  ...\n  447  ZEND_END_ARG_INFO()\n  448  \n  449: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_change_key_case, 0, 0, 1)\n  450  \tZEND_ARG_INFO(0, input) /* ARRAY_INFO(0, arg, 0) */\n  451  \tZEND_ARG_INFO(0, case)\n  452  ZEND_END_ARG_INFO()\n  453  \n  454: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_unique, 0, 0, 1)\n  455  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  456  \tZEND_ARG_INFO(0, flags)\n  457  ZEND_END_ARG_INFO()\n  458  \n  459: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_intersect_key, 0, 0, 2)\n  460  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  461  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  468  ZEND_END_ARG_INFO()\n  469  \n  470: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_intersect, 0, 0, 2)\n  471  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  472  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  479  ZEND_END_ARG_INFO()\n  480  \n  481: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_intersect_assoc, 0, 0, 2)\n  482  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  483  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  503  ZEND_END_ARG_INFO()\n  504  \n  505: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_diff_key, 0, 0, 2)\n  506  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  507  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  514  ZEND_END_ARG_INFO()\n  515  \n  516: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_diff, 0, 0, 2)\n  517  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  518  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  525  ZEND_END_ARG_INFO()\n  526  \n  527: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_diff_assoc, 0, 0, 2)\n  528  \tZEND_ARG_INFO(0, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  529  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  549  ZEND_END_ARG_INFO()\n  550  \n  551: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_multisort, 0, 0, 1)\n  552  \tZEND_ARG_INFO(ZEND_SEND_PREFER_REF, arr1) /* ARRAY_INFO(0, arg1, 0) */\n  553  \tZEND_ARG_INFO(ZEND_SEND_PREFER_REF, sort_order)\n  ...\n  556  ZEND_END_ARG_INFO()\n  557  \n  558: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_rand, 0, 0, 1)\n  559  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  560  \tZEND_ARG_INFO(0, num_req)\n  ...\n  569  ZEND_END_ARG_INFO()\n  570  \n  571: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_reduce, 0, 0, 2)\n  572  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  573  \tZEND_ARG_INFO(0, callback)\n  ...\n  575  ZEND_END_ARG_INFO()\n  576  \n  577: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_filter, 0, 0, 1)\n  578  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  579  \tZEND_ARG_INFO(0, callback)\n  ...\n  581  ZEND_END_ARG_INFO()\n  582  \n  583: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_map, 0, 0, 2)\n  584  \tZEND_ARG_INFO(0, callback)\n  585  \tZEND_ARG_VARIADIC_INFO(0, arrays)\n  ...\n  591  ZEND_END_ARG_INFO()\n  592  \n  593: ZEND_BEGIN_ARG_INFO_EX(arginfo_array_chunk, 0, 0, 2)\n  594  \tZEND_ARG_INFO(0, arg) /* ARRAY_INFO(0, arg, 0) */\n  595  \tZEND_ARG_INFO(0, size)\n  ...\n  633  ZEND_END_ARG_INFO()\n  634  \n  635: ZEND_BEGIN_ARG_INFO_EX(arginfo_getenv, 0, 0, 0)\n  636  \tZEND_ARG_INFO(0, varname)\n  637  \tZEND_ARG_INFO(0, local_only)\n  ...\n  644  #endif\n  645  \n  646: ZEND_BEGIN_ARG_INFO_EX(arginfo_getopt, 0, 0, 1)\n  647  \tZEND_ARG_INFO(0, options)\n  648  \tZEND_ARG_INFO(0, opts) /* ARRAY_INFO(0, opts, 1) */\n  ...\n  679  ZEND_END_ARG_INFO()\n  680  \n  681: ZEND_BEGIN_ARG_INFO_EX(arginfo_error_log, 0, 0, 1)\n  682  \tZEND_ARG_INFO(0, message)\n  683  \tZEND_ARG_INFO(0, message_type)\n  ...\n  686  ZEND_END_ARG_INFO()\n  687  \n  688: ZEND_BEGIN_ARG_INFO_EX(arginfo_error_get_last, 0, 0, 0)\n  689  ZEND_END_ARG_INFO()\n  690  \n  691: ZEND_BEGIN_ARG_INFO_EX(arginfo_error_clear_last, 0, 0, 0)\n  692  ZEND_END_ARG_INFO()\n  693  \n  694: ZEND_BEGIN_ARG_INFO_EX(arginfo_call_user_func, 0, 0, 1)\n  695  \tZEND_ARG_INFO(0, function_name)\n  696  \tZEND_ARG_VARIADIC_INFO(0, parameters)\n  697  ZEND_END_ARG_INFO()\n  698  \n  699: ZEND_BEGIN_ARG_INFO_EX(arginfo_call_user_func_array, 0, 0, 2)\n  700  \tZEND_ARG_INFO(0, function_name)\n  701  \tZEND_ARG_INFO(0, parameters) /* ARRAY_INFO(0, parameters, 1) */\n  702  ZEND_END_ARG_INFO()\n  703  \n  704: ZEND_BEGIN_ARG_INFO_EX(arginfo_forward_static_call, 0, 0, 1)\n  705  \tZEND_ARG_INFO(0, function_name)\n  706  \tZEND_ARG_VARIADIC_INFO(0, parameters)\n  707  ZEND_END_ARG_INFO()\n  708  \n  709: ZEND_BEGIN_ARG_INFO_EX(arginfo_forward_static_call_array, 0, 0, 2)\n  710  \tZEND_ARG_INFO(0, function_name)\n  711  \tZEND_ARG_INFO(0, parameters) /* ARRAY_INFO(0, parameters, 1) */\n  712  ZEND_END_ARG_INFO()\n  713  \n  714: ZEND_BEGIN_ARG_INFO_EX(arginfo_register_shutdown_function, 0, 0, 1)\n  715  \tZEND_ARG_INFO(0, function_name)\n  716  \tZEND_ARG_VARIADIC_INFO(0, parameters)\n  717  ZEND_END_ARG_INFO()\n  718  \n  719: ZEND_BEGIN_ARG_INFO_EX(arginfo_highlight_file, 0, 0, 1)\n  720  \tZEND_ARG_INFO(0, file_name)\n  721  \tZEND_ARG_INFO(0, return)\n  ...\n  726  ZEND_END_ARG_INFO()\n  727  \n  728: ZEND_BEGIN_ARG_INFO_EX(arginfo_highlight_string, 0, 0, 1)\n  729  \tZEND_ARG_INFO(0, string)\n  730  \tZEND_ARG_INFO(0, return)\n  ...\n  735  ZEND_END_ARG_INFO()\n  736  \n  737: ZEND_BEGIN_ARG_INFO_EX(arginfo_ini_get_all, 0, 0, 0)\n  738  \tZEND_ARG_INFO(0, extension)\n  739  \tZEND_ARG_INFO(0, details)\n  ...\n  759  ZEND_END_ARG_INFO()\n  760  \n  761: ZEND_BEGIN_ARG_INFO_EX(arginfo_print_r, 0, 0, 1)\n  762  \tZEND_ARG_INFO(0, var)\n  763  \tZEND_ARG_INFO(0, return)\n  ...\n  770  ZEND_END_ARG_INFO()\n  771  \n  772: ZEND_BEGIN_ARG_INFO_EX(arginfo_ignore_user_abort, 0, 0, 0)\n  773  \tZEND_ARG_INFO(0, value)\n  774  ZEND_END_ARG_INFO()\n  ...\n  800  #endif\n  801  \n  802: ZEND_BEGIN_ARG_INFO_EX(arginfo_register_tick_function, 0, 0, 1)\n  803  \tZEND_ARG_INFO(0, function_name)\n  804  \tZEND_ARG_VARIADIC_INFO(0, parameters)\n  ...\n  818  ZEND_END_ARG_INFO()\n  819  \n  820: ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_ini_file, 0, 0, 1)\n  821  \tZEND_ARG_INFO(0, filename)\n  822  \tZEND_ARG_INFO(0, process_sections)\n  ...\n  824  ZEND_END_ARG_INFO()\n  825  \n  826: ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_ini_string, 0, 0, 1)\n  827      ZEND_ARG_INFO(0, ini_string)\n  828      ZEND_ARG_INFO(0, process_sections)\n  ...\n  841  /* }}} */\n  842  /* {{{ assert.c */\n  843: ZEND_BEGIN_ARG_INFO_EX(arginfo_assert, 0, 0, 1)\n  844  \tZEND_ARG_INFO(0, assertion)\n  845  \tZEND_ARG_INFO(0, description)\n  846  ZEND_END_ARG_INFO()\n  847  \n  848: ZEND_BEGIN_ARG_INFO_EX(arginfo_assert_options, 0, 0, 1)\n  849  \tZEND_ARG_INFO(0, what)\n  850  \tZEND_ARG_INFO(0, value)\n  ...\n  856  ZEND_END_ARG_INFO()\n  857  \n  858: ZEND_BEGIN_ARG_INFO_EX(arginfo_base64_decode, 0, 0, 1)\n  859  \tZEND_ARG_INFO(0, str)\n  860  \tZEND_ARG_INFO(0, strict)\n  ...\n  863  /* }}} */\n  864  /* {{{ browscap.c */\n  865: ZEND_BEGIN_ARG_INFO_EX(arginfo_get_browser, 0, 0, 0)\n  866  \tZEND_ARG_INFO(0, browser_name)\n  867  \tZEND_ARG_INFO(0, return_array)\n  ...\n  875  /* }}} */\n  876  /* {{{ crypt.c */\n  877: ZEND_BEGIN_ARG_INFO_EX(arginfo_crypt, 0, 0, 1)\n  878  \tZEND_ARG_INFO(0, str)\n  879  \tZEND_ARG_INFO(0, salt)\n  ...\n  897  /* }}} */\n  898  /* {{{ dir.c */\n  899: ZEND_BEGIN_ARG_INFO_EX(arginfo_opendir, 0, 0, 1)\n  900  \tZEND_ARG_INFO(0, path)\n  901  \tZEND_ARG_INFO(0, context)\n  902  ZEND_END_ARG_INFO()\n  903  \n  904: ZEND_BEGIN_ARG_INFO_EX(arginfo_dir, 0, 0, 1)\n  905  \tZEND_ARG_INFO(0, directory)\n  906  \tZEND_ARG_INFO(0, context)\n  907  ZEND_END_ARG_INFO()\n  908  \n  909: ZEND_BEGIN_ARG_INFO_EX(arginfo_closedir, 0, 0, 0)\n  910  \tZEND_ARG_INFO(0, dir_handle)\n  911  ZEND_END_ARG_INFO()\n  ...\n  924  ZEND_END_ARG_INFO()\n  925  \n  926: ZEND_BEGIN_ARG_INFO_EX(arginfo_rewinddir, 0, 0, 0)\n  927  \tZEND_ARG_INFO(0, dir_handle)\n  928  ZEND_END_ARG_INFO()\n  929  \n  930: ZEND_BEGIN_ARG_INFO_EX(arginfo_readdir, 0, 0, 0)\n  931  \tZEND_ARG_INFO(0, dir_handle)\n  932  ZEND_END_ARG_INFO()\n  933  \n  934  #ifdef HAVE_GLOB\n  935: ZEND_BEGIN_ARG_INFO_EX(arginfo_glob, 0, 0, 1)\n  936  \tZEND_ARG_INFO(0, pattern)\n  937  \tZEND_ARG_INFO(0, flags)\n  ...\n  939  #endif\n  940  \n  941: ZEND_BEGIN_ARG_INFO_EX(arginfo_scandir, 0, 0, 1)\n  942  \tZEND_ARG_INFO(0, dir)\n  943  \tZEND_ARG_INFO(0, sorting_order)\n  ...\n  964  \n  965  #if defined(PHP_WIN32) || (HAVE_DNS_SEARCH_FUNC && !defined(__BEOS__))\n  966: ZEND_BEGIN_ARG_INFO_EX(arginfo_dns_check_record, 0, 0, 1)\n  967  \tZEND_ARG_INFO(0, host)\n  968  \tZEND_ARG_INFO(0, type)\n  ...\n  970  \n  971  # if defined(PHP_WIN32) || HAVE_FULL_DNS_FUNCS\n  972: ZEND_BEGIN_ARG_INFO_EX(arginfo_dns_get_record, 0, 0, 1)\n  973  \tZEND_ARG_INFO(0, hostname)\n  974  \tZEND_ARG_INFO(0, type)\n  ...\n  978  ZEND_END_ARG_INFO()\n  979  \n  980: ZEND_BEGIN_ARG_INFO_EX(arginfo_dns_get_mx, 0, 0, 2)\n  981  \tZEND_ARG_INFO(0, hostname)\n  982  \tZEND_ARG_INFO(1, mxhosts) /* ARRAY_INFO(1, mxhosts, 1) */\n  ...\n  989  \n  990  /* {{{ exec.c */\n  991: ZEND_BEGIN_ARG_INFO_EX(arginfo_exec, 0, 0, 1)\n  992  \tZEND_ARG_INFO(0, command)\n  993  \tZEND_ARG_INFO(1, output) /* ARRAY_INFO(1, output, 1) */\n  ...\n  995  ZEND_END_ARG_INFO()\n  996  \n  997: ZEND_BEGIN_ARG_INFO_EX(arginfo_system, 0, 0, 1)\n  998  \tZEND_ARG_INFO(0, command)\n  999  \tZEND_ARG_INFO(1, return_value)\n 1000  ZEND_END_ARG_INFO()\n 1001  \n 1002: ZEND_BEGIN_ARG_INFO_EX(arginfo_passthru, 0, 0, 1)\n 1003  \tZEND_ARG_INFO(0, command)\n 1004  \tZEND_ARG_INFO(1, return_value)\n ....\n 1024  /* }}} */\n 1025  /* {{{ file.c */\n 1026: ZEND_BEGIN_ARG_INFO_EX(arginfo_flock, 0, 0, 2)\n 1027  \tZEND_ARG_INFO(0, fp)\n 1028  \tZEND_ARG_INFO(0, operation)\n ....\n 1030  ZEND_END_ARG_INFO()\n 1031  \n 1032: ZEND_BEGIN_ARG_INFO_EX(arginfo_get_meta_tags, 0, 0, 1)\n 1033  \tZEND_ARG_INFO(0, filename)\n 1034  \tZEND_ARG_INFO(0, use_include_path)\n 1035  ZEND_END_ARG_INFO()\n 1036  \n 1037: ZEND_BEGIN_ARG_INFO_EX(arginfo_file_get_contents, 0, 0, 1)\n 1038  \tZEND_ARG_INFO(0, filename)\n 1039  \tZEND_ARG_INFO(0, flags)\n ....\n 1043  ZEND_END_ARG_INFO()\n 1044  \n 1045: ZEND_BEGIN_ARG_INFO_EX(arginfo_file_put_contents, 0, 0, 2)\n 1046  \tZEND_ARG_INFO(0, filename)\n 1047  \tZEND_ARG_INFO(0, data)\n ....\n 1050  ZEND_END_ARG_INFO()\n 1051  \n 1052: ZEND_BEGIN_ARG_INFO_EX(arginfo_file, 0, 0, 1)\n 1053  \tZEND_ARG_INFO(0, filename)\n 1054  \tZEND_ARG_INFO(0, flags)\n ....\n 1064  ZEND_END_ARG_INFO()\n 1065  \n 1066: ZEND_BEGIN_ARG_INFO_EX(arginfo_fopen, 0, 0, 2)\n 1067  \tZEND_ARG_INFO(0, filename)\n 1068  \tZEND_ARG_INFO(0, mode)\n ....\n 1088  ZEND_END_ARG_INFO()\n 1089  \n 1090: ZEND_BEGIN_ARG_INFO_EX(arginfo_fgets, 0, 0, 1)\n 1091  \tZEND_ARG_INFO(0, fp)\n 1092  \tZEND_ARG_INFO(0, length)\n ....\n 1097  ZEND_END_ARG_INFO()\n 1098  \n 1099: ZEND_BEGIN_ARG_INFO_EX(arginfo_fgetss, 0, 0, 1)\n 1100  \tZEND_ARG_INFO(0, fp)\n 1101  \tZEND_ARG_INFO(0, length)\n ....\n 1103  ZEND_END_ARG_INFO()\n 1104  \n 1105: ZEND_BEGIN_ARG_INFO_EX(arginfo_fscanf, 0, 0, 2)\n 1106  \tZEND_ARG_INFO(0, stream)\n 1107  \tZEND_ARG_INFO(0, format)\n ....\n 1109  ZEND_END_ARG_INFO()\n 1110  \n 1111: ZEND_BEGIN_ARG_INFO_EX(arginfo_fwrite, 0, 0, 2)\n 1112  \tZEND_ARG_INFO(0, fp)\n 1113  \tZEND_ARG_INFO(0, str)\n ....\n 1127  ZEND_END_ARG_INFO()\n 1128  \n 1129: ZEND_BEGIN_ARG_INFO_EX(arginfo_fseek, 0, 0, 2)\n 1130  \tZEND_ARG_INFO(0, fp)\n 1131  \tZEND_ARG_INFO(0, offset)\n ....\n 1133  ZEND_END_ARG_INFO()\n 1134  \n 1135: ZEND_BEGIN_ARG_INFO_EX(arginfo_mkdir, 0, 0, 1)\n 1136  \tZEND_ARG_INFO(0, pathname)\n 1137  \tZEND_ARG_INFO(0, mode)\n ....\n 1140  ZEND_END_ARG_INFO()\n 1141  \n 1142: ZEND_BEGIN_ARG_INFO_EX(arginfo_rmdir, 0, 0, 1)\n 1143  \tZEND_ARG_INFO(0, dirname)\n 1144  \tZEND_ARG_INFO(0, context)\n 1145  ZEND_END_ARG_INFO()\n 1146  \n 1147: ZEND_BEGIN_ARG_INFO_EX(arginfo_readfile, 0, 0, 1)\n 1148  \tZEND_ARG_INFO(0, filename)\n 1149  \tZEND_ARG_INFO(0, flags)\n ....\n 1151  ZEND_END_ARG_INFO()\n 1152  \n 1153: ZEND_BEGIN_ARG_INFO_EX(arginfo_umask, 0, 0, 0)\n 1154  \tZEND_ARG_INFO(0, mask)\n 1155  ZEND_END_ARG_INFO()\n ....\n 1159  ZEND_END_ARG_INFO()\n 1160  \n 1161: ZEND_BEGIN_ARG_INFO_EX(arginfo_rename, 0, 0, 2)\n 1162  \tZEND_ARG_INFO(0, old_name)\n 1163  \tZEND_ARG_INFO(0, new_name)\n ....\n 1165  ZEND_END_ARG_INFO()\n 1166  \n 1167: ZEND_BEGIN_ARG_INFO_EX(arginfo_unlink, 0, 0, 1)\n 1168  \tZEND_ARG_INFO(0, filename)\n 1169  \tZEND_ARG_INFO(0, context)\n ....\n 1178  \tZEND_ARG_INFO(0, fp)\n 1179  ZEND_END_ARG_INFO()\n 1180: ZEND_BEGIN_ARG_INFO_EX(arginfo_copy, 0, 0, 2)\n 1181  \tZEND_ARG_INFO(0, source_file)\n 1182  \tZEND_ARG_INFO(0, destination_file)\n ....\n 1189  ZEND_END_ARG_INFO()\n 1190  \n 1191: ZEND_BEGIN_ARG_INFO_EX(arginfo_fputcsv, 0, 0, 2)\n 1192  \tZEND_ARG_INFO(0, fp)\n 1193  \tZEND_ARG_INFO(0, fields) /* ARRAY_INFO(0, fields, 1) */\n ....\n 1197  ZEND_END_ARG_INFO()\n 1198  \n 1199: ZEND_BEGIN_ARG_INFO_EX(arginfo_fgetcsv, 0, 0, 1)\n 1200  \tZEND_ARG_INFO(0, fp)\n 1201  \tZEND_ARG_INFO(0, length)\n ....\n 1212  \n 1213  #ifdef HAVE_FNMATCH\n 1214: ZEND_BEGIN_ARG_INFO_EX(arginfo_fnmatch, 0, 0, 2)\n 1215  \tZEND_ARG_INFO(0, pattern)\n 1216  \tZEND_ARG_INFO(0, filename)\n ....\n 1259  \n 1260  #if HAVE_UTIME\n 1261: ZEND_BEGIN_ARG_INFO_EX(arginfo_touch, 0, 0, 1)\n 1262  \tZEND_ARG_INFO(0, filename)\n 1263  \tZEND_ARG_INFO(0, time)\n ....\n 1266  #endif\n 1267  \n 1268: ZEND_BEGIN_ARG_INFO_EX(arginfo_clearstatcache, 0, 0, 0)\n 1269  \tZEND_ARG_INFO(0, clear_realpath_cache)\n 1270  \tZEND_ARG_INFO(0, filename)\n ....\n 1350  /* }}} */\n 1351  /* {{{ formatted_print.c */\n 1352: ZEND_BEGIN_ARG_INFO_EX(arginfo_sprintf, 0, 0, 1)\n 1353  \tZEND_ARG_INFO(0, format)\n 1354  \tZEND_ARG_VARIADIC_INFO(0, args)\n ....\n 1360  ZEND_END_ARG_INFO()\n 1361  \n 1362: ZEND_BEGIN_ARG_INFO_EX(arginfo_printf, 0, 0, 1)\n 1363  \tZEND_ARG_INFO(0, format)\n 1364  \tZEND_ARG_VARIADIC_INFO(0, args)\n ....\n 1370  ZEND_END_ARG_INFO()\n 1371  \n 1372: ZEND_BEGIN_ARG_INFO_EX(arginfo_fprintf, 0, 0, 2)\n 1373  \tZEND_ARG_INFO(0, stream)\n 1374  \tZEND_ARG_INFO(0, format)\n ....\n 1383  /* }}} */\n 1384  /* {{{ fsock.c */\n 1385: ZEND_BEGIN_ARG_INFO_EX(arginfo_fsockopen, 0, 0, 1)\n 1386  \tZEND_ARG_INFO(0, hostname)\n 1387  \tZEND_ARG_INFO(0, port)\n ....\n 1391  ZEND_END_ARG_INFO()\n 1392  \n 1393: ZEND_BEGIN_ARG_INFO_EX(arginfo_pfsockopen, 0, 0, 1)\n 1394  \tZEND_ARG_INFO(0, hostname)\n 1395  \tZEND_ARG_INFO(0, port)\n ....\n 1408  /* }}} */\n 1409  /* {{{ head.c */\n 1410: ZEND_BEGIN_ARG_INFO_EX(arginfo_header, 0, 0, 1)\n 1411  \tZEND_ARG_INFO(0, header)\n 1412  \tZEND_ARG_INFO(0, replace)\n ....\n 1414  ZEND_END_ARG_INFO()\n 1415  \n 1416: ZEND_BEGIN_ARG_INFO_EX(arginfo_header_remove, 0, 0, 0)\n 1417  \tZEND_ARG_INFO(0, name)\n 1418  ZEND_END_ARG_INFO()\n 1419  \n 1420: ZEND_BEGIN_ARG_INFO_EX(arginfo_setcookie, 0, 0, 1)\n 1421  \tZEND_ARG_INFO(0, name)\n 1422  \tZEND_ARG_INFO(0, value)\n ....\n 1428  ZEND_END_ARG_INFO()\n 1429  \n 1430: ZEND_BEGIN_ARG_INFO_EX(arginfo_setrawcookie, 0, 0, 1)\n 1431  \tZEND_ARG_INFO(0, name)\n 1432  \tZEND_ARG_INFO(0, value)\n ....\n 1438  ZEND_END_ARG_INFO()\n 1439  \n 1440: ZEND_BEGIN_ARG_INFO_EX(arginfo_headers_sent, 0, 0, 0)\n 1441  \tZEND_ARG_INFO(1, file)\n 1442  \tZEND_ARG_INFO(1, line)\n ....\n 1446  ZEND_END_ARG_INFO()\n 1447  \n 1448: ZEND_BEGIN_ARG_INFO_EX(arginfo_http_response_code, 0, 0, 0)\n 1449  \tZEND_ARG_INFO(0, response_code)\n 1450  ZEND_END_ARG_INFO()\n 1451  /* }}} */\n 1452  /* {{{ html.c */\n 1453: ZEND_BEGIN_ARG_INFO_EX(arginfo_htmlspecialchars, 0, 0, 1)\n 1454  \tZEND_ARG_INFO(0, string)\n 1455  \tZEND_ARG_INFO(0, quote_style)\n ....\n 1458  ZEND_END_ARG_INFO()\n 1459  \n 1460: ZEND_BEGIN_ARG_INFO_EX(arginfo_htmlspecialchars_decode, 0, 0, 1)\n 1461  \tZEND_ARG_INFO(0, string)\n 1462  \tZEND_ARG_INFO(0, quote_style)\n 1463  ZEND_END_ARG_INFO()\n 1464  \n 1465: ZEND_BEGIN_ARG_INFO_EX(arginfo_html_entity_decode, 0, 0, 1)\n 1466  \tZEND_ARG_INFO(0, string)\n 1467  \tZEND_ARG_INFO(0, quote_style)\n ....\n 1469  ZEND_END_ARG_INFO()\n 1470  \n 1471: ZEND_BEGIN_ARG_INFO_EX(arginfo_htmlentities, 0, 0, 1)\n 1472  \tZEND_ARG_INFO(0, string)\n 1473  \tZEND_ARG_INFO(0, quote_style)\n ....\n 1476  ZEND_END_ARG_INFO()\n 1477  \n 1478: ZEND_BEGIN_ARG_INFO_EX(arginfo_get_html_translation_table, 0, 0, 0)\n 1479  \tZEND_ARG_INFO(0, table)\n 1480  \tZEND_ARG_INFO(0, quote_style)\n ....\n 1484  /* }}} */\n 1485  /* {{{ http.c */\n 1486: ZEND_BEGIN_ARG_INFO_EX(arginfo_http_build_query, 0, 0, 1)\n 1487  \tZEND_ARG_INFO(0, formdata)\n 1488  \tZEND_ARG_INFO(0, prefix)\n ....\n 1496  ZEND_END_ARG_INFO()\n 1497  \n 1498: ZEND_BEGIN_ARG_INFO_EX(arginfo_image_type_to_extension, 0, 0, 1)\n 1499  \tZEND_ARG_INFO(0, imagetype)\n 1500  \tZEND_ARG_INFO(0, include_dot)\n 1501  ZEND_END_ARG_INFO()\n 1502  \n 1503: ZEND_BEGIN_ARG_INFO_EX(arginfo_getimagesize, 0, 0, 1)\n 1504  \tZEND_ARG_INFO(0, imagefile)\n 1505  \tZEND_ARG_INFO(1, info) /* ARRAY_INFO(1, info, 1) */\n ....\n 1507  /* }}} */\n 1508  /* {{{ info.c */\n 1509: ZEND_BEGIN_ARG_INFO_EX(arginfo_phpinfo, 0, 0, 0)\n 1510  \tZEND_ARG_INFO(0, what)\n 1511  ZEND_END_ARG_INFO()\n 1512  \n 1513: ZEND_BEGIN_ARG_INFO_EX(arginfo_phpversion, 0, 0, 0)\n 1514  \tZEND_ARG_INFO(0, extension)\n 1515  ZEND_END_ARG_INFO()\n 1516  \n 1517: ZEND_BEGIN_ARG_INFO_EX(arginfo_phpcredits, 0, 0, 0)\n 1518  \tZEND_ARG_INFO(0, flag)\n 1519  ZEND_END_ARG_INFO()\n ....\n 1522  ZEND_END_ARG_INFO()\n 1523  \n 1524: ZEND_BEGIN_ARG_INFO_EX(arginfo_php_uname, 0, 0, 0)\n 1525  \tZEND_ARG_INFO(0, mode)\n 1526  ZEND_END_ARG_INFO()\n ....\n 1533  /* }}} */\n 1534  /* {{{ iptc.c */\n 1535: ZEND_BEGIN_ARG_INFO_EX(arginfo_iptcembed, 0, 0, 2)\n 1536  \tZEND_ARG_INFO(0, iptcdata)\n 1537  \tZEND_ARG_INFO(0, jpeg_file_name)\n ....\n 1550  \n 1551  /* {{{ levenshtein.c */\n 1552: ZEND_BEGIN_ARG_INFO_EX(arginfo_levenshtein, 0, 0, 2)\n 1553  \tZEND_ARG_INFO(0, str1)\n 1554  \tZEND_ARG_INFO(0, str2)\n ....\n 1584  ZEND_END_ARG_INFO()\n 1585  \n 1586: ZEND_BEGIN_ARG_INFO_EX(arginfo_mail, 0, 0, 3)\n 1587  \tZEND_ARG_INFO(0, to)\n 1588  \tZEND_ARG_INFO(0, subject)\n ....\n 1605  ZEND_END_ARG_INFO()\n 1606  \n 1607: ZEND_BEGIN_ARG_INFO_EX(arginfo_round, 0, 0, 1)\n 1608  \tZEND_ARG_INFO(0, number)\n 1609  \tZEND_ARG_INFO(0, precision)\n ....\n 1696  ZEND_END_ARG_INFO()\n 1697  \n 1698: ZEND_BEGIN_ARG_INFO_EX(arginfo_log, 0, 0, 1)\n 1699  \tZEND_ARG_INFO(0, number)\n 1700  \tZEND_ARG_INFO(0, base)\n ....\n 1752  ZEND_END_ARG_INFO()\n 1753  \n 1754: ZEND_BEGIN_ARG_INFO_EX(arginfo_number_format, 0, 0, 1)\n 1755  \tZEND_ARG_INFO(0, number)\n 1756  \tZEND_ARG_INFO(0, num_decimal_places)\n ....\n 1770  /* }}} */\n 1771  /* {{{ md5.c */\n 1772: ZEND_BEGIN_ARG_INFO_EX(arginfo_md5, 0, 0, 1)\n 1773  \tZEND_ARG_INFO(0, str)\n 1774  \tZEND_ARG_INFO(0, raw_output)\n 1775  ZEND_END_ARG_INFO()\n 1776  \n 1777: ZEND_BEGIN_ARG_INFO_EX(arginfo_md5_file, 0, 0, 1)\n 1778  \tZEND_ARG_INFO(0, filename)\n 1779  \tZEND_ARG_INFO(0, raw_output)\n ....\n 1781  /* }}} */\n 1782  /* {{{ metaphone.c */\n 1783: ZEND_BEGIN_ARG_INFO_EX(arginfo_metaphone, 0, 0, 1)\n 1784  \tZEND_ARG_INFO(0, text)\n 1785  \tZEND_ARG_INFO(0, phones)\n ....\n 1788  /* {{{ microtime.c */\n 1789  #ifdef HAVE_GETTIMEOFDAY\n 1790: ZEND_BEGIN_ARG_INFO_EX(arginfo_microtime, 0, 0, 0)\n 1791  \tZEND_ARG_INFO(0, get_as_float)\n 1792  ZEND_END_ARG_INFO()\n 1793  \n 1794: ZEND_BEGIN_ARG_INFO_EX(arginfo_gettimeofday, 0, 0, 0)\n 1795  \tZEND_ARG_INFO(0, get_as_float)\n 1796  ZEND_END_ARG_INFO()\n ....\n 1798  \n 1799  #ifdef HAVE_GETRUSAGE\n 1800: ZEND_BEGIN_ARG_INFO_EX(arginfo_getrusage, 0, 0, 0)\n 1801  \tZEND_ARG_INFO(0, who)\n 1802  ZEND_END_ARG_INFO()\n ....\n 1804  /* }}} */\n 1805  /* {{{ pack.c */\n 1806: ZEND_BEGIN_ARG_INFO_EX(arginfo_pack, 0, 0, 2)\n 1807  \tZEND_ARG_INFO(0, format)\n 1808  \tZEND_ARG_VARIADIC_INFO(0, args)\n 1809  ZEND_END_ARG_INFO()\n 1810  \n 1811: ZEND_BEGIN_ARG_INFO_EX(arginfo_unpack, 0, 0, 2)\n 1812  \tZEND_ARG_INFO(0, format)\n 1813  \tZEND_ARG_INFO(0, input)\n ....\n 1832  /* }}} */\n 1833  /* {{{ password.c */\n 1834: ZEND_BEGIN_ARG_INFO_EX(arginfo_password_hash, 0, 0, 2)\n 1835  \tZEND_ARG_INFO(0, password)\n 1836  \tZEND_ARG_INFO(0, algo)\n 1837  \tZEND_ARG_INFO(0, options)\n 1838  ZEND_END_ARG_INFO()\n 1839: ZEND_BEGIN_ARG_INFO_EX(arginfo_password_get_info, 0, 0, 1)\n 1840  \tZEND_ARG_INFO(0, hash)\n 1841  ZEND_END_ARG_INFO()\n 1842: ZEND_BEGIN_ARG_INFO_EX(arginfo_password_needs_rehash, 0, 0, 2)\n 1843  \tZEND_ARG_INFO(0, hash)\n 1844  \tZEND_ARG_INFO(0, algo)\n 1845  \tZEND_ARG_INFO(0, options)\n 1846  ZEND_END_ARG_INFO()\n 1847: ZEND_BEGIN_ARG_INFO_EX(arginfo_password_verify, 0, 0, 2)\n 1848  \tZEND_ARG_INFO(0, password)\n 1849  \tZEND_ARG_INFO(0, hash)\n ....\n 1852  /* {{{ proc_open.c */\n 1853  #ifdef PHP_CAN_SUPPORT_PROC_OPEN\n 1854: ZEND_BEGIN_ARG_INFO_EX(arginfo_proc_terminate, 0, 0, 1)\n 1855  \tZEND_ARG_INFO(0, process)\n 1856  \tZEND_ARG_INFO(0, signal)\n ....\n 1865  ZEND_END_ARG_INFO()\n 1866  \n 1867: ZEND_BEGIN_ARG_INFO_EX(arginfo_proc_open, 0, 0, 3)\n 1868  \tZEND_ARG_INFO(0, command)\n 1869  \tZEND_ARG_INFO(0, descriptorspec) /* ARRAY_INFO(0, descriptorspec, 1) */\n ....\n 1886  /* }}} */\n 1887  /* {{{ mt_rand.c */\n 1888: ZEND_BEGIN_ARG_INFO_EX(arginfo_mt_srand, 0, 0, 0)\n 1889  \tZEND_ARG_INFO(0, seed)\n 1890  \tZEND_ARG_INFO(0, mode)\n 1891  ZEND_END_ARG_INFO()\n 1892  \n 1893: ZEND_BEGIN_ARG_INFO_EX(arginfo_mt_rand, 0, 0, 0)\n 1894  \tZEND_ARG_INFO(0, min)\n 1895  \tZEND_ARG_INFO(0, max)\n ....\n 1900  /* }}} */\n 1901  /* {{{ random.c */\n 1902: ZEND_BEGIN_ARG_INFO_EX(arginfo_random_bytes, 0, 0, 1)\n 1903  \tZEND_ARG_INFO(0, length)\n 1904  ZEND_END_ARG_INFO()\n 1905  \n 1906: ZEND_BEGIN_ARG_INFO_EX(arginfo_random_int, 0, 0, 2)\n 1907  \tZEND_ARG_INFO(0, min)\n 1908  \tZEND_ARG_INFO(0, max)\n ....\n 1910  /* }}} */\n 1911  /* {{{ sha1.c */\n 1912: ZEND_BEGIN_ARG_INFO_EX(arginfo_sha1, 0, 0, 1)\n 1913  \tZEND_ARG_INFO(0, str)\n 1914  \tZEND_ARG_INFO(0, raw_output)\n 1915  ZEND_END_ARG_INFO()\n 1916  \n 1917: ZEND_BEGIN_ARG_INFO_EX(arginfo_sha1_file, 0, 0, 1)\n 1918  \tZEND_ARG_INFO(0, filename)\n 1919  \tZEND_ARG_INFO(0, raw_output)\n ....\n 1934  #endif\n 1935  \n 1936: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_client, 0, 0, 1)\n 1937  \tZEND_ARG_INFO(0, remoteaddress)\n 1938  \tZEND_ARG_INFO(1, errcode)\n ....\n 1943  ZEND_END_ARG_INFO()\n 1944  \n 1945: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_server, 0, 0, 1)\n 1946  \tZEND_ARG_INFO(0, localaddress)\n 1947  \tZEND_ARG_INFO(1, errcode)\n ....\n 1951  ZEND_END_ARG_INFO()\n 1952  \n 1953: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_accept, 0, 0, 1)\n 1954  \tZEND_ARG_INFO(0, serverstream)\n 1955  \tZEND_ARG_INFO(0, timeout)\n ....\n 1962  ZEND_END_ARG_INFO()\n 1963  \n 1964: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_sendto, 0, 0, 2)\n 1965  \tZEND_ARG_INFO(0, stream)\n 1966  \tZEND_ARG_INFO(0, data)\n ....\n 1969  ZEND_END_ARG_INFO()\n 1970  \n 1971: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_recvfrom, 0, 0, 2)\n 1972  \tZEND_ARG_INFO(0, stream)\n 1973  \tZEND_ARG_INFO(0, amount)\n ....\n 1976  ZEND_END_ARG_INFO()\n 1977  \n 1978: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_get_contents, 0, 0, 1)\n 1979  \tZEND_ARG_INFO(0, source)\n 1980  \tZEND_ARG_INFO(0, maxlen)\n ....\n 1982  ZEND_END_ARG_INFO()\n 1983  \n 1984: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_copy_to_stream, 0, 0, 2)\n 1985  \tZEND_ARG_INFO(0, source)\n 1986  \tZEND_ARG_INFO(0, dest)\n ....\n 2007  ZEND_END_ARG_INFO()\n 2008  \n 2009: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_supports_lock, 0, 0, 1)\n 2010      ZEND_ARG_INFO(0, stream)\n 2011  ZEND_END_ARG_INFO()\n 2012  \n 2013: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_isatty, 0, 0, 1)\n 2014  \tZEND_ARG_INFO(0, stream)\n 2015  ZEND_END_ARG_INFO()\n 2016  \n 2017  #ifdef PHP_WIN32\n 2018: ZEND_BEGIN_ARG_INFO_EX(arginfo_sapi_windows_vt100_support, 0, 0, 1)\n 2019  \tZEND_ARG_INFO(0, stream)\n 2020  \tZEND_ARG_INFO(0, enable)\n ....\n 2022  #endif\n 2023  \n 2024: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_select, 0, 0, 4)\n 2025  \tZEND_ARG_INFO(1, read_streams) /* ARRAY_INFO(1, read_streams, 1) */\n 2026  \tZEND_ARG_INFO(1, write_streams) /* ARRAY_INFO(1, write_streams, 1) */\n ....\n 2046  ZEND_END_ARG_INFO()\n 2047  \n 2048: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_context_get_params, 0, ZEND_RETURN_VALUE, 1)\n 2049  \tZEND_ARG_INFO(0, stream_or_context)\n 2050  ZEND_END_ARG_INFO()\n 2051  \n 2052: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_context_get_default, 0, 0, 0)\n 2053  \tZEND_ARG_INFO(0, options) /* ARRAY_INFO(0, options, 1) */\n 2054  ZEND_END_ARG_INFO()\n ....\n 2058  ZEND_END_ARG_INFO()\n 2059  \n 2060: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_context_create, 0, 0, 0)\n 2061  \tZEND_ARG_INFO(0, options) /* ARRAY_INFO(0, options, 1) */\n 2062  \tZEND_ARG_INFO(0, params) /* ARRAY_INFO(0, params, 1) */\n 2063  ZEND_END_ARG_INFO()\n 2064  \n 2065: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_filter_prepend, 0, 0, 2)\n 2066  \tZEND_ARG_INFO(0, stream)\n 2067  \tZEND_ARG_INFO(0, filtername)\n ....\n 2070  ZEND_END_ARG_INFO()\n 2071  \n 2072: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_filter_append, 0, 0, 2)\n 2073  \tZEND_ARG_INFO(0, stream)\n 2074  \tZEND_ARG_INFO(0, filtername)\n ....\n 2081  ZEND_END_ARG_INFO()\n 2082  \n 2083: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_get_line, 0, 0, 2)\n 2084  \tZEND_ARG_INFO(0, stream)\n 2085  \tZEND_ARG_INFO(0, maxlen)\n ....\n 2093  \n 2094  #if HAVE_SYS_TIME_H || defined(PHP_WIN32)\n 2095: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_set_timeout, 0, 0, 2)\n 2096  \tZEND_ARG_INFO(0, stream)\n 2097  \tZEND_ARG_INFO(0, seconds)\n ....\n 2115  ZEND_END_ARG_INFO()\n 2116  \n 2117: ZEND_BEGIN_ARG_INFO_EX(arginfo_stream_socket_enable_crypto, 0, 0, 2)\n 2118  \tZEND_ARG_INFO(0, stream)\n 2119  \tZEND_ARG_INFO(0, enable)\n ....\n 2138  ZEND_END_ARG_INFO()\n 2139  \n 2140: ZEND_BEGIN_ARG_INFO_EX(arginfo_strspn, 0, 0, 2)\n 2141  \tZEND_ARG_INFO(0, str)\n 2142  \tZEND_ARG_INFO(0, mask)\n ....\n 2145  ZEND_END_ARG_INFO()\n 2146  \n 2147: ZEND_BEGIN_ARG_INFO_EX(arginfo_strcspn, 0, 0, 2)\n 2148  \tZEND_ARG_INFO(0, str)\n 2149  \tZEND_ARG_INFO(0, mask)\n ....\n 2165  #endif\n 2166  \n 2167: ZEND_BEGIN_ARG_INFO_EX(arginfo_trim, 0, 0, 1)\n 2168  \tZEND_ARG_INFO(0, str)\n 2169  \tZEND_ARG_INFO(0, character_mask)\n 2170  ZEND_END_ARG_INFO()\n 2171  \n 2172: ZEND_BEGIN_ARG_INFO_EX(arginfo_rtrim, 0, 0, 1)\n 2173  \tZEND_ARG_INFO(0, str)\n 2174  \tZEND_ARG_INFO(0, character_mask)\n 2175  ZEND_END_ARG_INFO()\n 2176  \n 2177: ZEND_BEGIN_ARG_INFO_EX(arginfo_ltrim, 0, 0, 1)\n 2178  \tZEND_ARG_INFO(0, str)\n 2179  \tZEND_ARG_INFO(0, character_mask)\n 2180  ZEND_END_ARG_INFO()\n 2181  \n 2182: ZEND_BEGIN_ARG_INFO_EX(arginfo_wordwrap, 0, 0, 1)\n 2183  \tZEND_ARG_INFO(0, str)\n 2184  \tZEND_ARG_INFO(0, width)\n ....\n 2187  ZEND_END_ARG_INFO()\n 2188  \n 2189: ZEND_BEGIN_ARG_INFO_EX(arginfo_explode, 0, 0, 2)\n 2190  \tZEND_ARG_INFO(0, separator)\n 2191  \tZEND_ARG_INFO(0, str)\n ....\n 2198  ZEND_END_ARG_INFO()\n 2199  \n 2200: ZEND_BEGIN_ARG_INFO_EX(arginfo_strtok, 0, 0, 1)\n 2201  \tZEND_ARG_INFO(0, str)\n 2202  \tZEND_ARG_INFO(0, token)\n ....\n 2211  ZEND_END_ARG_INFO()\n 2212  \n 2213: ZEND_BEGIN_ARG_INFO_EX(arginfo_basename, 0, 0, 1)\n 2214  \tZEND_ARG_INFO(0, path)\n 2215  \tZEND_ARG_INFO(0, suffix)\n 2216  ZEND_END_ARG_INFO()\n 2217  \n 2218: ZEND_BEGIN_ARG_INFO_EX(arginfo_dirname, 0, 0, 1)\n 2219  \tZEND_ARG_INFO(0, path)\n 2220  \tZEND_ARG_INFO(0, levels)\n 2221  ZEND_END_ARG_INFO()\n 2222  \n 2223: ZEND_BEGIN_ARG_INFO_EX(arginfo_pathinfo, 0, 0, 1)\n 2224  \tZEND_ARG_INFO(0, path)\n 2225  \tZEND_ARG_INFO(0, options)\n 2226  ZEND_END_ARG_INFO()\n 2227  \n 2228: ZEND_BEGIN_ARG_INFO_EX(arginfo_stristr, 0, 0, 2)\n 2229  \tZEND_ARG_INFO(0, haystack)\n 2230  \tZEND_ARG_INFO(0, needle)\n ....\n 2232  ZEND_END_ARG_INFO()\n 2233  \n 2234: ZEND_BEGIN_ARG_INFO_EX(arginfo_strstr, 0, 0, 2)\n 2235  \tZEND_ARG_INFO(0, haystack)\n 2236  \tZEND_ARG_INFO(0, needle)\n ....\n 2238  ZEND_END_ARG_INFO()\n 2239  \n 2240: ZEND_BEGIN_ARG_INFO_EX(arginfo_strpos, 0, 0, 2)\n 2241  \tZEND_ARG_INFO(0, haystack)\n 2242  \tZEND_ARG_INFO(0, needle)\n ....\n 2244  ZEND_END_ARG_INFO()\n 2245  \n 2246: ZEND_BEGIN_ARG_INFO_EX(arginfo_stripos, 0, 0, 2)\n 2247  \tZEND_ARG_INFO(0, haystack)\n 2248  \tZEND_ARG_INFO(0, needle)\n ....\n 2250  ZEND_END_ARG_INFO()\n 2251  \n 2252: ZEND_BEGIN_ARG_INFO_EX(arginfo_strrpos, 0, 0, 2)\n 2253  \tZEND_ARG_INFO(0, haystack)\n 2254  \tZEND_ARG_INFO(0, needle)\n ....\n 2256  ZEND_END_ARG_INFO()\n 2257  \n 2258: ZEND_BEGIN_ARG_INFO_EX(arginfo_strripos, 0, 0, 2)\n 2259  \tZEND_ARG_INFO(0, haystack)\n 2260  \tZEND_ARG_INFO(0, needle)\n ....\n 2267  ZEND_END_ARG_INFO()\n 2268  \n 2269: ZEND_BEGIN_ARG_INFO_EX(arginfo_chunk_split, 0, 0, 1)\n 2270  \tZEND_ARG_INFO(0, str)\n 2271  \tZEND_ARG_INFO(0, chunklen)\n ....\n 2273  ZEND_END_ARG_INFO()\n 2274  \n 2275: ZEND_BEGIN_ARG_INFO_EX(arginfo_substr, 0, 0, 2)\n 2276  \tZEND_ARG_INFO(0, str)\n 2277  \tZEND_ARG_INFO(0, start)\n ....\n 2279  ZEND_END_ARG_INFO()\n 2280  \n 2281: ZEND_BEGIN_ARG_INFO_EX(arginfo_substr_replace, 0, 0, 3)\n 2282  \tZEND_ARG_INFO(0, str)\n 2283  \tZEND_ARG_INFO(0, replace)\n ....\n 2306  ZEND_END_ARG_INFO()\n 2307  \n 2308: ZEND_BEGIN_ARG_INFO_EX(arginfo_ucwords, 0, 0, 1)\n 2309  \tZEND_ARG_INFO(0, str)\n 2310  \tZEND_ARG_INFO(0, delimiters)\n 2311  ZEND_END_ARG_INFO()\n 2312  \n 2313: ZEND_BEGIN_ARG_INFO_EX(arginfo_strtr, 0, 0, 2)\n 2314  \tZEND_ARG_INFO(0, str)\n 2315  \tZEND_ARG_INFO(0, from)\n ....\n 2321  ZEND_END_ARG_INFO()\n 2322  \n 2323: ZEND_BEGIN_ARG_INFO_EX(arginfo_similar_text, 0, 0, 2)\n 2324  \tZEND_ARG_INFO(0, str1)\n 2325  \tZEND_ARG_INFO(0, str2)\n ....\n 2344  ZEND_END_ARG_INFO()\n 2345  \n 2346: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_replace, 0, 0, 3)\n 2347  \tZEND_ARG_INFO(0, search)\n 2348  \tZEND_ARG_INFO(0, replace)\n ....\n 2351  ZEND_END_ARG_INFO()\n 2352  \n 2353: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_ireplace, 0, 0, 3)\n 2354  \tZEND_ARG_INFO(0, search)\n 2355  \tZEND_ARG_INFO(0, replace)\n ....\n 2358  ZEND_END_ARG_INFO()\n 2359  \n 2360: ZEND_BEGIN_ARG_INFO_EX(arginfo_hebrev, 0, 0, 1)\n 2361  \tZEND_ARG_INFO(0, str)\n 2362  \tZEND_ARG_INFO(0, max_chars_per_line)\n 2363  ZEND_END_ARG_INFO()\n 2364  \n 2365: ZEND_BEGIN_ARG_INFO_EX(arginfo_hebrevc, 0, 0, 1)\n 2366  \tZEND_ARG_INFO(0, str)\n 2367  \tZEND_ARG_INFO(0, max_chars_per_line)\n 2368  ZEND_END_ARG_INFO()\n 2369  \n 2370: ZEND_BEGIN_ARG_INFO_EX(arginfo_nl2br, 0, 0, 1)\n 2371  \tZEND_ARG_INFO(0, str)\n 2372  \tZEND_ARG_INFO(0, is_xhtml)\n 2373  ZEND_END_ARG_INFO()\n 2374  \n 2375: ZEND_BEGIN_ARG_INFO_EX(arginfo_strip_tags, 0, 0, 1)\n 2376  \tZEND_ARG_INFO(0, str)\n 2377  \tZEND_ARG_INFO(0, allowable_tags)\n 2378  ZEND_END_ARG_INFO()\n 2379  \n 2380: ZEND_BEGIN_ARG_INFO_EX(arginfo_setlocale, 0, 0, 2)\n 2381  \tZEND_ARG_INFO(0, category)\n 2382  \tZEND_ARG_VARIADIC_INFO(0, locales)\n 2383  ZEND_END_ARG_INFO()\n 2384  \n 2385: ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_str, 0, 0, 1)\n 2386  \tZEND_ARG_INFO(0, encoded_string)\n 2387  \tZEND_ARG_INFO(1, result)\n 2388  ZEND_END_ARG_INFO()\n 2389  \n 2390: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_getcsv, 0, 0, 1)\n 2391  \tZEND_ARG_INFO(0, string)\n 2392  \tZEND_ARG_INFO(0, delimiter)\n ....\n 2400  ZEND_END_ARG_INFO()\n 2401  \n 2402: ZEND_BEGIN_ARG_INFO_EX(arginfo_count_chars, 0, 0, 1)\n 2403  \tZEND_ARG_INFO(0, input)\n 2404  \tZEND_ARG_INFO(0, mode)\n ....\n 2418  ZEND_END_ARG_INFO()\n 2419  \n 2420: ZEND_BEGIN_ARG_INFO_EX(arginfo_substr_count, 0, 0, 2)\n 2421  \tZEND_ARG_INFO(0, haystack)\n 2422  \tZEND_ARG_INFO(0, needle)\n ....\n 2425  ZEND_END_ARG_INFO()\n 2426  \n 2427: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_pad, 0, 0, 2)\n 2428  \tZEND_ARG_INFO(0, input)\n 2429  \tZEND_ARG_INFO(0, pad_length)\n ....\n 2432  ZEND_END_ARG_INFO()\n 2433  \n 2434: ZEND_BEGIN_ARG_INFO_EX(arginfo_sscanf, 0, 0, 2)\n 2435  \tZEND_ARG_INFO(0, str)\n 2436  \tZEND_ARG_INFO(0, format)\n ....\n 2446  ZEND_END_ARG_INFO()\n 2447  \n 2448: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_word_count, 0, 0, 1)\n 2449  \tZEND_ARG_INFO(0, str)\n 2450  \tZEND_ARG_INFO(0, format)\n ....\n 2459  #endif\n 2460  \n 2461: ZEND_BEGIN_ARG_INFO_EX(arginfo_str_split, 0, 0, 1)\n 2462  \tZEND_ARG_INFO(0, str)\n 2463  \tZEND_ARG_INFO(0, split_length)\n 2464  ZEND_END_ARG_INFO()\n 2465  \n 2466: ZEND_BEGIN_ARG_INFO_EX(arginfo_strpbrk, 0, 0, 2)\n 2467  \tZEND_ARG_INFO(0, haystack)\n 2468  \tZEND_ARG_INFO(0, char_list)\n 2469  ZEND_END_ARG_INFO()\n 2470  \n 2471: ZEND_BEGIN_ARG_INFO_EX(arginfo_substr_compare, 0, 0, 3)\n 2472  \tZEND_ARG_INFO(0, main_str)\n 2473  \tZEND_ARG_INFO(0, str)\n ....\n 2477  ZEND_END_ARG_INFO()\n 2478  \n 2479: ZEND_BEGIN_ARG_INFO_EX(arginfo_utf8_encode, 0, 0, 1)\n 2480  \tZEND_ARG_INFO(0, data)\n 2481  ZEND_END_ARG_INFO()\n 2482  \n 2483: ZEND_BEGIN_ARG_INFO_EX(arginfo_utf8_decode, 0, 0, 1)\n 2484  \tZEND_ARG_INFO(0, data)\n 2485  ZEND_END_ARG_INFO()\n ....\n 2512  ZEND_END_ARG_INFO()\n 2513  \n 2514: ZEND_BEGIN_ARG_INFO_EX(arginfo_intval, 0, 0, 1)\n 2515  \tZEND_ARG_INFO(0, var)\n 2516  \tZEND_ARG_INFO(0, base)\n ....\n 2569  ZEND_END_ARG_INFO()\n 2570  \n 2571: ZEND_BEGIN_ARG_INFO_EX(arginfo_is_callable, 0, 0, 1)\n 2572  \tZEND_ARG_INFO(0, var)\n 2573  \tZEND_ARG_INFO(0, syntax_only)\n ....\n 2575  ZEND_END_ARG_INFO()\n 2576  \n 2577: ZEND_BEGIN_ARG_INFO_EX(arginfo_is_iterable, 0, 0, 1)\n 2578  \tZEND_ARG_INFO(0, var)\n 2579  ZEND_END_ARG_INFO()\n ....\n 2581  /* {{{ uniqid.c */\n 2582  #ifdef HAVE_GETTIMEOFDAY\n 2583: ZEND_BEGIN_ARG_INFO_EX(arginfo_uniqid, 0, 0, 0)\n 2584  \tZEND_ARG_INFO(0, prefix)\n 2585  \tZEND_ARG_INFO(0, more_entropy)\n ....\n 2588  /* }}} */\n 2589  /* {{{ url.c */\n 2590: ZEND_BEGIN_ARG_INFO_EX(arginfo_parse_url, 0, 0, 1)\n 2591  \tZEND_ARG_INFO(0, url)\n 2592  \tZEND_ARG_INFO(0, component)\n ....\n 2609  ZEND_END_ARG_INFO()\n 2610  \n 2611: ZEND_BEGIN_ARG_INFO_EX(arginfo_get_headers, 0, 0, 1)\n 2612  \tZEND_ARG_INFO(0, url)\n 2613  \tZEND_ARG_INFO(0, format)\n ....\n 2653  /* }}} */\n 2654  /* {{{ var.c */\n 2655: ZEND_BEGIN_ARG_INFO_EX(arginfo_var_dump, 0, 0, 1)\n 2656  \tZEND_ARG_VARIADIC_INFO(0, vars)\n 2657  ZEND_END_ARG_INFO()\n 2658  \n 2659: ZEND_BEGIN_ARG_INFO_EX(arginfo_debug_zval_dump, 0, 0, 1)\n 2660  \tZEND_ARG_VARIADIC_INFO(0, vars)\n 2661  ZEND_END_ARG_INFO()\n 2662  \n 2663: ZEND_BEGIN_ARG_INFO_EX(arginfo_var_export, 0, 0, 1)\n 2664  \tZEND_ARG_INFO(0, var)\n 2665  \tZEND_ARG_INFO(0, return)\n ....\n 2670  ZEND_END_ARG_INFO()\n 2671  \n 2672: ZEND_BEGIN_ARG_INFO_EX(arginfo_unserialize, 0, 0, 1)\n 2673  \tZEND_ARG_INFO(0, variable_representation)\n 2674  \tZEND_ARG_INFO(0, allowed_classes)\n 2675  ZEND_END_ARG_INFO()\n 2676  \n 2677: ZEND_BEGIN_ARG_INFO_EX(arginfo_memory_get_usage, 0, 0, 0)\n 2678  \tZEND_ARG_INFO(0, real_usage)\n 2679  ZEND_END_ARG_INFO()\n 2680  \n 2681: ZEND_BEGIN_ARG_INFO_EX(arginfo_memory_get_peak_usage, 0, 0, 0)\n 2682  \tZEND_ARG_INFO(0, real_usage)\n 2683  ZEND_END_ARG_INFO()\n 2684  /* }}} */\n 2685  /* {{{ versioning.c */\n 2686: ZEND_BEGIN_ARG_INFO_EX(arginfo_version_compare, 0, 0, 2)\n 2687  \tZEND_ARG_INFO(0, ver1)\n 2688  \tZEND_ARG_INFO(0, ver2)\n ....\n 2692  /* {{{ win32/codepage.c */\n 2693  #ifdef PHP_WIN32\n 2694: ZEND_BEGIN_ARG_INFO_EX(arginfo_sapi_windows_cp_set, 0, 0, 1)\n 2695  \tZEND_ARG_TYPE_INFO(0, code_page, IS_LONG, 0)\n 2696  ZEND_END_ARG_INFO()\n 2697  \n 2698: ZEND_BEGIN_ARG_INFO_EX(arginfo_sapi_windows_cp_get, 0, 0, 0)\n 2699  ZEND_END_ARG_INFO()\n 2700  \n 2701: ZEND_BEGIN_ARG_INFO_EX(arginfo_sapi_windows_cp_is_utf8, 0, 0, 0)\n 2702  ZEND_END_ARG_INFO()\n 2703  \n 2704: ZEND_BEGIN_ARG_INFO_EX(arginfo_sapi_windows_cp_conv, 0, 0, 3)\n 2705  \tZEND_ARG_INFO(0, in_codepage)\n 2706  \tZEND_ARG_INFO(0, out_codepage)\n\nD:\\241\\project\\php-7.2.9\\php-7.2.9\\ext\\standard\\dir.c:\n   94  \n   95  /* {{{ arginfo */\n   96: ZEND_BEGIN_ARG_INFO_EX(arginfo_dir, 0, 0, 0)\n   97  \tZEND_ARG_INFO(0, dir_handle)\n   98  ZEND_END_ARG_INFO()\n\n232 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 40083,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "ext/standard/basic_functions.c",
+			"settings":
+			{
+				"buffer_size": 173047,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ext/jiaozi/php_jiaozi.h",
+			"settings":
+			{
+				"buffer_size": 2316,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "Zend/zend_variables.h",
 			"settings":
 			{
 				"buffer_size": 4782,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test_script/test_type_conversion_performance.php",
+			"settings":
+			{
+				"buffer_size": 177,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "{\n\t\"skuId\": \"8993031\",\n\t\"saleUnit\": \"\\u53f0\",\n\t\"isPop\": false,\n\t\"brandName\": \"\\u534e\\u4e3a\",\n\t\"skuType\": \"1\",\n\t\"warestatus\": \"1\",\n\t\"brandId\": \"8557\",\n\t\"productArea\": \"\\u4e2d\\u56fd\\u5927\\u9646\",\n\t\"skuName\": \"\\u534e\\u4e3a(HUAWEI) MateBook X Pro 13.9\\u82f1\\u5bf8\\u8d85\\u8f7b\\u8584\\u5168\\u9762\\u5c4f\\u7b14\\u8bb0\\u672c(i7-8550U 8G 512G 3K \\u6307\\u7eb9 office)\\u7070\",\n\t\"pName\": \"\\u534e\\u4e3a(HUAWEI) MateBook X Pro 13.9\\u82f1\\u5bf8\\u8d85\\u8f7b\\u8584\\u5168\\u9762\\u5c4f\\u7b14\\u8bb0\\u672c(i7-8550U 8G 512G 3K \\u6307\\u7eb9 office)\\u7070\",\n\t\"venderID\": \"1000004259\",\n\t\"pTag\": 0,\n\t\"description\": \"d8993031\",\n\t\"category\": [\"670\", \"671\", \"672\"],\n\t\"weight\": \"2180000\",\n\t\"length\": 317,\n\t\"width\": 231,\n\t\"height\": 55,\n\t\"model\": \"\\u534e\\u4e3aMateBook X Pro\",\n\t\"skumark\": 256,\n\t\"skuMark\": \"{\\\"isOripack\\\":true}\",\n\t\"timelinessId\": 0,\n\t\"valuePayFirst\": 0,\n\t\"image\": [\"jfs\\/t22945\\/7\\/2308109065\\/180645\\/15d38d79\\/5b7b849fNd965cc45.jpg\", \"jfs\\/t25249\\/194\\/755971907\\/235133\\/1a313dc3\\/5b7b84a0Nf64719b0.jpg\", \"jfs\\/t25963\\/190\\/754602582\\/28278\\/62cc40a3\\/5b7b849fNa9da9c85.jpg\", \"jfs\\/t25435\\/102\\/792191852\\/224988\\/39f33cfc\\/5b7b84a0N8d520eea.jpg\", \"jfs\\/t25672\\/290\\/745740189\\/187388\\/1b31b30a\\/5b7b84a1Nce745c2d.jpg\", \"jfs\\/t24544\\/35\\/2355115871\\/183528\\/736276e5\\/5b7b84a1Nfa235322.jpg\"],\n\t\"saleProp\": {\n\t\t\"1\": \"\\u989c\\u8272\",\n\t\t\"2\": \"\\u7248\\u672c\",\n\t\t\"3\": \"\"\n\t},\n\t\"newColorSize\": [{\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"5\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u6df1\\u7a7a\\u7070) i7-8550U 8+512G\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"8993031\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"6\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u6df1\\u7a7a\\u7070) i7-8550U 8+256G\\u72ec\\u663e\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6949869\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"7\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u6df1\\u7a7a\\u7070) i7-8550U 16+512G\\u72ec\\u663e\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6949861\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"2\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u7693\\u6708\\u94f6) i5-8250U 8+256G\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6949859\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"1\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u6df1\\u7a7a\\u7070) i5-8250U 8+256G\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6736180\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"3\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u7693\\u6708\\u94f6 ) i5-8250U 8+256G\\u72ec\\u663e\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6736178\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"4\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"(\\u6df1\\u7a7a\\u7070) i5-8250U 8+256G\\u72ec\\u663e\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"6736136\"\n\t}, {\n\t\t\"dim\": 3,\n\t\t\"sequenceNo1\": \"8\",\n\t\t\"sequenceNo2\": \"0\",\n\t\t\"sequenceNo3\": \"0\",\n\t\t\"1\": \"\\uff08X\\uff09i5-7200U 4G 256G\",\n\t\t\"2\": \"\",\n\t\t\"3\": \"\",\n\t\t\"SpecName\": \"\",\n\t\t\"skuId\": \"4224161\"\n\t}],\n\t\"salePropSeq\": {\n\t\t\"1\": [\"(\\u6df1\\u7a7a\\u7070) i5-8250U 8+256G\", \"(\\u7693\\u6708\\u94f6) i5-8250U 8+256G\", \"(\\u7693\\u6708\\u94f6 ) i5-8250U 8+256G\\u72ec\\u663e\", \"(\\u6df1\\u7a7a\\u7070) i5-8250U 8+256G\\u72ec\\u663e\", \"(\\u6df1\\u7a7a\\u7070) i7-8550U 8+512G\", \"(\\u6df1\\u7a7a\\u7070) i7-8550U 8+256G\\u72ec\\u663e\", \"(\\u6df1\\u7a7a\\u7070) i7-8550U 16+512G\\u72ec\\u663e\", \"\\uff08X\\uff09i5-7200U 4G 256G\"],\n\t\t\"2\": [\"\"],\n\t\t\"3\": [\"\"]\n\t},\n\t\"yn\": 1,\n\t\"spAttr\": {\n\t\t\"packType\": \"1\",\n\t\t\"IsNewGoods\": \"1\",\n\t\t\"YuShou\": \"0\",\n\t\t\"is7ToReturn\": \"1\",\n\t\t\"isOverseaPurchase\": \"0\",\n\t\t\"SoldOversea\": \"1\",\n\t\t\"isFzxp\": \"1\",\n\t\t\"mspd\": \"1\"\n\t}\n}",
+			"settings":
+			{
+				"buffer_size": 3556,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_script/test_conversion.php",
+			"settings":
+			{
+				"buffer_size": 60,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/241/project/commands/common_commands.log",
+			"settings":
+			{
+				"buffer_size": 10795,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/tools/proxy.pac",
+			"settings":
+			{
+				"buffer_size": 55842,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Desktop/test_go/test.go",
+			"settings":
+			{
+				"buffer_size": 80,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/241/project/config/database.php",
+			"settings":
+			{
+				"buffer_size": 1570,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/241/project/config/config.php",
+			"settings":
+			{
+				"buffer_size": 495,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ext/jiaozi/config.m4",
+			"settings":
+			{
+				"buffer_size": 2781,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Desktop/test_go/user.h",
+			"settings":
+			{
+				"buffer_size": 18,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Administrator/Desktop/test_go/user.c",
+			"settings":
+			{
+				"buffer_size": 101,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -109,30 +283,36 @@
 			}
 		},
 		{
-			"file": "Zend/zend_variables.c",
-			"settings":
-			{
-				"buffer_size": 5771,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ext/standard/array.c",
-			"settings":
-			{
-				"buffer_size": 182301,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "Zend/zend_API.h",
 			"settings":
 			{
 				"buffer_size": 61159,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "main/php.h",
+			"settings":
+			{
+				"buffer_size": 13474,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Zend/zend_variables.c",
+			"settings":
+			{
+				"buffer_size": 5771,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -177,6 +357,23 @@
 			}
 		},
 		{
+			"file": "Zend/zend_hash.c",
+			"settings":
+			{
+				"buffer_size": 69388,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Zend/zend_portability.h",
+			"settings":
+			{
+				"buffer_size": 15332,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "README.md",
 			"settings":
 			{
@@ -184,37 +381,43 @@
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
-		},
-		{
-			"file": "Zend/zend_types.h",
-			"settings":
-			{
-				"buffer_size": 34832,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/Administrator/Desktop/verify.js",
-			"settings":
-			{
-				"buffer_size": 2596,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "this.src=\"${src}\" + \"?_t=\" + Math.random()",
-			"settings":
-			{
-				"buffer_size": 42,
-				"line_ending": "Windows"
-			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Golang Build/Go.sublime-build",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					""
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Install"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Cross-Compile (Interactive)"
+				],
+				[
+					"Packages/Golang Build/Go.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Golang Build/Go.sublime-build",
+				"Run"
+			]
+		],
 		[
 			[
 				[
@@ -240,6 +443,14 @@
 		"selected_items":
 		[
 			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
 				"parse",
 				"URL Parse"
 			],
@@ -252,16 +463,8 @@
 				"URL Parse"
 			],
 			[
-				"forma",
-				"Format: Javascript"
-			],
-			[
 				"format",
 				"Format: Javascript"
-			],
-			[
-				"json",
-				"Set Syntax: JSON"
 			],
 			[
 				"javascr",
@@ -305,10 +508,23 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master"
+		"/D/241/project/php-7.2.9/php-7.2.9",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/jiaozi",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/json",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard"
 	],
 	"file_history":
 	[
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/spl/spl_array.h",
+		"/D/241/project/aj_pull/application/service_xfs/data_construct/ajyx_order_data.php",
+		"/D/241/project/aj_pull/application/service_xfs/data_construct/ajyx_item_data.php",
+		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard/array.c",
+		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_API.h",
+		"/D/241/project/five_star/js/index.js",
+		"/D/241/project/php-7.2.9/php-7.2.9/README.md",
+		"/C/Users/Administrator/Desktop/index.html",
+		"/D/241/project/commands/common_commands.log",
 		"/C/Users/Administrator/Desktop/verify.js",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_virtual_cwd.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_virtual_cwd.c",
@@ -316,7 +532,6 @@
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_vm_def.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_types.h",
 		"/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/tools/yaf_classes.php",
-		"/D/241/project/commands/common_commands.log",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_execute.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_execute.c",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_string.h",
@@ -341,10 +556,8 @@
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_long.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/main/php_stdint.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard/head.c",
-		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_API.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_operators.c",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend_operators.h",
-		"/D/241/project/php-7.2.9/php-7.2.9/ext/standard/array.c",
 		"/D/241/project/php-7.2.9/php-7.2.9/ext/jiaozi/jiaozi.c",
 		"/D/241/project/php-7.2.9/php-7.2.9/main/spprintf.h",
 		"/D/241/project/php-7.2.9/php-7.2.9/Zend/zend.c",
@@ -401,7 +614,6 @@
 		"/D/241/project/gopath/src/http_proxy/port_mapper.go",
 		"/C/Users/Administrator/Desktop/tmp/sqkeyword.csv",
 		"/C/Users/Administrator/Documents/python/spider_utils.py",
-		"/C/Users/Administrator/Desktop/index.html",
 		"/C/Users/Administrator/Desktop/tmp/examples/http.php",
 		"/D/work/DNS域名/账户.txt",
 		"/C/Users/Administrator/Desktop/tmp/settings.jar"
@@ -415,6 +627,7 @@
 		"height": 104.0,
 		"where_history":
 		[
+			"D:\\241\\project\\php-7.2.9\\php-7.2.9\\ext\\standard",
 			"D:\\241\\project\\php-7.2.9\\php-7.2.9",
 			""
 		]
@@ -424,6 +637,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"zend_array_dup",
+			"COPY",
+			"IS_LONG",
+			"IS_TYPE_COPYABLE",
+			"zend_parse_arg_zval_deref",
+			"Z_PARAM",
+			"PARAM",
+			"ksort",
+			"ZEND_BEGIN_ARG_INFO_EX",
+			"ZEND_BEGIN_ARG_INFO",
+			"ZEND_BEGIN_ARG_INFO_EX",
+			"preg_match",
+			"Z_PARAM_ZVAL",
+			"Z_PARAM_ZVAL_EX",
+			"Z_PARAM_ZVAL",
+			"error",
+			"zend_parse_arg_long",
+			"define",
+			"GINIT",
+			"PHP_GINIT_FUNCTION",
 			"ZVAL_ZVAL",
 			"zend_parse_arg_zval_deref",
 			"zend_parse_arg_double",
@@ -531,16 +764,7 @@
 			"0",
 			".*预充值金额太高.*",
 			".*恭喜您获得淘宝达人称号.*",
-			"恭喜您获得淘宝达人称号",
-			"18067983439 【电商宝】有一个新用户注册,",
-			"【电商宝】有一个新用户注册",
-			"^\\+18067983439 【电商宝】CRM后台.*$",
-			"18067983439 【电商宝】CRM后台.*$",
-			"18067983439 【电商宝】CRM后台有",
-			"18067983439 【电商宝】CRM后台有1条短信待审核",
-			"13001383875 【返利】亲，恭喜您获得淘宝达人称号，",
-			"\t",
-			"19999115858\t【电商宝】预充值金额太高？现在拨打电"
+			"恭喜您获得淘宝达人称号"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -565,7 +789,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -591,10 +815,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 61904.0,
+						"translation.y": 74287.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 43,
 					"type": "text"
 				},
 				{
@@ -620,39 +844,39 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5837.0,
+						"translation.y": 7004.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 42,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/yaf_loader.c",
-					"semi_transient": true,
+					"file": "Zend/zend_types.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22215,
+						"buffer_size": 34832,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7290,
-								7290
+								2906,
+								2906
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.sublime-syntax",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3645.0,
+						"translation.y": 873.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 39,
 					"type": "text"
 				},
 				{
@@ -668,8 +892,8 @@
 						"selection":
 						[
 							[
-								2564,
-								2564
+								2447,
+								2447
 							]
 						],
 						"settings":
@@ -677,42 +901,14 @@
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 667.0,
+						"translation.y": 475.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 40,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "/D/241/project/commands/common_commands.log",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10795,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6458,
-								6458
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3772.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "Zend/zend_string.h",
 					"semi_transient": false,
 					"settings":
@@ -734,14 +930,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 322.0,
+						"translation.y": 385.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 41,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "Zend/zend.h",
 					"semi_transient": false,
 					"settings":
@@ -753,8 +949,8 @@
 						"selection":
 						[
 							[
-								4837,
-								4837
+								4365,
+								4365
 							]
 						],
 						"settings":
@@ -763,14 +959,1217 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1589.0,
+						"translation.y": 1935.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 38,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Zend/zend_compile.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 33715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10699,
+								10699
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 6399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 37,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "ext/jiaozi/jiaozi.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5581,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4962,
+								4981
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2592.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "ext/standard/credits.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 6131,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2377,
+								2377
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 432.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "ext/standard/array.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 182301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18233,
+								18233
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 12475.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "ext/standard/test-scripts/test_array_copy.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "ext/standard/php_array.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 12,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40083,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										164,
+										186
+									],
+									[
+										339,
+										361
+									],
+									[
+										474,
+										496
+									],
+									[
+										663,
+										685
+									],
+									[
+										854,
+										876
+									],
+									[
+										1039,
+										1061
+									],
+									[
+										1223,
+										1245
+									],
+									[
+										1379,
+										1401
+									],
+									[
+										1563,
+										1585
+									],
+									[
+										1748,
+										1770
+									],
+									[
+										1931,
+										1953
+									],
+									[
+										2121,
+										2143
+									],
+									[
+										2248,
+										2270
+									],
+									[
+										2375,
+										2397
+									],
+									[
+										2570,
+										2592
+									],
+									[
+										2775,
+										2797
+									],
+									[
+										2974,
+										2996
+									],
+									[
+										3177,
+										3199
+									],
+									[
+										3390,
+										3412
+									],
+									[
+										3559,
+										3581
+									],
+									[
+										3715,
+										3737
+									],
+									[
+										3917,
+										3939
+									],
+									[
+										4116,
+										4138
+									],
+									[
+										4309,
+										4331
+									],
+									[
+										4501,
+										4523
+									],
+									[
+										4697,
+										4719
+									],
+									[
+										4903,
+										4925
+									],
+									[
+										5101,
+										5123
+									],
+									[
+										5309,
+										5331
+									],
+									[
+										5506,
+										5528
+									],
+									[
+										5703,
+										5725
+									],
+									[
+										5906,
+										5928
+									],
+									[
+										6102,
+										6124
+									],
+									[
+										6288,
+										6310
+									],
+									[
+										6499,
+										6521
+									],
+									[
+										6706,
+										6728
+									],
+									[
+										6919,
+										6941
+									],
+									[
+										7125,
+										7147
+									],
+									[
+										7327,
+										7349
+									],
+									[
+										7535,
+										7557
+									],
+									[
+										7775,
+										7797
+									],
+									[
+										7967,
+										7989
+									],
+									[
+										8162,
+										8184
+									],
+									[
+										8357,
+										8379
+									],
+									[
+										8533,
+										8555
+									],
+									[
+										8723,
+										8745
+									],
+									[
+										8877,
+										8899
+									],
+									[
+										9067,
+										9089
+									],
+									[
+										9239,
+										9261
+									],
+									[
+										9337,
+										9359
+									],
+									[
+										9437,
+										9459
+									],
+									[
+										9621,
+										9643
+									],
+									[
+										9837,
+										9859
+									],
+									[
+										10026,
+										10048
+									],
+									[
+										10247,
+										10269
+									],
+									[
+										10443,
+										10465
+									],
+									[
+										10616,
+										10638
+									],
+									[
+										10788,
+										10810
+									],
+									[
+										10959,
+										10981
+									],
+									[
+										11119,
+										11141
+									],
+									[
+										11272,
+										11294
+									],
+									[
+										11470,
+										11492
+									],
+									[
+										11652,
+										11674
+									],
+									[
+										11852,
+										11874
+									],
+									[
+										12016,
+										12038
+									],
+									[
+										12183,
+										12205
+									],
+									[
+										12359,
+										12381
+									],
+									[
+										12545,
+										12567
+									],
+									[
+										12706,
+										12728
+									],
+									[
+										12862,
+										12884
+									],
+									[
+										13019,
+										13041
+									],
+									[
+										13181,
+										13203
+									],
+									[
+										13311,
+										13333
+									],
+									[
+										13463,
+										13485
+									],
+									[
+										13610,
+										13632
+									],
+									[
+										13828,
+										13850
+									],
+									[
+										14023,
+										14045
+									],
+									[
+										14193,
+										14215
+									],
+									[
+										14391,
+										14413
+									],
+									[
+										14583,
+										14605
+									],
+									[
+										14746,
+										14768
+									],
+									[
+										14923,
+										14945
+									],
+									[
+										15083,
+										15105
+									],
+									[
+										15258,
+										15280
+									],
+									[
+										15432,
+										15454
+									],
+									[
+										15605,
+										15627
+									],
+									[
+										15766,
+										15788
+									],
+									[
+										15927,
+										15949
+									],
+									[
+										16084,
+										16106
+									],
+									[
+										16242,
+										16264
+									],
+									[
+										16404,
+										16426
+									],
+									[
+										16559,
+										16581
+									],
+									[
+										16716,
+										16738
+									],
+									[
+										16877,
+										16899
+									],
+									[
+										17034,
+										17056
+									],
+									[
+										17199,
+										17221
+									],
+									[
+										17352,
+										17374
+									],
+									[
+										17518,
+										17540
+									],
+									[
+										17704,
+										17726
+									],
+									[
+										17879,
+										17901
+									],
+									[
+										18069,
+										18091
+									],
+									[
+										18228,
+										18250
+									],
+									[
+										18389,
+										18411
+									],
+									[
+										18537,
+										18559
+									],
+									[
+										18740,
+										18762
+									],
+									[
+										18910,
+										18932
+									],
+									[
+										19079,
+										19101
+									],
+									[
+										19249,
+										19271
+									],
+									[
+										19414,
+										19436
+									],
+									[
+										19586,
+										19608
+									],
+									[
+										19749,
+										19771
+									],
+									[
+										19877,
+										19899
+									],
+									[
+										20039,
+										20061
+									],
+									[
+										20204,
+										20226
+									],
+									[
+										20368,
+										20390
+									],
+									[
+										20543,
+										20565
+									],
+									[
+										20720,
+										20742
+									],
+									[
+										20898,
+										20920
+									],
+									[
+										21077,
+										21099
+									],
+									[
+										21250,
+										21272
+									],
+									[
+										21442,
+										21464
+									],
+									[
+										21616,
+										21638
+									],
+									[
+										21797,
+										21819
+									],
+									[
+										22001,
+										22023
+									],
+									[
+										22123,
+										22145
+									],
+									[
+										22253,
+										22275
+									],
+									[
+										22411,
+										22433
+									],
+									[
+										22574,
+										22596
+									],
+									[
+										22753,
+										22775
+									],
+									[
+										22916,
+										22938
+									],
+									[
+										23073,
+										23095
+									],
+									[
+										23237,
+										23259
+									],
+									[
+										23394,
+										23416
+									],
+									[
+										23580,
+										23602
+									],
+									[
+										23734,
+										23756
+									],
+									[
+										23915,
+										23937
+									],
+									[
+										24104,
+										24126
+									],
+									[
+										24236,
+										24258
+									],
+									[
+										24406,
+										24428
+									],
+									[
+										24568,
+										24590
+									],
+									[
+										24729,
+										24751
+									],
+									[
+										24900,
+										24922
+									],
+									[
+										25089,
+										25111
+									],
+									[
+										25213,
+										25235
+									],
+									[
+										25406,
+										25428
+									],
+									[
+										25611,
+										25633
+									],
+									[
+										25782,
+										25804
+									],
+									[
+										26004,
+										26026
+									],
+									[
+										26158,
+										26180
+									],
+									[
+										26323,
+										26345
+									],
+									[
+										26452,
+										26474
+									],
+									[
+										26618,
+										26640
+									],
+									[
+										26773,
+										26795
+									],
+									[
+										26931,
+										26953
+									],
+									[
+										27115,
+										27137
+									],
+									[
+										27298,
+										27320
+									],
+									[
+										27481,
+										27503
+									],
+									[
+										27655,
+										27677
+									],
+									[
+										27833,
+										27855
+									],
+									[
+										28008,
+										28030
+									],
+									[
+										28183,
+										28205
+									],
+									[
+										28323,
+										28345
+									],
+									[
+										28477,
+										28499
+									],
+									[
+										28646,
+										28668
+									],
+									[
+										28903,
+										28925
+									],
+									[
+										29072,
+										29094
+									],
+									[
+										29281,
+										29303
+									],
+									[
+										29516,
+										29538
+									],
+									[
+										29697,
+										29719
+									],
+									[
+										29877,
+										29899
+									],
+									[
+										30070,
+										30092
+									],
+									[
+										30245,
+										30267
+									],
+									[
+										30428,
+										30450
+									],
+									[
+										30585,
+										30607
+									],
+									[
+										30730,
+										30752
+									],
+									[
+										30889,
+										30911
+									],
+									[
+										31049,
+										31071
+									],
+									[
+										31209,
+										31231
+									],
+									[
+										31369,
+										31391
+									],
+									[
+										31532,
+										31554
+									],
+									[
+										31690,
+										31712
+									],
+									[
+										31846,
+										31868
+									],
+									[
+										32001,
+										32023
+									],
+									[
+										32158,
+										32180
+									],
+									[
+										32323,
+										32345
+									],
+									[
+										32487,
+										32509
+									],
+									[
+										32651,
+										32673
+									],
+									[
+										32816,
+										32838
+									],
+									[
+										32981,
+										33003
+									],
+									[
+										33147,
+										33169
+									],
+									[
+										33313,
+										33335
+									],
+									[
+										33471,
+										33493
+									],
+									[
+										33639,
+										33661
+									],
+									[
+										33797,
+										33819
+									],
+									[
+										33953,
+										33975
+									],
+									[
+										34117,
+										34139
+									],
+									[
+										34285,
+										34307
+									],
+									[
+										34454,
+										34476
+									],
+									[
+										34619,
+										34641
+									],
+									[
+										34785,
+										34807
+									],
+									[
+										34939,
+										34961
+									],
+									[
+										35104,
+										35126
+									],
+									[
+										35275,
+										35297
+									],
+									[
+										35442,
+										35464
+									],
+									[
+										35611,
+										35633
+									],
+									[
+										35775,
+										35797
+									],
+									[
+										35945,
+										35967
+									],
+									[
+										36111,
+										36133
+									],
+									[
+										36270,
+										36292
+									],
+									[
+										36424,
+										36446
+									],
+									[
+										36586,
+										36608
+									],
+									[
+										36748,
+										36770
+									],
+									[
+										36917,
+										36939
+									],
+									[
+										37043,
+										37065
+									],
+									[
+										37202,
+										37224
+									],
+									[
+										37359,
+										37381
+									],
+									[
+										37528,
+										37550
+									],
+									[
+										37709,
+										37731
+									],
+									[
+										37882,
+										37904
+									],
+									[
+										38047,
+										38069
+									],
+									[
+										38216,
+										38238
+									],
+									[
+										38348,
+										38370
+									],
+									[
+										38487,
+										38509
+									],
+									[
+										38650,
+										38672
+									],
+									[
+										38837,
+										38859
+									],
+									[
+										38974,
+										38996
+									],
+									[
+										39155,
+										39177
+									],
+									[
+										39345,
+										39367
+									],
+									[
+										39501,
+										39523
+									],
+									[
+										39604,
+										39626
+									],
+									[
+										39711,
+										39733
+									],
+									[
+										39946,
+										39968
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								1051,
+								1051
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "ext/standard/basic_functions.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 173047,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5386,
+								5386
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3524.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "ext/jiaozi/php_jiaozi.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1289,
+								1289
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 30,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
 					"file": "Zend/zend_variables.h",
 					"semi_transient": false,
 					"settings":
@@ -782,8 +2181,8 @@
 						"selection":
 						[
 							[
-								4347,
-								4347
+								2704,
+								2704
 							]
 						],
 						"settings":
@@ -791,14 +2190,352 @@
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 950.0,
+						"translation.y": 1139.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 15,
+					"stack_index": 29,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 16,
+					"file": "test_script/test_type_conversion_performance.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3556,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								401,
+								401
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 27,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 26,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "test_script/test_conversion.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 60,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 25,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "/D/241/project/commands/common_commands.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9482,
+								9470
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6469.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 24,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "/D/tools/proxy.pac",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 55842,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								109,
+								109
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "/C/Users/Administrator/Desktop/test_go/test.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 80,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								80,
+								80
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Go/Go.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "/D/241/project/config/database.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1570,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								769,
+								769
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "/D/241/project/config/config.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								495,
+								495
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "ext/jiaozi/config.m4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2781,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1077,
+								1077
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "/C/Users/Administrator/Desktop/test_go/user.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2,
+								2
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "/C/Users/Administrator/Desktop/test_go/user.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20,
+								20
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				},
+				{
+					"buffer": 28,
 					"file": "/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/yaf_dispatcher.c",
 					"semi_transient": false,
 					"settings":
@@ -820,14 +2557,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 13004.0,
+						"translation.y": 15607.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 31,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 29,
 					"file": "/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/yaf_dispatcher.h",
 					"semi_transient": false,
 					"settings":
@@ -850,14 +2587,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 82.0,
+						"translation.y": 97.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 32,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 30,
 					"file": "/C/Users/Administrator/Desktop/tmp/yaf-master/yaf-master/php_yaf.h",
 					"semi_transient": false,
 					"settings":
@@ -869,8 +2606,8 @@
 						"selection":
 						[
 							[
-								1450,
-								1450
+								1594,
+								1594
 							]
 						],
 						"settings":
@@ -878,14 +2615,100 @@
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 202.0,
+						"translation.y": 254.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 14,
+					"stack_index": 33,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 31,
+					"file": "Zend/zend_API.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3519,
+								3519
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1346.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 34,
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "main/php.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13474,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11863,
+								11863
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7605.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 35,
+					"type": "text"
+				},
+				{
+					"buffer": 34,
 					"file": "Zend/zend_variables.c",
 					"semi_transient": false,
 					"settings":
@@ -907,72 +2730,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1849.0,
+						"translation.y": 2218.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 18,
+					"stack_index": 36,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "ext/standard/array.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 182301,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								20024,
-								20024
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 11654.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "Zend/zend_API.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 61159,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44579,
-								44579
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 11559.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
+					"buffer": 35,
 					"file": "Zend/zend_objects.c",
 					"semi_transient": false,
 					"settings":
@@ -997,11 +2762,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 19,
+					"stack_index": 44,
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 36,
 					"file": "Zend/zend_objects.h",
 					"semi_transient": false,
 					"settings":
@@ -1027,11 +2792,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 20,
+					"stack_index": 45,
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 37,
 					"file": "Zend/zend_long.h",
 					"semi_transient": false,
 					"settings":
@@ -1054,14 +2819,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 65.0,
+						"translation.y": 77.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 23,
+					"stack_index": 48,
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 38,
 					"file": "Zend/zend_alloc.h",
 					"semi_transient": false,
 					"settings":
@@ -1082,14 +2847,14 @@
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 145.0,
+						"translation.y": 172.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 22,
+					"stack_index": 47,
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 39,
 					"file": "Zend/zend_alloc.c",
 					"semi_transient": false,
 					"settings":
@@ -1111,51 +2876,20 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 41345.0,
+						"translation.y": 49613.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 21,
+					"stack_index": 46,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
-					"buffer": 19,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8535,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3900,
-								3910
-							]
-						],
-						"settings":
-						{
-							"history_list_is_closing": true,
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 202.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 20,
+					"buffer": 2,
 					"file": "Zend/zend_types.h",
 					"semi_transient": false,
 					"settings":
@@ -1167,8 +2901,8 @@
 						"selection":
 						[
 							[
-								6046,
-								6024
+								33607,
+								33607
 							]
 						],
 						"settings":
@@ -1177,14 +2911,216 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2505.0,
+						"translation.y": 18878.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 15,
+					"file": "Zend/zend_variables.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4782,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1705,
+								1705
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 158.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "Zend/zend_variables.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5771,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4701,
+								4701
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2552.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Zend/zend_hash.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 34795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13957,
+								13943
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4226.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 40,
+					"file": "Zend/zend_hash.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 69388,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								48734,
+								48734
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 32866.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 41,
+					"file": "Zend/zend_portability.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15332,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2934,
+								2934
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1454.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 0,
+					"file": "Zend/zend_API.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 129998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14535,
+								14535
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9361.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 42,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7588,
+								7588
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3751.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 31,
 					"file": "Zend/zend_API.h",
 					"semi_transient": false,
 					"settings":
@@ -1196,8 +3132,8 @@
 						"selection":
 						[
 							[
-								58713,
-								58713
+								44579,
+								44579
 							]
 						],
 						"settings":
@@ -1206,66 +3142,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 13856.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 21,
-					"file": "/C/Users/Administrator/Desktop/verify.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2596,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1156,
-								1156
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 225.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 22,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 42,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31,
-								31
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1273,7 +3153,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 25.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -1299,7 +3179,7 @@
 		"cols":
 		[
 			0.0,
-			0.241231540084,
+			0.430698050988,
 			1.0
 		],
 		"rows":
@@ -1317,6 +3197,10 @@
 	{
 		"height": 0.0
 	},
+	"output.golang_build":
+	{
+		"height": 242.0
+	},
 	"output.unsaved_changes":
 	{
 		"height": 401.0
@@ -1325,7 +3209,7 @@
 	"project": "php.sublime-project",
 	"replace":
 	{
-		"height": 46.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1335,20 +3219,40 @@
 		"selected_items":
 		[
 			[
-				"zend_vm_def",
-				"php-7.2.9\\Zend\\zend_vm_def.h"
+				"zend_hash",
+				"php-7.2.9\\Zend\\zend_hash.c"
 			],
 			[
 				"array.c",
 				"php-7.2.9\\ext\\standard\\array.c"
 			],
 			[
-				"zend_api",
-				"php-7.2.9\\Zend\\zend_API.h"
+				"ph_array.h",
+				"php-7.2.9\\ext\\standard\\php_array.h"
 			],
 			[
-				"zend_hash",
-				"php-7.2.9\\Zend\\zend_hash.h"
+				"array.h",
+				"php-7.2.9\\ext\\spl\\spl_array.h"
+			],
+			[
+				"zend_",
+				"php-7.2.9\\Zend\\zend_API.c"
+			],
+			[
+				"README.md",
+				"php-7.2.9\\README.md"
+			],
+			[
+				"yaf.h",
+				"yaf-master\\php_yaf.h"
+			],
+			[
+				"zend_vm_def",
+				"php-7.2.9\\Zend\\zend_vm_def.h"
+			],
+			[
+				"zend_api",
+				"php-7.2.9\\Zend\\zend_API.h"
 			],
 			[
 				"zend_string",
@@ -1431,15 +3335,15 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
-	"side_bar_width": 340.0,
+	"side_bar_visible": true,
+	"side_bar_width": 315.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
