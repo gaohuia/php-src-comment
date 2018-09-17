@@ -119,19 +119,35 @@ typedef struct _zend_trait_alias {
 } zend_trait_alias;
 
 struct _zend_class_entry {
+	// 标识是用户类还是内部类. 
 	char type;
+
+	// 类名
 	zend_string *name;
+
+	// 父类
 	struct _zend_class_entry *parent;
+
 	int refcount;
 	uint32_t ce_flags;
 
+	// 对应default_properties_table长度
 	int default_properties_count;
+	// 对应default_static_members_table长度
 	int default_static_members_count;
+
+	// 属性默认值表
 	zval *default_properties_table;
+	// 静态属性的默认值表
 	zval *default_static_members_table;
+	// 静态属性表
 	zval *static_members_table;
+
+	// 方法表
 	HashTable function_table;
+	// 属性信息, 应该是记录了所有的属性以及属性的信息. 包括是否是静态. 
 	HashTable properties_info;
+	// 常量信息
 	HashTable constants_table;
 
 	union _zend_function *constructor;
@@ -151,6 +167,7 @@ struct _zend_class_entry {
 	zend_class_iterator_funcs iterator_funcs;
 
 	/* handlers */
+	// 创建对象
 	zend_object* (*create_object)(zend_class_entry *class_type);
 	zend_object_iterator *(*get_iterator)(zend_class_entry *ce, zval *object, int by_ref);
 	int (*interface_gets_implemented)(zend_class_entry *iface, zend_class_entry *class_type); /* a class implements this interface */
