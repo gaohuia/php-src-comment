@@ -34,10 +34,15 @@
 BEGIN_EXTERN_C()
 
 typedef struct _zend_function_entry {
+	// 函数名. 普通函数名与类方法名之间就是命名的规则不同, 其它的相同.
 	const char *fname;
+	// 一个PHP_FUNCTION 或 PHP_METHOD. 无论是哪个最终会是一个 ZEND_NAMED_FUNCTION
 	zif_handler handler;
+	// 内部参数信息.
 	const struct _zend_internal_arg_info *arg_info;
+	// 参数个数.
 	uint32_t num_args;
+	// 标志位.
 	uint32_t flags;
 } zend_function_entry;
 
@@ -65,6 +70,12 @@ typedef struct _zend_fcall_info_cache {
 #define ZEND_FN(name) zif_##name
 #define ZEND_MN(name) zim_##name
 #define ZEND_NAMED_FUNCTION(name)		void name(INTERNAL_FUNCTION_PARAMETERS)
+
+
+// ZEND_FUNCTION 与 ZEND_METHOD的参数是一样的.
+// 唯一的区别是:
+// ZEND_FUNCTION 最后生成的函数名是 zif_XXXXXXXXXX
+// ZEND_METHOD 最后生成的函数名是 CLASSNAME_zim_XXXXXXXX
 #define ZEND_FUNCTION(name)				ZEND_NAMED_FUNCTION(ZEND_FN(name))
 #define ZEND_METHOD(classname, name)	ZEND_NAMED_FUNCTION(ZEND_MN(classname##_##name))
 
@@ -616,7 +627,7 @@ END_EXTERN_C()
 		ZVAL_PSTRINGL(z, "", 0);				\
 	} while (0)
 
-// 如果dtor设置为1 或 copy设置为0, 则值的引用数不变, 因为新的zval对zend_value的引用增加1, 老值引用减少1. 
+// 如果dtor设置为1 或 copy设置为0, 则值的引用数不变, 因为新的zval对zend_value的引用增加1, 老值引用减少1.
 // ZVAL_ZVAL(zval *z, zval *zv, int copy, int dtor)
 #define ZVAL_ZVAL(z, zv, copy, dtor) do {		\
 		zval *__z = (z);						\
@@ -635,14 +646,14 @@ END_EXTERN_C()
 		}										\
 	} while (0)
 
-// 将数据写入到return_value这个指针里面去. 
-// 
+// 将数据写入到return_value这个指针里面去.
+//
 #define RETVAL_BOOL(b)					ZVAL_BOOL(return_value, b)
 #define RETVAL_NULL() 					ZVAL_NULL(return_value)
 #define RETVAL_LONG(l) 					ZVAL_LONG(return_value, l)
 #define RETVAL_DOUBLE(d) 				ZVAL_DOUBLE(return_value, d)
 
-// 写入时，不增加引用计数. 
+// 写入时，不增加引用计数.
 #define RETVAL_STR(s)			 		ZVAL_STR(return_value, s)
 #define RETVAL_INTERNED_STR(s)	 		ZVAL_INTERNED_STR(return_value, s)
 #define RETVAL_NEW_STR(s)		 		ZVAL_NEW_STR(return_value, s)
@@ -741,7 +752,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 		int _max_num_args = (max_num_args); \		// 最大参数个数
 		int _num_args = EX_NUM_ARGS(); \			// 应该是, 当前函数的实际参数个数
 		int _i; \
-		zval *_real_arg, *_arg = NULL; \			// 
+		zval *_real_arg, *_arg = NULL; \			//
 		zend_expected_type _expected_type = Z_EXPECTED_LONG; \
 		char *_error = NULL; \
 		zend_bool _dummy; \
@@ -767,7 +778,7 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 			} \
 			// i 应该是当前参数索引
 			_i = 0; \
-			// 看起来像是指向了参数列表的第一个参数zval结构的前面一个位置, 便于_real_arg++时, 指向第一个参数. 
+			// 看起来像是指向了参数列表的第一个参数zval结构的前面一个位置, 便于_real_arg++时, 指向第一个参数.
 			_real_arg = ZEND_CALL_ARG(execute_data, 0);
 
 #define ZEND_PARSE_PARAMETERS_START(min_num_args, max_num_args) \
@@ -798,8 +809,8 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 	ZEND_ASSERT(_i <= _min_num_args || _optional==1); \
 	ZEND_ASSERT(_i >  _min_num_args || _optional==0); \
 	if (_optional) { \
-		// 如果是可选参数, 并且没有已经参数了, 退出参数解析. 
-		// 也就是后面的参数解析宏都不会运行了. 
+		// 如果是可选参数, 并且没有已经参数了, 退出参数解析.
+		// 也就是后面的参数解析宏都不会运行了.
 		if (UNEXPECTED(_i >_num_args)) break; \
 	} \
 	_real_arg++; \
@@ -1190,7 +1201,7 @@ static zend_always_inline int zend_parse_arg_double(zval *arg, double *dest, zen
 }
 
 // 将zval解析为一个zend_string变量
-// zend_string变量的内存由调用者分配. 
+// zend_string变量的内存由调用者分配.
 static zend_always_inline int zend_parse_arg_str(zval *arg, zend_string **dest, int check_null)
 {
 	// 如果zval的类型是 IS_STRING

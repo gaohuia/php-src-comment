@@ -74,6 +74,7 @@ zend_string *spl_gen_private_prop_name(zend_class_entry *ce, char *prop_name, in
 #define SPL_ABSTRACT_ME(class_name, function_name, arg_info) \
 	ZEND_ABSTRACT_ME( spl_ ## class_name, function_name, arg_info)
 
+// 在所有的class前面再加上一个spl_前缀.
 #define SPL_METHOD(class_name, function_name) \
 	PHP_METHOD(spl_ ## class_name, function_name)
 

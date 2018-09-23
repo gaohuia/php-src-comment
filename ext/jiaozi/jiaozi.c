@@ -66,7 +66,7 @@ PHP_FUNCTION(confirm_jiaozi_compiled)
 	RETURN_STR(strg);
 }
 
-// 
+//
 PHP_FUNCTION(jiaozi_write)
 {
 	char *arg = NULL;
@@ -176,6 +176,9 @@ const zend_function_entry jiaozi_functions[] = {
 
 /* {{{ jiaozi_module_entry
  */
+// 这个变量必需是 xxx_module_entry. 与ZEND_GET_MODULE对应
+// 如果是静态编译, 这个变量会以外部变量的形式被内联到PHP内部
+// 如果是动态编译, 这个变量会以get_module方法的形式导出.
 zend_module_entry jiaozi_module_entry = {
 	STANDARD_MODULE_HEADER,
 	"jiaozi",
@@ -194,6 +197,7 @@ zend_module_entry jiaozi_module_entry = {
 #ifdef ZTS
 ZEND_TSRMLS_CACHE_DEFINE()
 #endif
+// 导出一个 get_module 方法.
 ZEND_GET_MODULE(jiaozi)
 #endif
 

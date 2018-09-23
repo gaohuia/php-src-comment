@@ -130,6 +130,7 @@ struct _zend_compiler_globals {
 };
 
 
+// 全局执行结构.
 struct _zend_executor_globals {
 	zval uninitialized_zval;
 	zval error_zval;
@@ -141,6 +142,7 @@ struct _zend_executor_globals {
 
 	zend_array symbol_table;		/* main symbol table */
 
+	// 已经被include进来的文件
 	HashTable included_files;	/* files already included */
 
 	JMP_BUF *bailout;
@@ -148,8 +150,11 @@ struct _zend_executor_globals {
 	int error_reporting;
 	int exit_status;
 
+	// 函数表
 	HashTable *function_table;	/* function symbol table */
+	// 类表
 	HashTable *class_table;		/* class table */
+	// 常量表
 	HashTable *zend_constants;	/* constants table */
 
 	zval          *vm_stack_top;

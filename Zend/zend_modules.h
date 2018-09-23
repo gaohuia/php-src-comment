@@ -28,8 +28,10 @@
 
 #define INIT_FUNC_ARGS		int type, int module_number
 #define INIT_FUNC_ARGS_PASSTHRU	type, module_number
+
 #define SHUTDOWN_FUNC_ARGS	int type, int module_number
 #define SHUTDOWN_FUNC_ARGS_PASSTHRU type, module_number
+
 #define ZEND_MODULE_INFO_FUNC_ARGS zend_module_entry *zend_module
 #define ZEND_MODULE_INFO_FUNC_ARGS_PASSTHRU zend_module
 
@@ -70,6 +72,7 @@ struct _zend_ini_entry;
 typedef struct _zend_module_entry zend_module_entry;
 typedef struct _zend_module_dep zend_module_dep;
 
+// PHP扩展.
 struct _zend_module_entry {
 	unsigned short size;
 	unsigned int zend_api;

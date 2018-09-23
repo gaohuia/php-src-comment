@@ -11,6 +11,7 @@ PHP源码阅读笔记.
 * Zend/zend_alloc.h       定义了内存分配相关的方法.
 * Zend/zend_hash.h        定义了hash表相关的方法和宏.
 * Zend/zend_vm_def.h      定义了所有的Opcode handle
+* zend_globals_macros.h   定义了Zend的全局宏如: EG等.
 
 ## zval
 
@@ -40,7 +41,7 @@ PHP源码阅读笔记.
 
 #### zval取值
 
-宏并非函数, 只是快捷方式. 
+宏并非函数, 只是快捷方式.
 
 ```C
     zend_long Z_LVAL(zval);         // 取long值
@@ -125,8 +126,8 @@ PHP源码阅读笔记.
 ```C
     Z_TRY_ADDREF(zval p);  // 如果是可以引用计数的, 那么增加它.
     Z_TRY_DELREF(zval p);  // 尝试, 减少引用.
-    zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存. 
-    zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法. 
+    zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存.
+    zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法.
 ```
 
 ## 数据类型及常用操作
@@ -164,28 +165,28 @@ PHP源码阅读笔记.
 #### 释放一个HashTable指针的内存.
     FREE_HASHTABLE(HashTable *ht)
 
-#### 判断两个zend_string是否相等. 
+#### 判断两个zend_string是否相等.
     zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
 
 ### 数组(HashTable)
 
-    PHP数据的要点. 
+    PHP数据的要点.
 
-    * PHP中有一个Packed数组. 用于存储类似于数组的数据. 
-    * PHP zend_hash可以指定一个析构函数. 这个函数将会在每个元素被删除时调用. 默认情况下这个析构函数只是去减少变量的引用计数， 如果引用计数减为0， 再调用相应类型的析构函数. 
+    * PHP中有一个Packed数组. 用于存储类似于数组的数据.
+    * PHP zend_hash可以指定一个析构函数. 这个函数将会在每个元素被删除时调用. 默认情况下这个析构函数只是去减少变量的引用计数， 如果引用计数减为0， 再调用相应类型的析构函数.
 
 ```C
 
-    zend_bool HT_IS_PACKED(HashTable *);            // 判断一个数组是不是Packed的. 
-    zend_bool HT_IS_WITHOUT_HOLES(HashTable *);     // 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞. 
+    zend_bool HT_IS_PACKED(HashTable *);            // 判断一个数组是不是Packed的.
+    zend_bool HT_IS_WITHOUT_HOLES(HashTable *);     // 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞.
     zend_bool HT_HAS_STATIC_KEYS_ONLY(HashTable*);  // 是否只有静态KEY
 
 
-    // 数据变量未初始化之前不能使用. 
-    void array_init(zval *pzval);                   // 对一个数组变量进行初始化. 
-    void array_init_size(zval *pzval, size_t size); // 对一个数组变量进行初始化, 并指定大小. 
+    // 数据变量未初始化之前不能使用.
+    void array_init(zval *pzval);                   // 对一个数组变量进行初始化.
+    void array_init_size(zval *pzval, size_t size); // 对一个数组变量进行初始化, 并指定大小.
 
-    // 看样子这个方法没啥软用. 
+    // 看样子这个方法没啥软用.
     void zend_hash_real_init(HashTable*, zend_bool packed);     // 初始化一个HashTable
     int zend_hash_del(HashTable*, zend_string*);                // 删除一个key
     void zend_hash_packed_to_hash(HashTable*);                  // 把packed数组转为hash
@@ -193,17 +194,17 @@ PHP源码阅读笔记.
     uint32_t zend_array_count(HashTable *);                     // 返回数组长度.
 
     // zend_hash_str_* 系统的方法, 它的参数都是原始的C字符串
-    // _ind方法. 如果zval变量为IS_INDIRECT类型, 需要解析出他的真实值存入. 
+    // _ind方法. 如果zval变量为IS_INDIRECT类型, 需要解析出他的真实值存入.
     zval *zend_hash_str_update(HashTable *, char *, size_t len, zval *pData); // 更新一个Hash类型的Key.  返回一个新的zval指针
     zval *zend_hash_str_update_ind(HashTable *, char *, size_t len, zval *pData); // pData是一个间接的变量...(还不明白这里的用意)
     zval *zend_hash_str_add(HashTable *, char*, size_t len, zval *pData);
-    zval *zend_hash_str_add_new(HashTable *, char*, size_t len, zval *pData);   // 在可以确定数组中没有冲突的键的情况下, 可以使用_new方法. 可以避免一次hash查找. 
+    zval *zend_hash_str_add_new(HashTable *, char*, size_t len, zval *pData);   // 在可以确定数组中没有冲突的键的情况下, 可以使用_new方法. 可以避免一次hash查找.
 
-    // 
-    zval *zend_hash_update(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
-    zval *zend_hash_update_ind(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
-    zval *zend_hash_add(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值. 
-    zval *zend_hash_add_new(HashTable *, zend_string *, zval);       // 跳过查询原来的key阶段, 直接添加新值. 有些情况下, 可以断言key不存在于HashTable中, 就可以直接调用此函数提高效率. 
+    //
+    zval *zend_hash_update(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值.
+    zval *zend_hash_update_ind(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值.
+    zval *zend_hash_add(HashTable *, zend_string *, zval);       // 其实就是设置key => value. 没有值时, 应该也会添加值.
+    zval *zend_hash_add_new(HashTable *, zend_string *, zval);       // 跳过查询原来的key阶段, 直接添加新值. 有些情况下, 可以断言key不存在于HashTable中, 就可以直接调用此函数提高效率.
 
 
 
@@ -217,11 +218,11 @@ PHP源码阅读笔记.
 
 ### 扩展开发
 
-参数: 
+参数:
 
 * check_null 检测参数是否为null
 * deref 对变量进行解引用
-* separate 对变量进行分离. 如果这个变量原来与其它变量共享zend_value, 那就把这个zend_value分离出来. 
+* separate 对变量进行分离. 如果这个变量原来与其它变量共享zend_value, 那就把这个zend_value分离出来.
 
 ```C
     ZEND_PARSE_PARAMETERS_START(int minArguments, int maxArguments)
@@ -236,7 +237,7 @@ PHP源码阅读笔记.
     ZEND_PARSE_PARAMETERS_END_EX()
 
 
-    // 返回数据相关方法. 
+    // 返回数据相关方法.
 
     RETURN_BOOL(zend_bool b);
     RETURN_NULL();
@@ -263,3 +264,5 @@ PHP源码阅读笔记.
 * [PHP Internals Book](http://www.phpinternalsbook.com/index.html)
 * [PHP at the Core: A Hacker's Guide](http://php.net/manual/en/internals2.php)
 * [盘古大叔](https://github.com/pangudashu/php7-internal)
+* [autoconf_tutorial](https://github.com/edrosten/autoconf_tutorial)
+
