@@ -11,7 +11,7 @@ PHP源码阅读笔记.
 * Zend/zend_alloc.h       定义了内存分配相关的方法.
 * Zend/zend_hash.h        定义了hash表相关的方法和宏.
 * Zend/zend_vm_def.h      定义了所有的Opcode handle
-* zend_globals_macros.h   定义了Zend的全局宏如: EG等.
+* Zend/zend_globals_macros.h   定义了Zend的全局宏如: EG等.
 
 ## zval
 
@@ -157,14 +157,6 @@ PHP源码阅读笔记.
 #### 减少引用
     uint32_t zend_string_delref(zend_string *s)
 
-### 数组类型
-
-#### 分配一个HashTable结构zend_array
-    ALLOC_HASHTABLE(HashTable *ht)
-
-#### 释放一个HashTable指针的内存.
-    FREE_HASHTABLE(HashTable *ht)
-
 #### 判断两个zend_string是否相等.
     zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
 
@@ -176,11 +168,12 @@ PHP源码阅读笔记.
     * PHP zend_hash可以指定一个析构函数. 这个函数将会在每个元素被删除时调用. 默认情况下这个析构函数只是去减少变量的引用计数， 如果引用计数减为0， 再调用相应类型的析构函数.
 
 ```C
+    ALLOC_HASHTABLE(HashTable *ht);     // 分配一个HashTable结构zend_array
+    FREE_HASHTABLE(HashTable *ht);      // 释放一个HashTable指针的内存.
 
     zend_bool HT_IS_PACKED(HashTable *);            // 判断一个数组是不是Packed的.
     zend_bool HT_IS_WITHOUT_HOLES(HashTable *);     // 返回数组是否有空洞, 因为unset可以删除数组中的元素, 留下空洞.
     zend_bool HT_HAS_STATIC_KEYS_ONLY(HashTable*);  // 是否只有静态KEY
-
 
     // 数据变量未初始化之前不能使用.
     void array_init(zval *pzval);                   // 对一个数组变量进行初始化.
@@ -219,52 +212,53 @@ PHP源码阅读笔记.
 ### 类的定义
 
 ```C
-zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment);
-zend_declare_property(zend_class_entry *ce, char* name, size_t name_length, zval *property, int access_type); // 包含一个对zend_declare_property_ex的调用, 内置新建类包zend_string的调用.
-zend_declare_property_null(zend_class_entry *ce, const char* name, size_t name_length, access_type); // 定义一个属性, 并指定其默认值为null
-zend_declare_property_bool();
-zend_declare_property_long();
-zend_declare_property_double();
-zend_declare_property_string();
-zend_declare_property_stringl();
+    // 属性的定义
+    zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment);
+    zend_declare_property(zend_class_entry *ce, char* name, size_t name_length, zval *property, int access_type); // 包含一个对zend_declare_property_ex的调用, 内置新建类包zend_string的调用.
+    zend_declare_property_null(zend_class_entry *ce, const char* name, size_t name_length, access_type); // 定义一个属性, 并指定其默认值为null
+    zend_declare_property_bool();
+    zend_declare_property_long();
+    zend_declare_property_double();
+    zend_declare_property_string();
+    zend_declare_property_stringl();
 
-// 常量部分.
-zend_declare_class_constant_ex();   // 定义一个类常量
-zend_declare_class_constant();
-zend_declare_class_constant_null();
-zend_declare_class_constant_long();
-zend_declare_class_constant_bool();
-zend_declare_class_constant_double();
-zend_declare_class_constant_stringl();
-zend_declare_class_constant_string();
+    // 常量部分.
+    zend_declare_class_constant_ex();   // 定义一个类常量
+    zend_declare_class_constant();
+    zend_declare_class_constant_null();
+    zend_declare_class_constant_long();
+    zend_declare_class_constant_bool();
+    zend_declare_class_constant_double();
+    zend_declare_class_constant_stringl();
+    zend_declare_class_constant_string();
 
-// 写属性
-zend_update_property_ex();
-zend_update_property();
-zend_update_property_null();
-zend_unset_property();
-zend_update_property_bool();
-zend_update_property_long();
-zend_update_property_double();
-zend_update_property_str();
-zend_update_property_string();
-zend_update_property_stringl();
+    // 写属性
+    zend_update_property_ex();
+    zend_update_property();
+    zend_update_property_null();
+    zend_unset_property();
+    zend_update_property_bool();
+    zend_update_property_long();
+    zend_update_property_double();
+    zend_update_property_str();
+    zend_update_property_string();
+    zend_update_property_stringl();
 
-// 写静态属性
-zend_update_static_property();  //
-zend_update_static_property_null();
-zend_update_static_property_bool();
-zend_update_static_property_long();
-zend_update_static_property_double();
-zend_update_static_property_string();
-zend_update_static_property_stringl();
+    // 写静态属性
+    zend_update_static_property();  //
+    zend_update_static_property_null();
+    zend_update_static_property_bool();
+    zend_update_static_property_long();
+    zend_update_static_property_double();
+    zend_update_static_property_string();
+    zend_update_static_property_stringl();
 
-// 读属性
-zend_read_property_ex();
-zend_read_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length, zend_bool silent, zval *rv);
+    // 读属性
+    zend_read_property_ex();
+    zend_read_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length, zend_bool silent, zval *rv);
 
-// 读静态属性
-zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_t name_length, zend_bool silent);
+    // 读静态属性
+    zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_t name_length, zend_bool silent);
 
 ```
 
@@ -309,6 +303,31 @@ zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_
     RETURN_ZVAL(zval *);
     RETURN_FALSE();
     RETURN_TRUE();
+
+```
+
+参数及类型表格
+
+[zend_parse_parameters](http://php.net/manual/en/internals2.funcs.php)
+
+```
+a   array   zval*
+A   array or object zval*
+b   boolean zend_bool
+C   class   zend_class_entry*
+d   double  double
+f   function    zend_fcall_info*, zend_fcall_info_cache*
+h   array   HashTable*
+H   array or object HashTable*
+l   long    long
+L   long (limits out-of-range LONG_MAX/LONG_MIN)    long
+o   object  zval*
+O   object (of specified zend_class_entry)  zval*, zend_class_entry*
+p   string (a valid path)   char*, int
+r   resource    zval*
+s   string  char*, int
+z   mixed   zval*
+Z   mixed   zval**
 ```
 
 ### 参考文档
