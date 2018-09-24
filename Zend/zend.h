@@ -45,11 +45,11 @@
 #define HANDLE_UNBLOCK_INTERRUPTIONS()		ZEND_SIGNAL_UNBLOCK_INTERRUPTIONS()
 
 // ZEND_FUNCTION的参数列表
-// 返回值的由调用方分配, 
-// 猜想: 
+// 返回值的由调用方分配,
+// 猜想:
 // 在编译的时候, 如果有接收返回值的调用应该传上来的就是这个接收变量的指针
 // 如果没有接收返回值的, 要么就是由Zend分配了一个临时变量
-// 所以一个ZEND函数就是接收参数, 再把想要返回的值写回到这个return_value的指针指向的那个变量里面去. 
+// 所以一个ZEND函数就是接收参数, 再把想要返回的值写回到这个return_value的指针指向的那个变量里面去.
 #define INTERNAL_FUNCTION_PARAMETERS zend_execute_data *execute_data, zval *return_value
 #define INTERNAL_FUNCTION_PARAM_PASSTHRU execute_data, return_value
 
@@ -119,7 +119,7 @@ typedef struct _zend_trait_alias {
 } zend_trait_alias;
 
 struct _zend_class_entry {
-	// 标识是用户类还是内部类. 
+	// 标识是用户类还是内部类.
 	char type;
 
 	// 类名
@@ -133,20 +133,28 @@ struct _zend_class_entry {
 
 	// 对应default_properties_table长度
 	int default_properties_count;
+
 	// 对应default_static_members_table长度
+	// 每增加一个静态的变量, 这个属性也要相应的增加1.
 	int default_static_members_count;
 
 	// 属性默认值表
 	zval *default_properties_table;
+
 	// 静态属性的默认值表
+	// 对, 这是一个数组, 数组里面每个元素都是一个zval结构.
 	zval *default_static_members_table;
+
 	// 静态属性表
 	zval *static_members_table;
 
 	// 方法表
 	HashTable function_table;
-	// 属性信息, 应该是记录了所有的属性以及属性的信息. 包括是否是静态. 
+	
+	// 属性信息, 应该是记录了所有的属性以及属性的信息. 包括是否是静态.
+	// 记录了所有的属性.
 	HashTable properties_info;
+
 	// 常量信息
 	HashTable constants_table;
 

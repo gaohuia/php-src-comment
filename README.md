@@ -216,6 +216,59 @@ PHP源码阅读笔记.
     ZEND_HASH_FOREACH_END();
 ```
 
+### 类的定义
+
+```C
+zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment);
+zend_declare_property(zend_class_entry *ce, char* name, size_t name_length, zval *property, int access_type); // 包含一个对zend_declare_property_ex的调用, 内置新建类包zend_string的调用.
+zend_declare_property_null(zend_class_entry *ce, const char* name, size_t name_length, access_type); // 定义一个属性, 并指定其默认值为null
+zend_declare_property_bool();
+zend_declare_property_long();
+zend_declare_property_double();
+zend_declare_property_string();
+zend_declare_property_stringl();
+
+// 常量部分.
+zend_declare_class_constant_ex();   // 定义一个类常量
+zend_declare_class_constant();
+zend_declare_class_constant_null();
+zend_declare_class_constant_long();
+zend_declare_class_constant_bool();
+zend_declare_class_constant_double();
+zend_declare_class_constant_stringl();
+zend_declare_class_constant_string();
+
+// 写属性
+zend_update_property_ex();
+zend_update_property();
+zend_update_property_null();
+zend_unset_property();
+zend_update_property_bool();
+zend_update_property_long();
+zend_update_property_double();
+zend_update_property_str();
+zend_update_property_string();
+zend_update_property_stringl();
+
+// 写静态属性
+zend_update_static_property();  //
+zend_update_static_property_null();
+zend_update_static_property_bool();
+zend_update_static_property_long();
+zend_update_static_property_double();
+zend_update_static_property_string();
+zend_update_static_property_stringl();
+
+// 读属性
+zend_read_property_ex();
+zend_read_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length, zend_bool silent, zval *rv);
+
+// 读静态属性
+zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_t name_length, zend_bool silent);
+
+```
+
+
 ### 扩展开发
 
 参数:

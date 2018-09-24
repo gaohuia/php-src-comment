@@ -309,6 +309,8 @@ typedef struct _zend_oparray_context {
 char *zend_visibility_string(uint32_t fn_flags);
 
 typedef struct _zend_property_info {
+	// 对象属性的偏移
+	// 静态属性的索引
 	uint32_t offset; /* property offset for object properties or
 	                      property index for static properties */
 	uint32_t flags;
@@ -461,14 +463,14 @@ typedef enum _zend_call_kind {
 
 // ZEND函数的参数
 struct _zend_execute_data {
-	// 如果是PHP函数, zend_op应该是指向机器码的内存. 
+	// 如果是PHP函数, zend_op应该是指向机器码的内存.
 	const zend_op       *opline;           /* executed opline                */
 	// 指向当前结构体? 为啥有这种操作
 	zend_execute_data   *call;             /* current call                   */
 	// 这里为啥又定义了一个返回值的指针?
 	zval                *return_value;
 	zend_function       *func;             /* executed function              */
-	// this 指向的变量, 所以YY是不是所有的变量都可以定义方法? 
+	// this 指向的变量, 所以YY是不是所有的变量都可以定义方法?
 	zval                 This;             /* this + call_info + num_args    */
 	// 是否用于调用栈回逆?
 	zend_execute_data   *prev_execute_data;
@@ -523,7 +525,7 @@ struct _zend_execute_data {
 
 // 一个固定的偏移值
 #define ZEND_CALL_FRAME_SLOT \
-	// 结构体大小 + 
+	// 结构体大小 +
 	((int)((ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval)) - 1) / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
 	// ((int)( 指向最后一个字节 / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
 
@@ -544,7 +546,7 @@ struct _zend_execute_data {
 #define EX_CALL_INFO()			ZEND_CALL_INFO(execute_data)
 #define EX_CALL_KIND()			ZEND_CALL_KIND(execute_data)
 
-// 取出ZEND_FUNCTION实际传递的参数个数. 
+// 取出ZEND_FUNCTION实际传递的参数个数.
 #define EX_NUM_ARGS()			ZEND_CALL_NUM_ARGS(execute_data)
 
 #define ZEND_CALL_USES_STRICT_TYPES(call) \

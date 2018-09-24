@@ -311,18 +311,26 @@ ZEND_API void zend_collect_module_handlers(void);
 ZEND_API void zend_destroy_modules(void);
 ZEND_API void zend_check_magic_method_implementation(const zend_class_entry *ce, const zend_function *fptr, int error_type);
 
+// 注册一个内部类.
 ZEND_API zend_class_entry *zend_register_internal_class(zend_class_entry *class_entry);
+// 注册一个内部类, 并指定一个父类.
 ZEND_API zend_class_entry *zend_register_internal_class_ex(zend_class_entry *class_entry, zend_class_entry *parent_ce);
+// 注册一个内部interface
 ZEND_API zend_class_entry *zend_register_internal_interface(zend_class_entry *orig_class_entry);
+//
 ZEND_API void zend_class_implements(zend_class_entry *class_entry, int num_interfaces, ...);
 
+// 类的别名.
 ZEND_API int zend_register_class_alias_ex(const char *name, size_t name_len, zend_class_entry *ce);
 
+// 一个简易的宏
 #define zend_register_class_alias(name, ce) \
 	zend_register_class_alias_ex(name, sizeof(name)-1, ce)
+// 一个带命名空间的别名.
 #define zend_register_ns_class_alias(ns, name, ce) \
 	zend_register_class_alias_ex(ZEND_NS_NAME(ns, name), sizeof(ZEND_NS_NAME(ns, name))-1, ce)
 
+// 禁用
 ZEND_API int zend_disable_function(char *function_name, size_t function_name_length);
 ZEND_API int zend_disable_class(char *class_name, size_t class_name_length);
 
@@ -342,6 +350,8 @@ ZEND_API zend_bool zend_is_callable(zval *callable, uint32_t check_flags, zend_s
 ZEND_API zend_bool zend_make_callable(zval *callable, zend_string **callable_name);
 ZEND_API const char *zend_get_module_version(const char *module_name);
 ZEND_API int zend_get_module_started(const char *module_name);
+
+// 声明一个属性
 ZEND_API int zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment);
 ZEND_API int zend_declare_property(zend_class_entry *ce, const char *name, size_t name_length, zval *property, int access_type);
 ZEND_API int zend_declare_property_null(zend_class_entry *ce, const char *name, size_t name_length, int access_type);
@@ -351,6 +361,7 @@ ZEND_API int zend_declare_property_double(zend_class_entry *ce, const char *name
 ZEND_API int zend_declare_property_string(zend_class_entry *ce, const char *name, size_t name_length, const char *value, int access_type);
 ZEND_API int zend_declare_property_stringl(zend_class_entry *ce, const char *name, size_t name_length, const char *value, size_t value_len, int access_type);
 
+// 声明一个类的常量.
 ZEND_API int zend_declare_class_constant_ex(zend_class_entry *ce, zend_string *name, zval *value, int access_type, zend_string *doc_comment);
 ZEND_API int zend_declare_class_constant(zend_class_entry *ce, const char *name, size_t name_length, zval *value);
 ZEND_API int zend_declare_class_constant_null(zend_class_entry *ce, const char *name, size_t name_length);
@@ -362,6 +373,7 @@ ZEND_API int zend_declare_class_constant_string(zend_class_entry *ce, const char
 
 ZEND_API int zend_update_class_constants(zend_class_entry *class_type);
 
+// 更新属性.
 ZEND_API void zend_update_property_ex(zend_class_entry *scope, zval *object, zend_string *name, zval *value);
 ZEND_API void zend_update_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length, zval *value);
 ZEND_API void zend_update_property_null(zend_class_entry *scope, zval *object, const char *name, size_t name_length);
@@ -373,6 +385,7 @@ ZEND_API void zend_update_property_string(zend_class_entry *scope, zval *object,
 ZEND_API void zend_update_property_stringl(zend_class_entry *scope, zval *object, const char *name, size_t name_length, const char *value, size_t value_length);
 ZEND_API void zend_unset_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length);
 
+// 更新静态属性.
 ZEND_API int zend_update_static_property(zend_class_entry *scope, const char *name, size_t name_length, zval *value);
 ZEND_API int zend_update_static_property_null(zend_class_entry *scope, const char *name, size_t name_length);
 ZEND_API int zend_update_static_property_bool(zend_class_entry *scope, const char *name, size_t name_length, zend_long value);
@@ -381,9 +394,11 @@ ZEND_API int zend_update_static_property_double(zend_class_entry *scope, const c
 ZEND_API int zend_update_static_property_string(zend_class_entry *scope, const char *name, size_t name_length, const char *value);
 ZEND_API int zend_update_static_property_stringl(zend_class_entry *scope, const char *name, size_t name_length, const char *value, size_t value_length);
 
+// 读取属性.
 ZEND_API zval *zend_read_property_ex(zend_class_entry *scope, zval *object, zend_string *name, zend_bool silent, zval *rv);
 ZEND_API zval *zend_read_property(zend_class_entry *scope, zval *object, const char *name, size_t name_length, zend_bool silent, zval *rv);
 
+// 读取静态属性.
 ZEND_API zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_t name_length, zend_bool silent);
 
 ZEND_API char *zend_get_type_by_const(int type);
