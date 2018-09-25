@@ -463,7 +463,7 @@ typedef enum _zend_call_kind {
 
 // ZEND函数的参数
 struct _zend_execute_data {
-	// 如果是PHP函数, zend_op应该是指向机器码的内存.
+	// 如果是PHP函数, zend_op应该是指向机器码的内存. 此成员会随着机器码的执行而变化. 指向下一个机器码.
 	const zend_op       *opline;           /* executed opline                */
 	// 指向当前结构体? 为啥有这种操作
 	zend_execute_data   *call;             /* current call                   */
@@ -472,7 +472,10 @@ struct _zend_execute_data {
 	zend_function       *func;             /* executed function              */
 	// this 指向的变量, 所以YY是不是所有的变量都可以定义方法?
 	zval                 This;             /* this + call_info + num_args    */
-	// 是否用于调用栈回逆?
+	// 是否用于调用栈回逆? 不完全是.
+	// 指向当前执行结构的上一个执行结构.
+	// 每一次函数调用会产生一个新的执行结构. 并将prev_execute_data指向调用方的执行结构.
+	// 当函数执行结束时, 执行器将EG(current_execute_data)指向prev_execute_data, 并继续执行.opline.
 	zend_execute_data   *prev_execute_data;
 	zend_array          *symbol_table;
 #if ZEND_EX_USE_RUN_TIME_CACHE

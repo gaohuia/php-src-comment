@@ -276,12 +276,14 @@ PHP源码阅读笔记.
     // ----开始参数定义------
     Z_PARAM_ARRAY_EX2(zval *pzval, int check_null, int deref, int separate);
     Z_PARAM_ARRAY_EX(zval *pzval, int check_null, int separate);                 // 当separate为1是, 将会对参数进行解引用
+    // ...
     Z_PARAM_ZVAL(zval *pzval);
-    Z_PARAM_BOOL(zend_bool *p)
-    Z_PARAM_DOUBLE(double *p)
+    Z_PARAM_BOOL(zend_bool *p);
+    Z_PARAM_DOUBLE(double *p);
+    // ...
     // ----结束参数定义------
-    ZEND_PARSE_PARAMETERS_END()
-    ZEND_PARSE_PARAMETERS_END_EX()
+    ZEND_PARSE_PARAMETERS_END();
+    ZEND_PARSE_PARAMETERS_END_EX();
 
 
     // 返回数据相关方法.
