@@ -139,6 +139,12 @@ PHP源码阅读笔记.
 
 ### 字符串类型
 
+```C
+zend_string *zval_get_string(zval*);        // 取得一个变量的String值.
+long zval_get_long(op);                     // 取得整型值
+double zval_get_double(op);                 // 取得数值值
+```
+
 #### 创建一个zend_string结构. 并设置引用数为1
     zend_string *zend_string_alloc(size_t len, int persistent)
 

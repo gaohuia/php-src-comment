@@ -839,6 +839,7 @@ try_again:
 }
 /* }}} */
 
+// Convert the zval to zend_string*.
 ZEND_API zend_string* ZEND_FASTCALL _zval_get_string_func(zval *op) /* {{{ */
 {
 try_again:

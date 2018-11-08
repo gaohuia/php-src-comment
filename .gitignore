@@ -234,3 +234,4 @@ win32/wsyslog.h
 
 /.tags
 /.tags_sorted_by_file
+/tags
