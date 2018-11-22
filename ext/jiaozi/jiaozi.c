@@ -73,15 +73,15 @@ PHP_FUNCTION(jiaozi_write)
 	size_t arg_len, len;
 	zend_string *strg;
 
-	zval filename;
-	zval content;
+	zend_string *filename;
+	zend_string *content;
 
 	ZEND_PARSE_PARAMETERS_START(2, 2)
 		Z_PARAM_STR(filename)
 		Z_PARAM_STR(content)
 	ZEND_PARSE_PARAMETERS_END();
 
-	RETURN_STR();
+	RETURN_STR(filename);
 
 	strg = strpprintf(0, "Congratulations! You have successfully modified ext/%.78s/config.m4. Module %.78s is now compiled into PHP.", "jiaozi", arg);
 
@@ -169,7 +169,8 @@ PHP_MINFO_FUNCTION(jiaozi)
  * Every user visible function must have an entry in jiaozi_functions[].
  */
 const zend_function_entry jiaozi_functions[] = {
-	PHP_FE(confirm_jiaozi_compiled,	NULL)		/* For testing, remove later. */
+	PHP_FE(confirm_jiaozi_compiled,	NULL)
+	PHP_FE(jiaozi_write,	NULL)
 	PHP_FE_END	/* Must be the last line in jiaozi_functions[] */
 };
 /* }}} */

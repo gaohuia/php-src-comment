@@ -218,6 +218,23 @@ double zval_get_double(op);                 // 取得数值值
 ### 类的定义
 
 ```C
+
+    // Constants, 定义方法可见性的一些常量
+    ZEND_ACC_STATIC;
+    ZEND_ACC_ABSTRACT;
+    ZEND_ACC_FINAL;
+    ZEND_ACC_IMPLEMENTED_ABSTRACT;
+    ZEND_ACC_PUBLIC;
+    ZEND_ACC_PROTECTED;
+    ZEND_ACC_PRIVATE;
+
+    // 
+    
+
+
+    INIT_CLASS_ENTRY(zend_class_entry class_container, char* class_name, functions);
+    zend_class_entry *zend_register_internal_class_ex(zend_class_entry *, zend_class_entry *parent_ce); // Register a internal class.
+
     // 属性的定义
     zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment);
     zend_declare_property(zend_class_entry *ce, char* name, size_t name_length, zval *property, int access_type); // 包含一个对zend_declare_property_ex的调用, 内置新建类包zend_string的调用.
@@ -265,6 +282,9 @@ double zval_get_double(op);                 // 取得数值值
 
     // 读静态属性
     zval *zend_read_static_property(zend_class_entry *scope, const char *name, size_t name_length, zend_bool silent);
+
+    // 抛出异常
+    zend_object *zend_throw_exception(zend_class_entry *exception_ce, const char *message, zend_long code);
 
 ```
 
@@ -345,4 +365,9 @@ Z   mixed   zval**
 * [PHP at the Core: A Hacker's Guide](http://php.net/manual/en/internals2.php)
 * [盘古大叔](https://github.com/pangudashu/php7-internal)
 * [autoconf_tutorial](https://github.com/edrosten/autoconf_tutorial)
+
+### 相关链接
+
+* [Zephir](https://docs.zephir-lang.com/en/0.10/introduction) 可以用一种类似PHP的语法来编写PHP扩展
+
 

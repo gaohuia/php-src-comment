@@ -1108,6 +1108,8 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 #define Z_PARAM_STR_EX(dest, check_null, separate) \
 	Z_PARAM_STR_EX2(dest, check_null, separate, separate)
 
+// 通过这些宏取只是取得了zend_string*的一个指针，并没有增加原变量的引用数.
+// 所以无需释放.
 #define Z_PARAM_STR(dest) \
 	Z_PARAM_STR_EX(dest, 0, 0)
 
@@ -1222,6 +1224,7 @@ static zend_always_inline int zend_parse_arg_str(zval *arg, zend_string **dest, 
 	// 如果zval的类型是 IS_STRING
 	if (EXPECTED(Z_TYPE_P(arg) == IS_STRING)) {
 		// 直接把zend_value取出来写入目标变量
+        // 没有增加新的引用计数, 外部不需要release
 		*dest = Z_STR_P(arg);
 	} else if (check_null && Z_TYPE_P(arg) == IS_NULL) {
 		// null的时候, 写入NULL

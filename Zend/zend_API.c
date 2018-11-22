@@ -3970,6 +3970,7 @@ ZEND_API int zend_declare_class_constant_string(zend_class_entry *ce, const char
 }
 /* }}} */
 
+// The difference with the next function is using zend_string as the property name.
 ZEND_API void zend_update_property_ex(zend_class_entry *scope, zval *object, zend_string *name, zval *value) /* {{{ */
 {
 	zval property;
@@ -3977,6 +3978,8 @@ ZEND_API void zend_update_property_ex(zend_class_entry *scope, zval *object, zen
 
 	EG(fake_scope) = scope;
 
+    // write_property is a function,
+    // Not support update if this handle is null
 	if (!Z_OBJ_HT_P(object)->write_property) {
 		zend_error_noreturn(E_CORE_ERROR, "Property %s of class %s cannot be updated", ZSTR_VAL(name), ZSTR_VAL(Z_OBJCE_P(object)->name));
 	}

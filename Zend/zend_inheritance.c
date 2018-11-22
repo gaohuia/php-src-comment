@@ -811,6 +811,7 @@ ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent
 		}
 	}
 
+    // set parent
 	ce->parent = parent_ce;
 
 	/* Inherit interfaces */

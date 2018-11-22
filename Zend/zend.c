@@ -216,6 +216,8 @@ ZEND_API zend_string *zend_vstrpprintf(size_t max_len, const char *format, va_li
 }
 /* }}} */
 
+// 格式化， 只是返回值是zend_string*.
+// 其它参数类型与printf一致
 ZEND_API zend_string *zend_strpprintf(size_t max_len, const char *format, ...) /* {{{ */
 {
 	va_list arg;

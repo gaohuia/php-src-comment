@@ -497,9 +497,14 @@ PHPAPI zend_string *php_resolve_path(const char *filename, int filename_length, 
 		return NULL;
 	}
 
-	if ((*filename == '.' &&
-	     (IS_SLASH(filename[1]) ||
-	      ((filename[1] == '.') && IS_SLASH(filename[2])))) ||
+	if (
+         (// relative path
+             *filename == '.' &&
+             (IS_SLASH(filename[1]) ||
+             ((filename[1] == '.') && IS_SLASH(filename[2])))
+         )
+            ||
+            // absolute path
 	    IS_ABSOLUTE_PATH(filename, filename_length) ||
 #ifdef PHP_WIN32
 		/* This should count as an absolute local path as well, however

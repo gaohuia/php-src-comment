@@ -133,6 +133,7 @@ void zend_exception_restore(void) /* {{{ */
 }
 /* }}} */
 
+// throwing an exception is just moving the execution pointer to the exception_op
 ZEND_API ZEND_COLD void zend_throw_exception_internal(zval *exception) /* {{{ */
 {
 #ifdef HAVE_DTRACE
@@ -879,8 +880,7 @@ ZEND_API zend_class_entry *zend_get_error_exception(void)
 }
 /* }}} */
 
-ZEND_API ZEND_COLD zend_object *zend_throw_exception(zend_class_entry *exception_ce, const char *message, zend_long code) /* {{{ */
-{
+ZEND_API ZEND_COLD zend_object *zend_throw_exception(zend_class_entry *exception_ce, const char *message, zend_long code) /* {{{ */ {
 	zval ex, tmp;
 
 	if (exception_ce) {
