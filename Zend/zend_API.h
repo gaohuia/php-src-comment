@@ -46,21 +46,22 @@ typedef struct _zend_function_entry {
 	uint32_t flags;
 } zend_function_entry;
 
+// 调用信息
 typedef struct _zend_fcall_info {
 	size_t size;
-	zval function_name;
-	zval *retval;
-	zval *params;
-	zend_object *object;
-	zend_bool no_separation;
-	uint32_t param_count;
+	zval function_name;     // 要调用谁
+	zval *retval;           // 返回值
+	zval *params;           // 参数数组
+	zend_object *object;    // 看起来像是调用的哪个对象
+	zend_bool no_separation;// 
+	uint32_t param_count;   // 实际传入的参数有几个
 } zend_fcall_info;
 
 typedef struct _zend_fcall_info_cache {
 	zend_bool initialized;
-	zend_function *function_handler;
-	zend_class_entry *calling_scope;
-	zend_class_entry *called_scope;
+	zend_function *function_handler;    // 
+	zend_class_entry *calling_scope;    // 调用者的 zend_class_entry
+	zend_class_entry *called_scope;     // 被调用的 zend_class_entry
 	zend_object *object;
 } zend_fcall_info_cache;
 
@@ -1340,6 +1341,7 @@ static zend_always_inline int zend_parse_arg_resource(zval *arg, zval **dest, in
 	return 1;
 }
 
+// 将参数解析为一个函数, arg为当前参数
 static zend_always_inline int zend_parse_arg_func(zval *arg, zend_fcall_info *dest_fci, zend_fcall_info_cache *dest_fcc, int check_null, char **error)
 {
 	if (check_null && UNEXPECTED(Z_TYPE_P(arg) == IS_NULL)) {

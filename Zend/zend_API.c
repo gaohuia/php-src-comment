@@ -2889,6 +2889,10 @@ ZEND_API int zend_disable_class(char *class_name, size_t class_name_length) /* {
 }
 /* }}} */
 
+// 传入的scope是::前面的部分
+// 可以算是calling_scope
+// 如果返回成功, 会对fcc中的called_scope和calling_scope进赋值. 
+// 还设置fcc->object, 为调用方的this
 static int zend_is_callable_check_class(zend_string *name, zend_class_entry *scope, zend_fcall_info_cache *fcc, int *strict_class, char **error) /* {{{ */
 {
 	int ret = 0;
@@ -2898,13 +2902,17 @@ static int zend_is_callable_check_class(zend_string *name, zend_class_entry *sco
 	ALLOCA_FLAG(use_heap);
 
 	ZSTR_ALLOCA_ALLOC(lcname, name_len, use_heap);
+    // 转小写
 	zend_str_tolower_copy(ZSTR_VAL(lcname), ZSTR_VAL(name), name_len);
 
 	*strict_class = 0;
+    // self::sxxxx
 	if (zend_string_equals_literal(lcname, "self")) {
 		if (!scope) {
 			if (error) *error = estrdup("cannot access self:: when no class scope is active");
 		} else {
+            // 这里实际上又重新对calling_scope进行了赋值
+            // 调用方的scope -> called_scope
 			fcc->called_scope = zend_get_called_scope(EG(current_execute_data));
 			fcc->calling_scope = scope;
 			if (!fcc->object) {
@@ -2973,9 +2981,20 @@ static int zend_is_callable_check_class(zend_string *name, zend_class_entry *sco
 }
 /* }}} */
 
+// 会写入fcc, error
+// calling_scope 和 called_scope
+// calling_scope 是外部传入的如:
+// $user = new User();
+// $user->init();
+// 这里的calling_scope就是User
+// 如果当前是Controller::init(), 其中发生的调用
+// called_scope就是Controller
+// 验证一下.
 static int zend_is_callable_check_func(int check_flags, zval *callable, zend_fcall_info_cache *fcc, int strict_class, char **error) /* {{{ */
 {
+    // 外部想要调用的类的zend_class_entry
 	zend_class_entry *ce_org = fcc->calling_scope;
+
 	int retval = 0;
 	zend_string *mname, *cname;
 	zend_string *lmname;
@@ -2986,24 +3005,35 @@ static int zend_is_callable_check_func(int check_flags, zval *callable, zend_fca
 	zend_class_entry *scope;
 	ALLOCA_FLAG(use_heap)
 
+    // 
 	if (error) {
 		*error = NULL;
 	}
 
+    // 清空, 原值存储在ce_org中
 	fcc->calling_scope = NULL;
 	fcc->function_handler = NULL;
 
+    // 难道外部调用时, 也可以不先填充calling_scope?
+    // NO, 没有说明是纯函数调用
+    // 调用的时候没有指定calling_scope, 纯函数调用
 	if (!ce_org) {
 		zend_string *lmname;
 
 		/* Skip leading \ */
 		if (UNEXPECTED(Z_STRVAL_P(callable)[0] == '\\')) {
+            // 如果第一个字符是'\', 带命名空间
+            // 把第一个'\'去掉
 			ZSTR_ALLOCA_INIT(lmname, Z_STRVAL_P(callable) + 1, Z_STRLEN_P(callable) - 1, use_heap);
 		} else {
 			lmname = Z_STR_P(callable);
 		}
+
 		/* Check if function with given name exists.
 		 * This may be a compound name that includes namespace name */
+        //
+        // 查找 EG(function_table)
+        // 如果找到了, 将找到的function_handler写入fcc->function_handler
 		if (EXPECTED((fcc->function_handler = zend_hash_find_ptr(EG(function_table), lmname)) != NULL)) {
 			if (lmname != Z_STR_P(callable)) {
 				ZSTR_ALLOCA_FREE(lmname, use_heap);
@@ -3017,28 +3047,36 @@ static int zend_is_callable_check_func(int check_flags, zval *callable, zend_fca
 				zend_string_forget_hash_val(lmname);
 			}
 			zend_str_tolower(ZSTR_VAL(lmname), ZSTR_LEN(lmname));
+            // 看起来像是用小写的又找了一次. 
 			if ((fcc->function_handler = zend_hash_find_ptr(EG(function_table), lmname)) != NULL) {
 				ZSTR_ALLOCA_FREE(lmname, use_heap);
 				fcc->initialized = 1;
 				return 1;
 			}
 		}
+
 		if (lmname != Z_STR_P(callable)) {
 			ZSTR_ALLOCA_FREE(lmname, use_heap);
 		}
 	}
 
 	/* Split name into class/namespace and method/function names */
+    // 找 "::"
 	if ((colon = zend_memrchr(Z_STRVAL_P(callable), ':', Z_STRLEN_P(callable))) != NULL &&
 		colon > Z_STRVAL_P(callable) &&
 		*(colon-1) == ':'
 	) {
 		size_t mlen;
 
+        // 指向::xxxxxxx
 		colon--;
+
+        // 类名的长度
 		clen = colon - Z_STRVAL_P(callable);
+        // 方法名的长度
 		mlen = Z_STRLEN_P(callable) - clen - 2;
 
+        // 说明::前面已经没有东西了, 报错
 		if (colon == Z_STRVAL_P(callable)) {
 			if (error) zend_spprintf(error, 0, "invalid function name");
 			return 0;
@@ -3049,17 +3087,26 @@ static int zend_is_callable_check_func(int check_flags, zval *callable, zend_fca
 		if (ce_org) {
 			scope = ce_org;
 		} else {
+            // 找到当前所在的scope, 也就是一个zend_class_entry
+            // 这个应该是
 			scope = zend_get_executed_scope();
 		}
 
+        // 取出class_name部分
 		cname = zend_string_init(Z_STRVAL_P(callable), clen, 0);
+
+        // 这里应该重新设置了fcc的calling_scope, called_scope, object
 		if (!zend_is_callable_check_class(cname, scope, fcc, &strict_class, error)) {
 			zend_string_release(cname);
 			return 0;
 		}
 		zend_string_release(cname);
 
+        // calling_scope 是一个zend_execute_data
+        // 拿到function_table
 		ftable = &fcc->calling_scope->function_table;
+
+        
 		if (ce_org && !instanceof_function(ce_org, fcc->calling_scope)) {
 			if (error) zend_spprintf(error, 0, "class '%s' is not a subclass of '%s'", ZSTR_VAL(ce_org->name), ZSTR_VAL(fcc->calling_scope->name));
 			return 0;
@@ -3332,13 +3379,16 @@ static zend_bool zend_is_callable_impl(zval *callable, zend_object *object, uint
 	zend_bool ret;
 	zend_fcall_info_cache fcc_local;
 
+    // 确保fcc是可以写的.
 	if (fcc == NULL) {
 		fcc = &fcc_local;
 	}
+
 	if (error) {
 		*error = NULL;
 	}
 
+    // 将fcc全部置空.
 	fcc->initialized = 0;
 	fcc->calling_scope = NULL;
 	fcc->called_scope = NULL;
@@ -3346,19 +3396,29 @@ static zend_bool zend_is_callable_impl(zval *callable, zend_object *object, uint
 	fcc->object = NULL;
 
 again:
+    // 对callable的类型进行判断
 	switch (Z_TYPE_P(callable)) {
+        // 字符串
 		case IS_STRING:
+            
+            // 如果提供了object, 相当于$obj->xxx
+            // calling_scope为正在调用的ce
 			if (object) {
 				fcc->object = object;
 				fcc->calling_scope = object->ce;
 			}
 
+            // 
 			if (check_flags & IS_CALLABLE_CHECK_SYNTAX_ONLY) {
 				fcc->called_scope = fcc->calling_scope;
 				return 1;
 			}
 
+            // 主要应该在这个里面
 			ret = zend_is_callable_check_func(check_flags, callable, fcc, 0, error);
+
+
+            // 这是为本地fcc的情况, 忽略
 			if (fcc == &fcc_local &&
 			    fcc->function_handler &&
 				((fcc->function_handler->common.fn_flags & ZEND_ACC_CALL_VIA_TRAMPOLINE) ||
@@ -3371,7 +3431,7 @@ again:
 				zend_free_trampoline(fcc->function_handler);
 			}
 			return ret;
-
+        // 数组
 		case IS_ARRAY:
 			{
 				zval *method = NULL;
@@ -3445,6 +3505,7 @@ again:
 				}
 			}
 			return 0;
+        // 对象
 		case IS_OBJECT:
 			if (Z_OBJ_HANDLER_P(callable, get_closure) && Z_OBJ_HANDLER_P(callable, get_closure)(callable, &fcc->calling_scope, &fcc->function_handler, &fcc->object) == SUCCESS) {
 				fcc->called_scope = fcc->calling_scope;
@@ -3453,9 +3514,12 @@ again:
 			}
 			if (error) zend_spprintf(error, 0, "no array or string given");
 			return 0;
+        // 引用
 		case IS_REFERENCE:
+            // 解引用后, 重新分析一次. 
 			callable = Z_REFVAL_P(callable);
 			goto again;
+        // 其它类似不可调用
 		default:
 			if (error) zend_spprintf(error, 0, "no array or string given");
 			return 0;
@@ -3463,6 +3527,12 @@ again:
 }
 /* }}} */
 
+//
+// 这个方法去判断callable是否可调用
+// 如果可以调用, 将有信息写入fcc中.
+// 如果提供了callable_name参数, 也会写入.
+// 如果出现错误, 将写入error
+//
 ZEND_API zend_bool zend_is_callable_ex(zval *callable, zend_object *object, uint32_t check_flags, zend_string **callable_name, zend_fcall_info_cache *fcc, char **error) /* {{{ */
 {
 	zend_bool ret = zend_is_callable_impl(callable, object, check_flags, fcc, error);
@@ -3573,7 +3643,9 @@ ZEND_API int zend_fcall_info_args_ex(zend_fcall_info *fci, zend_function *func, 
 		return FAILURE;
 	}
 
+    // 设置为实际传入的参数个数
 	fci->param_count = zend_hash_num_elements(Z_ARRVAL_P(args));
+    // 分配一个新的zval*数组
 	fci->params = params = (zval *) erealloc(fci->params, fci->param_count * sizeof(zval));
 
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(args), arg) {

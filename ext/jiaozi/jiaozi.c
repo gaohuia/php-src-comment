@@ -88,6 +88,13 @@ PHP_FUNCTION(jiaozi_write)
 	RETURN_STR(strg);
 }
 
+ZEND_METHOD(fucker, getName) {
+    zend_string *ret = zend_string_init("hello world", 11, 0);
+    RETURN_STR(ret);
+}
+
+
+
 /* }}} */
 /* The previous line is meant for vim and emacs, so it can correctly fold and
    unfold functions in source code. See the corresponding marks just before
@@ -129,17 +136,6 @@ PHP_MSHUTDOWN_FUNCTION(jiaozi)
 }
 /* }}} */
 
-/* Remove if there's nothing to do at request start */
-/* {{{ PHP_RINIT_FUNCTION
- */
-PHP_RINIT_FUNCTION(jiaozi)
-{
-#if defined(COMPILE_DL_JIAOZI) && defined(ZTS)
-	ZEND_TSRMLS_CACHE_UPDATE();
-#endif
-	return SUCCESS;
-}
-/* }}} */
 
 /* Remove if there's nothing to do at request end */
 /* {{{ PHP_RSHUTDOWN_FUNCTION
@@ -173,6 +169,29 @@ const zend_function_entry jiaozi_functions[] = {
 	PHP_FE(jiaozi_write,	NULL)
 	PHP_FE_END	/* Must be the last line in jiaozi_functions[] */
 };
+
+const zend_function_entry fucker_functions[] = {
+    PHP_ME(fucker, getName, NULL, 0)
+    PHP_FE_END
+};
+
+/* }}} */
+
+/* Remove if there's nothing to do at request start */
+/* {{{ PHP_RINIT_FUNCTION
+ */
+PHP_RINIT_FUNCTION(jiaozi)
+{
+#if defined(COMPILE_DL_JIAOZI) && defined(ZTS)
+	ZEND_TSRMLS_CACHE_UPDATE();
+#endif
+
+    zend_class_entry class_entry;
+    INIT_CLASS_ENTRY(class_entry, "fucker", fucker_functions);
+    zend_register_internal_class_ex(&class_entry, NULL);
+
+	return SUCCESS;
+}
 /* }}} */
 
 /* {{{ jiaozi_module_entry

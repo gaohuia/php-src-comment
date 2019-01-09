@@ -515,6 +515,7 @@ ZEND_API zend_class_entry *zend_get_executed_scope(void) /* {{{ */
 		if (!ex) {
 			return NULL;
 		} else if (ex->func && (ZEND_USER_CODE(ex->func->type) || ex->func->common.scope)) {
+            // 
 			return ex->func->common.scope;
 		}
 		ex = ex->prev_execute_data;
@@ -659,10 +660,13 @@ int _call_user_function_ex(zval *object, zval *function_name, zval *retval_ptr, 
 int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /* {{{ */
 {
 	uint32_t i;
+    // 定义一个zend_execute_data指针
 	zend_execute_data *call, dummy_execute_data;
+
 	zend_fcall_info_cache fci_cache_local;
 	zend_function *func;
 
+    // set to undefined
 	ZVAL_UNDEF(fci->retval);
 
 	if (!EG(active)) {
@@ -704,14 +708,18 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		EG(current_execute_data) = &dummy_execute_data;
 	}
 
+
+    // 也就是说, 这个fci_cache参数是可以不传的. 
 	if (!fci_cache || !fci_cache->initialized) {
 		char *error = NULL;
 
+        // 如果是空的, 让他指向本地的fci_cache_local变量
 		if (!fci_cache) {
 			fci_cache = &fci_cache_local;
 		}
 
 		if (!zend_is_callable_ex(&fci->function_name, fci->object, IS_CALLABLE_CHECK_SILENT, NULL, fci_cache, &error)) {
+            // 不能执行的情况
 			if (error) {
 				zend_string *callable_name
 					= zend_get_callable_name_ex(&fci->function_name, fci->object);
@@ -719,11 +727,14 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 				efree(error);
 				zend_string_release(callable_name);
 			}
+            
+            // 恢复EG(current_execute_data)
 			if (EG(current_execute_data) == &dummy_execute_data) {
 				EG(current_execute_data) = dummy_execute_data.prev_execute_data;
 			}
 			return FAILURE;
 		} else if (error) {
+            // 判断能不能执行的时候, 出现了错误.
 			/* Capitalize the first latter of the error message */
 			if (error[0] >= 'a' && error[0] <= 'z') {
 				error[0] += ('A' - 'a');
@@ -760,6 +771,7 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		}
 	}
 
+    // 对参数进行处理
 	for (i=0; i<fci->param_count; i++) {
 		zval *param;
 		zval *arg = &fci->params[i];
@@ -796,7 +808,11 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 			}
 		}
 
+        // 计算第i个参数的位置
 		param = ZEND_CALL_ARG(call, i+1);
+
+        // 基于arg clone一个新的变量
+        // 相当于增加一个指向"值"的变量
 		ZVAL_COPY(param, arg);
 	}
 
@@ -1013,9 +1029,11 @@ ZEND_API zend_class_entry *zend_lookup_class(zend_string *name) /* {{{ */
 }
 /* }}} */
 
+// 到到
 ZEND_API zend_class_entry *zend_get_called_scope(zend_execute_data *ex) /* {{{ */
 {
 	while (ex) {
+        // 如果this是一个object, 取ce值
 		if (Z_TYPE(ex->This) == IS_OBJECT) {
 			return Z_OBJCE(ex->This);
 		} else if (Z_CE(ex->This)) {

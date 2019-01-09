@@ -964,13 +964,13 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 #if SIZEOF_SIZE_T == 4
 # define ZVAL_COPY_VALUE_EX(z, v, gc, t)				\
 	do {												\
-		uint32_t _w2 = v->value.ww.w2;					\
-		// 
+		uint32_t _w2 = v->value.ww.w2;					\                                              \
 		Z_COUNTED_P(z) = gc;							\
 		z->value.ww.w2 = _w2;							\
 		Z_TYPE_INFO_P(z) = t;							\
 	} while (0)
 #elif SIZEOF_SIZE_T == 8
+
 // 64位因为w2已经包含在gc里面了，所以没有必要再copy了．
 # define ZVAL_COPY_VALUE_EX(z, v, gc, t)				\
 	do {												\
@@ -987,7 +987,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 	do {												\
 		zval *_z1 = (z);								\
 		const zval *_z2 = (v);							\
-		// 实际上代表了所有Value值. 64位 
+        /* 实际上代表了所有Value值. 64位 */             \
 		zend_refcounted *_gc = Z_COUNTED_P(_z2);		\
 		uint32_t _t = Z_TYPE_INFO_P(_z2);				\
 		ZVAL_COPY_VALUE_EX(_z1, _z2, _gc, _t);			\

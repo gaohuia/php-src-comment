@@ -4899,6 +4899,7 @@ PHP_FUNCTION(call_user_func_array)
 		Z_PARAM_ARRAY_EX(params, 0, 1)
 	ZEND_PARSE_PARAMETERS_END();
 
+    // params 是传入的参数数组
 	zend_fcall_info_args(&fci, params);
 	fci.retval = &retval;
 
@@ -4906,9 +4907,15 @@ PHP_FUNCTION(call_user_func_array)
 		if (Z_ISREF(retval)) {
 			zend_unwrap_reference(&retval);
 		}
+        
+        // 对将retval的value部分copy到return_value
+        // 不增加引用计数.
+        // 所以不需要释放retval
 		ZVAL_COPY_VALUE(return_value, &retval);
 	}
 
+    // 对fci的参数部分进行释放
+    // 因为zend_call_function会对fci的参数进行复制.
 	zend_fcall_info_args_clear(&fci, 1);
 }
 /* }}} */

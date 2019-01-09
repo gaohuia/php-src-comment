@@ -441,13 +441,13 @@ union _zend_function {
 	struct {
 		zend_uchar type;  /* never used */
 		zend_uchar arg_flags[3]; /* bitset of arg_info.pass_by_reference */
-		uint32_t fn_flags;
-		zend_string *function_name;
-		zend_class_entry *scope;
-		union _zend_function *prototype;
-		uint32_t num_args;
-		uint32_t required_num_args;
-		zend_arg_info *arg_info;
+		uint32_t fn_flags;              // 
+		zend_string *function_name;     // 函数名
+		zend_class_entry *scope;        // 所在的scope, 实际是一个zend_class_entry
+		union _zend_function *prototype;// 原型..?
+		uint32_t num_args;              // 参数数量
+		uint32_t required_num_args;     // 必传的参数数量
+		zend_arg_info *arg_info;        // 参数信息
 	} common;
 
 	zend_op_array op_array;
@@ -528,7 +528,7 @@ struct _zend_execute_data {
 
 // 一个固定的偏移值
 #define ZEND_CALL_FRAME_SLOT \
-	// 结构体大小 +
+	/* 结构体大小 + */      \
 	((int)((ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval)) - 1) / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
 	// ((int)( 指向最后一个字节 / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
 
@@ -541,6 +541,8 @@ struct _zend_execute_data {
 
 // call是execute_data
 // 得到的是一个指针
+// 得到第n个参数的指针
+// 看起来n是从1开始的
 #define ZEND_CALL_ARG(call, n) \
 	ZEND_CALL_VAR_NUM(call, ((int)(n)) - 1)
 
@@ -891,8 +893,9 @@ void zend_assert_valid_class_name(const zend_string *const_name);
 #define BP_VAR_SHIFT 3
 #define BP_VAR_MASK  7
 
-
+// 内部方法
 #define ZEND_INTERNAL_FUNCTION				1
+// 用户定义的方法
 #define ZEND_USER_FUNCTION					2
 #define ZEND_OVERLOADED_FUNCTION			3
 #define	ZEND_EVAL_CODE						4
