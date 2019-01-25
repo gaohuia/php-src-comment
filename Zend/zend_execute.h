@@ -189,8 +189,16 @@ static zend_always_inline zend_execute_data *zend_vm_stack_push_call_frame_ex(ui
 		zend_vm_init_call_frame(call, call_info | ZEND_CALL_ALLOCATED, func, num_args, called_scope, object);
 		return call;
 	} else {
+    // 始终指向stack的尾部
 		EG(vm_stack_top) = (zval*)((char*)call + used_stack);
+
+    // 
+    // 对新分配的这个zend_execute_data进行初始化.
+    // 请注意, zend_execute_data是一个变长的结构.
+    //
 		zend_vm_init_call_frame(call, call_info, func, num_args, called_scope, object);
+
+    // 返回新分配的zend_execute_data
 		return call;
 	}
 }

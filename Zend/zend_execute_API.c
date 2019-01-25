@@ -515,7 +515,7 @@ ZEND_API zend_class_entry *zend_get_executed_scope(void) /* {{{ */
 		if (!ex) {
 			return NULL;
 		} else if (ex->func && (ZEND_USER_CODE(ex->func->type) || ex->func->common.scope)) {
-            // 
+            //
 			return ex->func->common.scope;
 		}
 		ex = ex->prev_execute_data;
@@ -709,7 +709,7 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 	}
 
 
-    // 也就是说, 这个fci_cache参数是可以不传的. 
+    // 也就是说, 这个fci_cache参数是可以不传的.
 	if (!fci_cache || !fci_cache->initialized) {
 		char *error = NULL;
 
@@ -727,7 +727,7 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 				efree(error);
 				zend_string_release(callable_name);
 			}
-            
+
             // 恢复EG(current_execute_data)
 			if (EG(current_execute_data) == &dummy_execute_data) {
 				EG(current_execute_data) = dummy_execute_data.prev_execute_data;
@@ -754,9 +754,11 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 	fci->object = (func->common.fn_flags & ZEND_ACC_STATIC) ?
 		NULL : fci_cache->object;
 
+  // 从栈上分配一个 zend_execute_data结构
 	call = zend_vm_stack_push_call_frame(ZEND_CALL_TOP_FUNCTION | ZEND_CALL_DYNAMIC,
 		func, fci->param_count, fci_cache->called_scope, fci->object);
 
+  // E_DEPRECATED
 	if (UNEXPECTED(func->common.fn_flags & ZEND_ACC_DEPRECATED)) {
 		zend_error(E_DEPRECATED, "Function %s%s%s() is deprecated",
 			func->common.scope ? ZSTR_VAL(func->common.scope->name) : "",
@@ -777,7 +779,9 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		zval *arg = &fci->params[i];
 
 		if (ARG_SHOULD_BE_SENT_BY_REF(func, i + 1)) {
+      // 如果要求传入的是一个引用
 			if (UNEXPECTED(!Z_ISREF_P(arg))) {
+        // 
 				if (!fci->no_separation) {
 					/* Separation is enabled -- create a ref */
 					ZVAL_NEW_REF(arg, arg);
@@ -801,6 +805,8 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 				}
 			}
 		} else {
+      // 如果传入的一个引用变量
+      // 解引用
 			if (Z_ISREF_P(arg) &&
 			    !(func->common.fn_flags & ZEND_ACC_CALL_VIA_TRAMPOLINE)) {
 				/* don't separate references for __call */
@@ -828,7 +834,7 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		ZEND_ADD_CALL_FLAG(call, call_info);
 	}
 
-	if (func->type == ZEND_USER_FUNCTION) {		
+	if (func->type == ZEND_USER_FUNCTION) {
 		int call_via_handler = (func->common.fn_flags & ZEND_ACC_CALL_VIA_TRAMPOLINE) != 0;
 		const zend_op *current_opline_before_exception = EG(opline_before_exception);
 
@@ -1035,14 +1041,19 @@ ZEND_API zend_class_entry *zend_get_called_scope(zend_execute_data *ex) /* {{{ *
 	while (ex) {
         // 如果this是一个object, 取ce值
 		if (Z_TYPE(ex->This) == IS_OBJECT) {
+      // 是一个对象
 			return Z_OBJCE(ex->This);
 		} else if (Z_CE(ex->This)) {
+      // 是一个
 			return Z_CE(ex->This);
 		} else if (ex->func) {
 			if (ex->func->type != ZEND_INTERNAL_FUNCTION || ex->func->common.scope) {
 				return NULL;
 			}
 		}
+
+    // 如果是内部函数 && 没有定义scope
+    // 需要往上找.
 		ex = ex->prev_execute_data;
 	}
 	return NULL;

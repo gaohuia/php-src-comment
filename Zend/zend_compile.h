@@ -441,7 +441,7 @@ union _zend_function {
 	struct {
 		zend_uchar type;  /* never used */
 		zend_uchar arg_flags[3]; /* bitset of arg_info.pass_by_reference */
-		uint32_t fn_flags;              // 
+		uint32_t fn_flags;              //
 		zend_string *function_name;     // 函数名
 		zend_class_entry *scope;        // 所在的scope, 实际是一个zend_class_entry
 		union _zend_function *prototype;// 原型..?
@@ -527,6 +527,8 @@ struct _zend_execute_data {
 	(call)->This.u2.num_args
 
 // 一个固定的偏移值
+// 简单理解为 zend_execute_data 结构相当于几个 zval 大小
+// 这个相当于是使用对齐后的大小进行计算
 #define ZEND_CALL_FRAME_SLOT \
 	/* 结构体大小 + */      \
 	((int)((ZEND_MM_ALIGNED_SIZE(sizeof(zend_execute_data)) + ZEND_MM_ALIGNED_SIZE(sizeof(zval)) - 1) / ZEND_MM_ALIGNED_SIZE(sizeof(zval))))
@@ -543,6 +545,18 @@ struct _zend_execute_data {
 // 得到的是一个指针
 // 得到第n个参数的指针
 // 看起来n是从1开始的
+//
+// ----zend_execute_data----即call-----------
+//  .............
+//  .............
+//  +++ALIGN这里有可能有一些空的无用的空间, 简单忽略即可+++
+// --- 对齐后的位置 ---- (zval*)(call) + ZEND_CALL_FRAME_SLOT
+// zval[0]
+// zval[1]
+// ---------------------
+//
+//
+// 返回指向第n个参数的指针
 #define ZEND_CALL_ARG(call, n) \
 	ZEND_CALL_VAR_NUM(call, ((int)(n)) - 1)
 

@@ -53,16 +53,26 @@ typedef struct _zend_fcall_info {
 	zval *retval;           // 返回值
 	zval *params;           // 参数数组
 	zend_object *object;    // 看起来像是调用的哪个对象
-	zend_bool no_separation;// 
+	zend_bool no_separation;//
 	uint32_t param_count;   // 实际传入的参数有几个
 } zend_fcall_info;
 
+/**
+ * 以下代码为例:
+ * class Controller {
+ *  public function action() {
+ *    $a = new User();
+ *    $a->sayHello();
+ *  }
+ * }
+ *
+ */
 typedef struct _zend_fcall_info_cache {
 	zend_bool initialized;
-	zend_function *function_handler;    // 
-	zend_class_entry *calling_scope;    // 调用者的 zend_class_entry
-	zend_class_entry *called_scope;     // 被调用的 zend_class_entry
-	zend_object *object;
+	zend_function *function_handler;    //
+	zend_class_entry *calling_scope;    // 被调用对象的zend_class_entry, User对应的zend_class_entry
+	zend_class_entry *called_scope;     // 调用语句所在的scope, 有可能为null. Controller对应的zend_class_entry
+	zend_object *object;     // 被调用的对象, 例如$a->xx()时, 此字段为$a对象
 } zend_fcall_info_cache;
 
 #define ZEND_NS_NAME(ns, name)			ns "\\" name
