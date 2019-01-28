@@ -132,6 +132,7 @@ struct _zend_class_entry {
 	uint32_t ce_flags;
 
 	// 对应default_properties_table长度
+  // 这个应该相当于非静态属性的个数
 	int default_properties_count;
 
 	// 对应default_static_members_table长度
@@ -150,7 +151,7 @@ struct _zend_class_entry {
 
 	// 方法表
 	HashTable function_table;
-	
+
 	// 属性信息, 应该是记录了所有的属性以及属性的信息. 包括是否是静态.
 	// 记录了所有的属性.
 	HashTable properties_info;

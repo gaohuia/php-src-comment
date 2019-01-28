@@ -308,10 +308,11 @@ typedef struct _zend_oparray_context {
 
 char *zend_visibility_string(uint32_t fn_flags);
 
+// 类的属性信息
 typedef struct _zend_property_info {
-	// 对象属性的偏移
+	// 对象属性的偏移 (zend_property_info*)((char*)properties_table+offset)
 	// 静态属性的索引
-	uint32_t offset; /* property offset for object properties or
+	uint32_t offset;     /* property offset for object properties or
 	                      property index for static properties */
 	uint32_t flags;
 	zend_string *name;

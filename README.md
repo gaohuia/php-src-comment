@@ -229,9 +229,6 @@ double zval_get_double(op);                 // 取得数值值
     ZEND_ACC_PRIVATE;
 
     //
-
-
-
     INIT_CLASS_ENTRY(zend_class_entry class_container, char* class_name, functions);
     zend_class_entry *zend_register_internal_class_ex(zend_class_entry *, zend_class_entry *parent_ce); // Register a internal class.
 
@@ -343,7 +340,7 @@ double zval_get_double(op);                 // 取得数值值
     ZEND_PARSE_PARAMETERS_START(int minArguments, int maxArguments)
     // ----开始参数定义------
     Z_PARAM_ARRAY_EX2(zval *pzval, int check_null, int deref, int separate);
-    Z_PARAM_ARRAY_EX(zval *pzval, int check_null, int separate);                 // 当separate为1是, 将会对参数进行解引用
+    Z_PARAM_ARRAY_EX(zval *pzval, int check_null, int separate);                 // 当separate为1时, 将会对参数进行解引用
     // ...
     Z_PARAM_ZVAL(zval *pzval);
     Z_PARAM_BOOL(zend_bool *p);

@@ -659,14 +659,18 @@ static zend_function *do_inherit_method(zend_string *key, zend_function *parent,
 
 static void do_inherit_property(zend_property_info *parent_info, zend_string *key, zend_class_entry *ce) /* {{{ */
 {
+  // 在子类中查找同名属性.
 	zval *child = zend_hash_find(&ce->properties_info, key);
 	zend_property_info *child_info;
 
+  // 子类中找到
 	if (UNEXPECTED(child)) {
 		child_info = Z_PTR_P(child);
 		if (UNEXPECTED(parent_info->flags & (ZEND_ACC_PRIVATE|ZEND_ACC_SHADOW))) {
 			child_info->flags |= ZEND_ACC_CHANGED;
 		} else {
+
+      // 父类中定义的静态属性不应该在子类中被定义成普通属性.
 			if (UNEXPECTED((parent_info->flags & ZEND_ACC_STATIC) != (child_info->flags & ZEND_ACC_STATIC))) {
 				zend_error_noreturn(E_COMPILE_ERROR, "Cannot redeclare %s%s::$%s as %s%s::$%s",
 					(parent_info->flags & ZEND_ACC_STATIC) ? "static " : "non static ", ZSTR_VAL(ce->parent->name), ZSTR_VAL(key),
@@ -684,6 +688,9 @@ static void do_inherit_property(zend_property_info *parent_info, zend_string *ke
 				int child_num = OBJ_PROP_TO_NUM(child_info->offset);
 
 				/* Don't keep default properties in GC (they may be freed by opcache) */
+        // 因为子类已经定义了默认值， 所以把Copy过来的那个父类默认值进行释放. 再把子类的默认值写到父类的坑位里面去.
+        // 不明白这里面的用意, 不动不行？
+        // 可能是因为这样就不需要再分配一个slot给父类的这个属性了. 
 				zval_ptr_dtor_nogc(&(ce->default_properties_table[parent_num]));
 				ce->default_properties_table[parent_num] = ce->default_properties_table[child_num];
 				ZVAL_UNDEF(&ce->default_properties_table[child_num]);
@@ -691,6 +698,9 @@ static void do_inherit_property(zend_property_info *parent_info, zend_string *ke
 			}
 		}
 	} else {
+    // 子类中没找到.
+
+
 		if (UNEXPECTED(parent_info->flags & (ZEND_ACC_PRIVATE|ZEND_ACC_SHADOW))) {
 			if (UNEXPECTED(ce->type & ZEND_INTERNAL_CLASS)) {
 				child_info = zend_duplicate_property_info_internal(parent_info);
@@ -742,17 +752,22 @@ ZEND_API void zend_do_inherit_interfaces(zend_class_entry *ce, const zend_class_
 	/* Inherit the interfaces, only if they're not already inherited by the class */
 	while (if_num--) {
 		entry = iface->interfaces[if_num];
+
+    // 要看下当前类里面是否已经存在了这个interface
 		for (i = 0; i < ce_num; i++) {
 			if (ce->interfaces[i] == entry) {
 				break;
 			}
 		}
+
+    // 添加到接口列表
 		if (i == ce_num) {
 			ce->interfaces[ce->num_interfaces++] = entry;
 		}
 	}
 
 	/* and now call the implementing handlers */
+  // 就是有接口加到接口列表里面了
 	while (ce_num < ce->num_interfaces) {
 		do_implement_interface(ce, ce->interfaces[ce_num++]);
 	}
@@ -822,6 +837,8 @@ ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent
 		zval *src, *dst, *end;
 
 		if (ce->default_properties_count) {
+
+      // 分配一块内存， 以存储父类和子类的属性信息
 			zval *table = pemalloc(sizeof(zval) * (ce->default_properties_count + parent_ce->default_properties_count), ce->type == ZEND_INTERNAL_CLASS);
 			src = ce->default_properties_table + ce->default_properties_count;
 			end = table + parent_ce->default_properties_count;
@@ -907,7 +924,10 @@ ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent
 		}
 	}
 
+  // 因为所有的父类属性被复制到properties_info的前面, 而子类的属性跟在后面
+  // 所以， 所有的子类属性需要增加一个偏移
 	ZEND_HASH_FOREACH_PTR(&ce->properties_info, property_info) {
+    // 当前类定义的
 		if (property_info->ce == ce) {
 			if (property_info->flags & ZEND_ACC_STATIC) {
 				property_info->offset += parent_ce->default_static_members_count;
@@ -917,11 +937,17 @@ ZEND_API void zend_do_inheritance(zend_class_entry *ce, zend_class_entry *parent
 		}
 	} ZEND_HASH_FOREACH_END();
 
+  // 此时已经复制了默认值， 还没有Copy父类的属性到子类
+
 	if (zend_hash_num_elements(&parent_ce->properties_info)) {
+
+    // Extend 应该会把子元素的属性放在前面吧?
+    // 所以这里就无所谓前后了， 因为properties_info是一个k->v结构
 		zend_hash_extend(&ce->properties_info,
 			zend_hash_num_elements(&ce->properties_info) +
 			zend_hash_num_elements(&parent_ce->properties_info), 0);
 
+    // 遍历父类的属性列表进行继承
 		ZEND_HASH_FOREACH_STR_KEY_PTR(&parent_ce->properties_info, key, property_info) {
 			do_inherit_property(property_info, key, ce);
 		} ZEND_HASH_FOREACH_END();

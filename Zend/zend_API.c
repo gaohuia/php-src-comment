@@ -3521,7 +3521,7 @@ again:
 							zend_string_release(fcc->function_handler->common.function_name);
 						}
 						zend_free_trampoline(fcc->function_handler);
-					} 
+					}
 					return ret;
 
 				} while (0);
@@ -3806,10 +3806,17 @@ ZEND_API const char *zend_get_module_version(const char *module_name) /* {{{ */
 // 声明一个属性.
 // 需要指定一个类entry
 //
-ZEND_API int zend_declare_property_ex(zend_class_entry *ce, zend_string *name, zval *property, int access_type, zend_string *doc_comment) /* {{{ */
+ZEND_API int zend_declare_property_ex(
+  zend_class_entry *ce,   /*类*/
+  zend_string *name,      /*属性名*/
+  zval *property,         /*看起来像是属性的值*/
+  int access_type,        /*访问类型*/
+  zend_string *doc_comment /*注释*/
+) /* {{{ */
 {
 	zend_property_info *property_info, *property_info_ptr;
 
+  // 先分配一个结构.
 	if (ce->type == ZEND_INTERNAL_CLASS) {
 		// 内部类
 		// 分配一个property_info
@@ -3855,16 +3862,25 @@ ZEND_API int zend_declare_property_ex(zend_class_entry *ce, zend_string *name, z
 		}
 	} else {
 		// 非静态属性.
+    // 先找找原来有没有定义这个属性
 		if ((property_info_ptr = zend_hash_find_ptr(&ce->properties_info, name)) != NULL &&
 		    (property_info_ptr->flags & ZEND_ACC_STATIC) == 0) {
 
-			// 已经定义过了, 并且是非静态的.
+			// 已经定义过了, 并且是非静态的. 先把之前定义的那个属性删掉.
+      // 相当于， 以后面来的那个默认值为准
 			property_info->offset = property_info_ptr->offset;
 			zval_ptr_dtor(&ce->default_properties_table[OBJ_PROP_TO_NUM(property_info->offset)]);
 			zend_hash_del(&ce->properties_info, name);
 		} else {
+
+      // 没有定义过
+
 			property_info->offset = OBJ_PROP_TO_OFFSET(ce->default_properties_count);
+
+      // 无条件增加一个默认属性, 也就是说， 不管在定义的时候是否指定默认值， 系统处理的时候都会当作有默认值处理.
 			ce->default_properties_count++;
+
+      // 将内存管理的工作交给了系统.
 			ce->default_properties_table = perealloc(ce->default_properties_table, sizeof(zval) * ce->default_properties_count, ce->type == ZEND_INTERNAL_CLASS);
 		}
 
