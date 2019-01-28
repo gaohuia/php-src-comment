@@ -374,6 +374,8 @@ double zval_get_double(op);                 // 取得数值值
 
 ```
 
+
+
 参数及类型表格
 
 [zend_parse_parameters](http://php.net/manual/en/internals2.funcs.php)
@@ -397,6 +399,20 @@ s   string  char*, int
 z   mixed   zval*
 Z   mixed   zval**
 ```
+
+核心数据结构及相关宏:
+
+```C
+zend_executor_globals    *executor_globals;
+```
+
+
+```C
+#define EG(v) executor_globals.v
+#define EX(element) ((execute_data)->element)
+
+```
+
 
 ### 参考文档
 
