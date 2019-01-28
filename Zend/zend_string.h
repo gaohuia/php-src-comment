@@ -314,6 +314,8 @@ static zend_always_inline zend_string *zend_string_safe_realloc(zend_string *s, 
 
 // 字符串释放, 只有引用数<=1的zend_string结构能被释放.
 // 否则会报错.
+// 一般不需要调用它, 调用zend_string_release即可
+// 真正调用free方法释放内存. 
 static zend_always_inline void zend_string_free(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {
@@ -324,6 +326,8 @@ static zend_always_inline void zend_string_free(zend_string *s)
 
 // 减少zend_string结构的引用数.
 // 如果引用数减为0, 自动释放 .
+// release 只是释放引用数, 相当于把绑在s身上的一根绳子解开了
+// 只有当这个绳子是最后一根绳子时， s才真正变成一个free的s
 static zend_always_inline void zend_string_release(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {

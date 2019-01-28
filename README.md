@@ -159,7 +159,7 @@ double zval_get_double(op);                 // 取得数值值
 
 #### 增加引用
     uint32_t zend_string_addref(zend_string *s)
-    
+
 #### 减少引用
     uint32_t zend_string_delref(zend_string *s)
 
@@ -228,8 +228,8 @@ double zval_get_double(op);                 // 取得数值值
     ZEND_ACC_PROTECTED;
     ZEND_ACC_PRIVATE;
 
-    // 
-    
+    //
+
 
 
     INIT_CLASS_ENTRY(zend_class_entry class_container, char* class_name, functions);
@@ -286,6 +286,46 @@ double zval_get_double(op);                 // 取得数值值
     // 抛出异常
     zend_object *zend_throw_exception(zend_class_entry *exception_ce, const char *message, zend_long code);
 
+```
+
+
+### 函数
+
+调用用户态函数的一般方法.
+
+```C
+  // callable的名称, 用户态或internal函数名称
+  zval callable = {};
+
+  // 存放返回值
+  zval rv = {};
+
+  // fci/fci_cache
+  zend_fcall_info fci = empty_fcall_info;
+  zend_fcall_info_cache fci_cache = empty_fcall_info_cache;
+
+  // 错误
+  char* error = NULL;
+
+  ZVAL_STR(&callable, zend_string_init("sayHello", 8, 0));
+
+  if (FAILURE == zend_fcall_info_init(&callable, 0, &fci, &fci_cache, NULL, &error)) {
+      RETURN_STR(strpprintf(0, "Error: %s", error));
+  }
+
+  fci.retval = &rv;
+
+  // 调用
+  zend_call_function(&fci, &fci_cache);
+
+  // 释放参数
+  zend_fcall_info_args_clear(&fci, 1);
+
+  // 释放变量
+  zval_ptr_dtor(&callable);
+  zval_ptr_dtor(&rv);
+
+  RETVAL_TRUE;
 ```
 
 
@@ -369,5 +409,3 @@ Z   mixed   zval**
 ### 相关链接
 
 * [Zephir](https://docs.zephir-lang.com/en/0.10/introduction) 可以用一种类似PHP的语法来编写PHP扩展
-
-

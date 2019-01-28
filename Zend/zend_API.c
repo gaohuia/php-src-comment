@@ -3521,11 +3521,11 @@ again:
 							zend_string_release(fcc->function_handler->common.function_name);
 						}
 						zend_free_trampoline(fcc->function_handler);
-					}
+					} 
 					return ret;
 
 				} while (0);
-        
+
 				if (zend_hash_num_elements(Z_ARRVAL_P(callable)) == 2) {
 					if (!obj || (!Z_ISREF_P(obj)?
 								(Z_TYPE_P(obj) != IS_STRING && Z_TYPE_P(obj) != IS_OBJECT) :
