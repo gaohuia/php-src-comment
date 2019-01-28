@@ -54773,7 +54773,7 @@ static ZEND_OPCODE_HANDLER_RET ZEND_FASTCALL ZEND_NULL_HANDLER(ZEND_OPCODE_HANDL
 	ZEND_VM_NEXT_OPCODE(); /* Never reached */
 }
 
-
+// 开始执行ex对象所指向的数据
 ZEND_API void execute_ex(zend_execute_data *ex)
 {
 	DCL_OPLINE
@@ -63766,6 +63766,8 @@ ZEND_API void zend_execute(zend_op_array *op_array, zval *return_value)
 
 	execute_data = zend_vm_stack_push_call_frame(ZEND_CALL_TOP_CODE | ZEND_CALL_HAS_SYMBOL_TABLE,
 		(zend_function*)op_array, 0, zend_get_called_scope(EG(current_execute_data)), zend_get_this_object(EG(current_execute_data)));
+
+    // 看起来EG(current_execute_data)是有可能为空的. 
 	if (EG(current_execute_data)) {
 		execute_data->symbol_table = zend_rebuild_symbol_table();
 	} else {
