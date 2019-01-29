@@ -157,6 +157,25 @@ PHP源码阅读笔记.
     zend_bool zend_string_equals(zend_string* s1, zend_string* s2); // 判断两个zend_string是否相等.
 ```
 
+### 字符串格式化相关几个函数
+
+```C
+
+// 别名. 就是去掉了前面的"zend_"前缀
+#define spprintf zend_spprintf
+#define strpprintf zend_strpprintf
+#define vspprintf zend_vspprintf
+#define vstrpprintf zend_vstrpprintf
+
+// 格式化, message用于接收格式化好的字符串地址, 记得用完message后需要调用efree释放
+size_t zend_spprintf(char **message, size_t max_len, const char *format, ...);
+// 格式化, 但直接返回一个zend_string*
+zend_string *zend_vstrpprintf(size_t max_len, const char *format, va_list ap);
+// 同上, 可变参数, 格式与printf类似
+zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
+
+```
+
 ### 数组(HashTable)
 
     PHP数据的要点.

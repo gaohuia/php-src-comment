@@ -18,7 +18,7 @@
 */
 
 /* $Id$ */
-  
+
 #include "zend.h"
 #include "zend_extensions.h"
 #include "zend_modules.h"
@@ -185,6 +185,8 @@ ZEND_API size_t zend_vspprintf(char **pbuf, size_t max_len, const char *format, 
 }
 /* }}} */
 
+// 传入一个字符串指针, 格式化完成后指针变量被写入一个已分配的字符串地址
+// 用完后需要调用efree释放内存
 ZEND_API size_t zend_spprintf(char **message, size_t max_len, const char *format, ...) /* {{{ */
 {
 	va_list arg;
@@ -197,6 +199,7 @@ ZEND_API size_t zend_spprintf(char **message, size_t max_len, const char *format
 }
 /* }}} */
 
+// 返回一个zend_string* 
 ZEND_API zend_string *zend_vstrpprintf(size_t max_len, const char *format, va_list ap) /* {{{ */
 {
 	smart_str buf = {0};
