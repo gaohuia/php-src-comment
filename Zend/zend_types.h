@@ -158,11 +158,11 @@ typedef uintptr_t zend_type;
 
 // 大小64位
 typedef union _zend_value {
-	// 不需要处理内存问题, 与zval结构共享内存. 
+	// 不需要处理内存问题, 与zval结构共享内存.
 	zend_long         lval;				/* long value */
-	// 同上. 
+	// 同上.
 	double            dval;				/* double value */
-	// 可以指向下面各种内存变量, 不会单独使用. 
+	// 可以指向下面各种内存变量, 不会单独使用.
 	zend_refcounted  *counted;			// 可以理解为, 一种多态.
 
 	// 字符串
@@ -185,7 +185,7 @@ typedef union _zend_value {
 	} ww;
 } zend_value;
 
-// 
+//
 struct _zval_struct {
 	zend_value        value;			/* value */
 	union {
@@ -204,7 +204,7 @@ struct _zval_struct {
 		uint32_t     next;                 /* hash collision chain */
 		uint32_t     cache_slot;           /* literal cache slot */
 		uint32_t     lineno;               /* line number (for ast nodes) */
-		uint32_t     num_args;             /* arguments number for EX(This) */ // 当他是一个execute_data的This时, 此处记录了参数的个数. 
+		uint32_t     num_args;             /* arguments number for EX(This) */ // 当他是一个execute_data的This时, 此处记录了参数的个数.
 		uint32_t     fe_pos;               /* foreach position */
 		uint32_t     fe_iter_idx;          /* foreach iterator index */
 		uint32_t     access_flags;         /* class constant access flags */
@@ -232,6 +232,7 @@ struct _zend_refcounted {
 	zend_refcounted_h gc;
 };
 
+// 变长结构.
 struct _zend_string {
 	zend_refcounted_h gc;
 	zend_ulong        h;                /* hash value */
@@ -313,7 +314,7 @@ struct _zend_array {
 #define HT_HASH_EX(data, idx) \
 	((uint32_t*)(data))[(int32_t)(idx)]
 
-// Hash表, 引用Hash表坑位. 
+// Hash表, 引用Hash表坑位.
 #define HT_HASH(ht, idx) \
 	HT_HASH_EX((ht)->arData, idx)
 
@@ -339,22 +340,22 @@ struct _zend_array {
 #define HT_HASH_RESET(ht) \
 	memset(&HT_HASH(ht, (ht)->nTableMask), HT_INVALID_IDX, HT_HASH_SIZE((ht)->nTableMask))
 
-// 因为Packet保留了hash表的两个坑位. 所以需要重置一下. 
+// 因为Packet保留了hash表的两个坑位. 所以需要重置一下.
 #define HT_HASH_RESET_PACKED(ht) do { \
 		HT_HASH(ht, -2) = HT_INVALID_IDX; \
 		HT_HASH(ht, -1) = HT_INVALID_IDX; \
 	} while (0)
 
-// 通过Hash值, 取得一个Bucket指针. 	
+// 通过Hash值, 取得一个Bucket指针.
 #define HT_HASH_TO_BUCKET(ht, idx) \
 	HT_HASH_TO_BUCKET_EX((ht)->arData, idx)
 
-// 设置数据区域, 将数据区域偏移一个hash区的大小后赋值到arData. 
+// 设置数据区域, 将数据区域偏移一个hash区的大小后赋值到arData.
 #define HT_SET_DATA_ADDR(ht, ptr) do { \
 		(ht)->arData = (Bucket*)(((char*)(ptr)) + HT_HASH_SIZE((ht)->nTableMask)); \
 	} while (0)
 
-// 取得数据区域指针. 
+// 取得数据区域指针.
 #define HT_GET_DATA_ADDR(ht) \
 	((char*)((ht)->arData) - HT_HASH_SIZE((ht)->nTableMask))
 
@@ -374,7 +375,9 @@ struct _zend_object {
 	// 这里估计是对象的方法
 	const zend_object_handlers *handlers;
 	// 对象的属性?
+  // 这里应该是未定义的属性
 	HashTable        *properties;
+  // 这里是已定义的属性.
 	zval              properties_table[1];
 };
 
@@ -480,7 +483,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define GC_FLAGS(p)					(p)->gc.u.v.flags
 #define GC_INFO(p)					(p)->gc.u.v.gc_info
 #define GC_TYPE_INFO(p)				(p)->gc.u.type_info
-// 
+//
 
 #define Z_GC_TYPE(zval)				GC_TYPE(Z_COUNTED(zval))
 #define Z_GC_TYPE_P(zval_p)			Z_GC_TYPE(*(zval_p))
@@ -511,7 +514,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 /* extended types */
 #define IS_INTERNED_STRING_EX		IS_STRING
 
-// 一次赋值. 
+// 一次赋值.
 #define IS_STRING_EX				(IS_STRING         | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_ARRAY_EX					(IS_ARRAY          | ((                   IS_TYPE_REFCOUNTED | IS_TYPE_COPYABLE) << Z_TYPE_FLAGS_SHIFT))
 #define IS_OBJECT_EX				(IS_OBJECT         | ((                   IS_TYPE_REFCOUNTED                   ) << Z_TYPE_FLAGS_SHIFT))
@@ -573,7 +576,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_CONSTANT_P(zval_p)		Z_CONSTANT(*(zval_p))
 
 // 一般带_P的，需要传入一个　zval*
-// 不带_P的，传入一个zval结构. 
+// 不带_P的，传入一个zval结构.
 #define Z_REFCOUNTED(zval)			((Z_TYPE_FLAGS(zval) & IS_TYPE_REFCOUNTED) != 0)
 #define Z_REFCOUNTED_P(zval_p)		Z_REFCOUNTED(*(zval_p))
 
@@ -620,7 +623,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_DVAL(zval)				(zval).value.dval
 #define Z_DVAL_P(zval_p)			Z_DVAL(*(zval_p))
 
-// 返回zval内的str值. 
+// 返回zval内的str值.
 #define Z_STR(zval)					(zval).value.str
 #define Z_STR_P(zval_p)				Z_STR(*(zval_p))
 
@@ -749,8 +752,8 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 	} while (0)
 
 // 设置zval的zend_string值.
-// 当zend_string为新值, 所以此时不增加引用计数. 
-// 与ZVAL_STR基本一样. 
+// 当zend_string为新值, 所以此时不增加引用计数.
+// 与ZVAL_STR基本一样.
 #define ZVAL_NEW_STR(z, s) do {					\
 		zval *__z = (z);						\
 		zend_string *__s = (s);					\
@@ -760,7 +763,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 
 // COPY语义
 // 认为zend_string原来有在别的地方使用
-// 所以COPY时会增加引用数. 
+// 所以COPY时会增加引用数.
 #define ZVAL_STR_COPY(z, s) do {						\
 		zval *__z = (z);								\
 		zend_string *__s = (s);							\
@@ -774,15 +777,15 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		}												\
 	} while (0)
 
-// 简单设置zval值. 
-// ZVAL_设置后, 都重置量类型. 
+// 简单设置zval值.
+// ZVAL_设置后, 都重置量类型.
 #define ZVAL_ARR(z, a) do {						\
 		zval *__z = (z);						\
 		Z_ARR_P(__z) = (a);						\
 		Z_TYPE_INFO_P(__z) = IS_ARRAY_EX;		\
 	} while (0)
 
-// 只分配了zend_array的内存, 但并不对这个变量进行初始化. 
+// 只分配了zend_array的内存, 但并不对这个变量进行初始化.
 #define ZVAL_NEW_ARR(z) do {									\
 		zval *__z = (z);										\
 		zend_array *_arr =										\
@@ -791,7 +794,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_ARRAY_EX;						\
 	} while (0)
 
-// 
+//
 #define ZVAL_NEW_PERSISTENT_ARR(z) do {							\
 		zval *__z = (z);										\
 		zend_array *_arr =										\
@@ -847,7 +850,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		Z_TYPE_INFO_P(__z) = IS_REFERENCE_EX;					\
 	} while (0)
 
-// 
+//
 #define ZVAL_NEW_EMPTY_REF(z) do {								\
 		zend_reference *_ref =									\
 		(zend_reference *) emalloc(sizeof(zend_reference));		\
@@ -994,7 +997,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 	} while (0)
 
 // COPY变量
-// 同时增加引用计数. 
+// 同时增加引用计数.
 #define ZVAL_COPY(z, v)									\
 	do {												\
 		zval *_z1 = (z);								\
@@ -1026,7 +1029,7 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 	} while (0)
 
 // 如果变量是一个引用类型, 对变量解引用.
-// 否则, 不产生任何效果. 
+// 否则, 不产生任何效果.
 #define ZVAL_DEREF(z) do {								\
 		if (UNEXPECTED(Z_ISREF_P(z))) {					\
 			(z) = Z_REFVAL_P(z);						\
@@ -1047,8 +1050,8 @@ static zend_always_inline uint32_t zval_delref_p(zval* pz) {
 		}												\
 	} while (0)
 
-// 强制取消引用. 
-// 
+// 强制取消引用.
+//
 #define ZVAL_UNREF(z) do {								\
 		zval *_z = (z);									\
 		zend_reference *ref;							\

@@ -16,7 +16,7 @@
    |         Xinchen Hui <laruence@php.net>                               |
    +----------------------------------------------------------------------+
  */
-
+ 
 /* $Id$ */
 
 #ifndef PHP_SMART_STRING_PUBLIC_H
