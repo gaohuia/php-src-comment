@@ -140,31 +140,41 @@ PHP源码阅读笔记.
 ### 字符串类型
 
 ```C
-zend_string *zval_get_string(zval*);        // 取得一个变量的String值.
-long zval_get_long(op);                     // 取得整型值
-double zval_get_double(op);                 // 取得数值值
+  zend_string *zval_get_string(zval*);        // 取得一个变量的String值.
+  long zval_get_long(op);                     // 取得整型值
+  double zval_get_double(op);                 // 取得数值值
 ```
 
-#### 创建一个zend_string结构. 并设置引用数为1
-    zend_string *zend_string_alloc(size_t len, int persistent)
+### 字符串分配
 
-#### 创建一个zend_string结构, 并为期赋值. 设置引用数为1. str指向的缓冲区将会被copy到zend_str结构内.
-    zend_string *zend_string_init(const char *str, size_t len, int persistent)
+```C
+    zend_string *zend_string_alloc(size_t len, int persistent); // 创建一个zend_string结构. 并设置引用数为1
+    zend_string *zend_string_init(const char *str, size_t len, int persistent); //创建一个zend_string结构, 并为期赋值. 设置引用数为1. str指向的缓冲区将会被copy到zend_str结构内.
+    zend_string *zend_string_copy(zend_string *s); //此方法只是简单增加了引用计数, 并返回传入的zend_string
+    void zend_string_release(zend_string *s); //释放zend_string, 只是减少一次引用, 如果引用减为0自动释放
+    uint32_t zend_string_addref(zend_string *s); //增加引用
+    uint32_t zend_string_delref(zend_string *s); //减少引用
+    zend_bool zend_string_equals(zend_string* s1, zend_string* s2); // 判断两个zend_string是否相等.
+```
 
-#### 此方法只是简单增加了引用计数, 并返回传入的zend_string
-    zend_string *zend_string_copy(zend_string *s)
+### 字符串格式化相关几个函数
 
-#### 释放zend_string, 只是减少一次引用, 如果引用减为0自动释放
-    void zend_string_release(zend_string *s)
+```C
 
-#### 增加引用
-    uint32_t zend_string_addref(zend_string *s)
+// 别名. 就是去掉了前面的"zend_"前缀
+#define spprintf zend_spprintf
+#define strpprintf zend_strpprintf
+#define vspprintf zend_vspprintf
+#define vstrpprintf zend_vstrpprintf
 
-#### 减少引用
-    uint32_t zend_string_delref(zend_string *s)
+// 格式化, message用于接收格式化好的字符串地址, 记得用完message后需要调用efree释放
+size_t zend_spprintf(char **message, size_t max_len, const char *format, ...);
+// 格式化, 但直接返回一个zend_string*
+zend_string *zend_vstrpprintf(size_t max_len, const char *format, va_list ap);
+// 同上, 可变参数, 格式与printf类似
+zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
 
-#### 判断两个zend_string是否相等.
-    zend_bool zend_string_equals(zend_string* s1, zend_string* s2)
+```
 
 ### 数组(HashTable)
 
