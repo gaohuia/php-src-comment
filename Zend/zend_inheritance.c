@@ -690,7 +690,10 @@ static void do_inherit_property(zend_property_info *parent_info, zend_string *ke
 				/* Don't keep default properties in GC (they may be freed by opcache) */
         // 因为子类已经定义了默认值， 所以把Copy过来的那个父类默认值进行释放. 再把子类的默认值写到父类的坑位里面去.
         // 不明白这里面的用意, 不动不行？
-        // 可能是因为这样就不需要再分配一个slot给父类的这个属性了. 
+        // 可能是因为这样就不需要再分配一个slot给父类的这个属性了.
+        // 减少内存分配次数以提高效率.
+        // 但是多数情况好像是， 父类会定义好多发生，而子类定义少数属性.
+        // 属性覆盖的概率是比较低的. 
 				zval_ptr_dtor_nogc(&(ce->default_properties_table[parent_num]));
 				ce->default_properties_table[parent_num] = ce->default_properties_table[child_num];
 				ZVAL_UNDEF(&ce->default_properties_table[child_num]);
