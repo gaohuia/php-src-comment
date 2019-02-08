@@ -157,14 +157,20 @@ typedef uintptr_t zend_type;
 	ZEND_TYPE_ENCODE_CLASS_CONST_Q1(allow_null, class_name)
 
 // 大小64位
+// 联合结构, 根据zval的type取不同的字段.
+// 只有zend_long 和 double 类型不需要释放内存, 因为他们与zval共享内存
+// 其它的值都是一个结构体指针. 结构体的开头都是一个zend_refcounted结构.
+// 所以counted字段可以安全地引用所有的结构体.
+// 我们简单的把所有zend_refcounted结构开始的结构称之为refcounted结构.
 typedef union _zend_value {
-	// 不需要处理内存问题, 与zval结构共享内存.
+	// 数字类型. 不需要处理内存问题, 与zval结构共享内存.
 	zend_long         lval;				/* long value */
-	// 同上.
 	double            dval;				/* double value */
+
 	// 可以指向下面各种内存变量, 不会单独使用.
 	zend_refcounted  *counted;			// 可以理解为, 一种多态.
 
+  // 以下为refcounted结构.
 	// 字符串
 	zend_string      *str;
 	// 数组
@@ -173,11 +179,13 @@ typedef union _zend_value {
 	zend_object      *obj;
 	zend_resource    *res;
 	zend_reference   *ref;
-	zend_ast_ref     *ast;
-	zval             *zv;
-	void             *ptr;
-	zend_class_entry *ce;
-	zend_function    *func;
+
+  // 以下. 非refcounted结构. 无法被自动回收.
+	zend_ast_ref     *ast;     // 非refcounted结构
+	zval             *zv;      // 非refcounted结构
+	void             *ptr;     // 非refcounted结构
+	zend_class_entry *ce;      // 非refcounted结构
+	zend_function    *func;    // 非refcounted结构
 
 	struct {
 		uint32_t w1;
