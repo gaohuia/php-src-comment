@@ -49,6 +49,7 @@ END_EXTERN_C()
 /* Shortcuts */
 
 // shortcuts 没错, 只是便捷的取出zend_string结构的成员.
+// ZSTR_开头用于于zend_string结构. 
 #define ZSTR_VAL(zstr)  (zstr)->val
 #define ZSTR_LEN(zstr)  (zstr)->len
 #define ZSTR_H(zstr)    (zstr)->h
@@ -315,7 +316,7 @@ static zend_always_inline zend_string *zend_string_safe_realloc(zend_string *s, 
 // 字符串释放, 只有引用数<=1的zend_string结构能被释放.
 // 否则会报错.
 // 一般不需要调用它, 调用zend_string_release即可
-// 真正调用free方法释放内存. 
+// 真正调用free方法释放内存.
 static zend_always_inline void zend_string_free(zend_string *s)
 {
 	if (!ZSTR_IS_INTERNED(s)) {

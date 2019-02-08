@@ -40,8 +40,8 @@
 #define HASH_FLAG_PACKED           (1<<2)
 #define HASH_FLAG_INITIALIZED      (1<<3)
 
-// 是否只有静态Key值. 
-// 当添加一个zend_string类型的key时, 此标记将会被取消. 
+// 是否只有静态Key值.
+// 当添加一个zend_string类型的key时, 此标记将会被取消.
 #define HASH_FLAG_STATIC_KEYS      (1<<4) /* long and interned strings */
 #define HASH_FLAG_HAS_EMPTY_IND    (1<<5)
 #define HASH_FLAG_ALLOW_COW_VIOLATION (1<<6)
@@ -78,9 +78,9 @@ ZEND_API void ZEND_FASTCALL _zend_hash_init_ex(HashTable *ht, uint32_t nSize, dt
 ZEND_API void ZEND_FASTCALL zend_hash_destroy(HashTable *ht);
 ZEND_API void ZEND_FASTCALL zend_hash_clean(HashTable *ht);
 
-// 初始化一个数组变量. 
+// 初始化一个数组变量.
 #define zend_hash_init(ht, nSize, pHashFunction, pDestructor, persistent)						_zend_hash_init((ht), (nSize), (pDestructor), (persistent) ZEND_FILE_LINE_CC)
-// 初始化一个数组变量, 并指定容量. 可一次性分配足够的内存, 避免插入大量数据时反复COPY数据. 
+// 初始化一个数组变量, 并指定容量. 可一次性分配足够的内存, 避免插入大量数据时反复COPY数据.
 #define zend_hash_init_ex(ht, nSize, pHashFunction, pDestructor, persistent, bApplyProtection)		_zend_hash_init_ex((ht), (nSize), (pDestructor), (persistent), (bApplyProtection) ZEND_FILE_LINE_CC)
 
 ZEND_API void ZEND_FASTCALL zend_hash_real_init(HashTable *ht, zend_bool packed);
@@ -95,17 +95,17 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_update_ind(HashTable *ht, zend_string *k
 ZEND_API zval* ZEND_FASTCALL _zend_hash_add(HashTable *ht, zend_string *key,zval *pData ZEND_FILE_LINE_DC);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_add_new(HashTable *ht, zend_string *key,zval *pData ZEND_FILE_LINE_DC);
 
-// 通过宏的方式将当前行号带入调用. 
+// 通过宏的方式将当前行号带入调用.
 #define zend_hash_update(ht, key, pData) \
 		_zend_hash_update(ht, key, pData ZEND_FILE_LINE_CC)
-// 间接的(还不知道什么时候会发生)....pData是一个zval指针, 但这是一个间接的变量. zend_value区域保存着真实的zval指针. 	
+// 间接的(还不知道什么时候会发生)....pData是一个zval指针, 但这是一个间接的变量. zend_value区域保存着真实的zval指针.
 #define zend_hash_update_ind(ht, key, pData) \
 		_zend_hash_update_ind(ht, key, pData ZEND_FILE_LINE_CC)
-// 增加一个key, 如果key存在, 将会更新. 
+// 增加一个key, 如果key存在, 将会更新.
 #define zend_hash_add(ht, key, pData) \
 		_zend_hash_add(ht, key, pData ZEND_FILE_LINE_CC)
-// 增加一个key, 并跳过hash查找阶段. 
-// 只有可以确定key不会冲突时才使用这个方法. 可以提高插入性能. 
+// 增加一个key, 并跳过hash查找阶段.
+// 只有可以确定key不会冲突时才使用这个方法. 可以提高插入性能.
 #define zend_hash_add_new(ht, key, pData) \
 		_zend_hash_add_new(ht, key, pData ZEND_FILE_LINE_CC)
 
@@ -115,7 +115,7 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_str_update_ind(HashTable *ht, const char
 ZEND_API zval* ZEND_FASTCALL _zend_hash_str_add(HashTable *ht, const char *key, size_t len, zval *pData ZEND_FILE_LINE_DC);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_str_add_new(HashTable *ht, const char *key, size_t len, zval *pData ZEND_FILE_LINE_DC);
 
-// 更新key值, 和上面那组不同的是直接使用char*作为值. 
+// 更新key值, 和上面那组不同的是直接使用char*作为值.
 #define zend_hash_str_update(ht, key, len, pData) \
 		_zend_hash_str_update(ht, key, len, pData ZEND_FILE_LINE_CC)
 #define zend_hash_str_update_ind(ht, key, len, pData) \
@@ -135,7 +135,7 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_next_index_insert_new(HashTable *ht, zva
 // 设置某个位置的值
 #define zend_hash_index_add(ht, h, pData) \
 		_zend_hash_index_add(ht, h, pData ZEND_FILE_LINE_CC)
-// 
+//
 #define zend_hash_index_add_new(ht, h, pData) \
 		_zend_hash_index_add_new(ht, h, pData ZEND_FILE_LINE_CC)
 // 更新
@@ -144,7 +144,7 @@ ZEND_API zval* ZEND_FASTCALL _zend_hash_next_index_insert_new(HashTable *ht, zva
 // 直接插入到尾部
 #define zend_hash_next_index_insert(ht, pData) \
 		_zend_hash_next_index_insert(ht, pData ZEND_FILE_LINE_CC)
-// 还没搞清楚和上面这个函数有什么不同. 
+// 还没搞清楚和上面这个函数有什么不同.
 #define zend_hash_next_index_insert_new(ht, pData) \
 		_zend_hash_next_index_insert_new(ht, pData ZEND_FILE_LINE_CC)
 
@@ -192,7 +192,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_str_find(const HashTable *ht, const char 
 ZEND_API zval* ZEND_FASTCALL zend_hash_index_find(const HashTable *ht, zend_ulong h);
 ZEND_API zval* ZEND_FASTCALL _zend_hash_index_find(const HashTable *ht, zend_ulong h);
 
-// _not_found是一个锚点. 
+// _not_found是一个锚点.
 #define ZEND_HASH_INDEX_FIND(_ht, _h, _ret, _not_found) do { \
 		if (EXPECTED((_ht)->u.flags & HASH_FLAG_PACKED)) { \
 			if (EXPECTED((zend_ulong)(_h) < (zend_ulong)(_ht)->nNumUsed)) { \
@@ -229,7 +229,7 @@ ZEND_API zval* ZEND_FASTCALL zend_hash_get_current_data_ex(HashTable *ht, HashPo
 ZEND_API void  ZEND_FASTCALL zend_hash_internal_pointer_reset_ex(HashTable *ht, HashPosition *pos);
 ZEND_API void  ZEND_FASTCALL zend_hash_internal_pointer_end_ex(HashTable *ht, HashPosition *pos);
 
-// 看起来像量数组遍历需要用到的一些函数. 
+// 看起来像量数组遍历需要用到的一些函数.
 #define zend_hash_has_more_elements(ht) \
 	zend_hash_has_more_elements_ex(ht, &(ht)->nInternalPointer)
 #define zend_hash_move_forward(ht) \
@@ -339,7 +339,7 @@ static zend_always_inline zval *zend_hash_find_ind(const HashTable *ht, zend_str
 	zval *zv;
 
 	zv = zend_hash_find(ht, key);
-	return (zv && Z_TYPE_P(zv) == IS_INDIRECT) ? 
+	return (zv && Z_TYPE_P(zv) == IS_INDIRECT) ?
 		((Z_TYPE_P(Z_INDIRECT_P(zv)) != IS_UNDEF) ? Z_INDIRECT_P(zv) : NULL) : zv;
 }
 
@@ -359,7 +359,7 @@ static zend_always_inline zval *zend_hash_str_find_ind(const HashTable *ht, cons
 	zval *zv;
 
 	zv = zend_hash_str_find(ht, str, len);
-	return (zv && Z_TYPE_P(zv) == IS_INDIRECT) ? 
+	return (zv && Z_TYPE_P(zv) == IS_INDIRECT) ?
 		((Z_TYPE_P(Z_INDIRECT_P(zv)) != IS_UNDEF) ? Z_INDIRECT_P(zv) : NULL) : zv;
 }
 
@@ -855,6 +855,10 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 #define zend_hash_get_current_data_ptr(ht) \
 	zend_hash_get_current_data_ptr_ex(ht, &(ht)->nInternalPointer)
 
+// 遍历
+// 遍历一个数组是一件很简单的事情
+// 只需要找到arData和nNumUsed就知道了所有Bucket
+// 再把其中类型为IS_UNDEF的过滤掉即可
 #define ZEND_HASH_FOREACH(_ht, indirect) do { \
 		HashTable *__ht = (_ht); \
 		Bucket *_p = __ht->arData; \
@@ -866,6 +870,7 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 			} \
 			if (UNEXPECTED(Z_TYPE_P(_z) == IS_UNDEF)) continue;
 
+// 反向遍历
 #define ZEND_HASH_REVERSE_FOREACH(_ht, indirect) do { \
 		HashTable *__ht = (_ht); \
 		uint32_t _idx; \
@@ -877,6 +882,7 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 			} \
 			if (UNEXPECTED(Z_TYPE_P(_z) == IS_UNDEF)) continue;
 
+// 与上述两个宏成对
 #define ZEND_HASH_FOREACH_END() \
 		} \
 	} while (0)
@@ -902,18 +908,22 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 		__ht->nNumUsed = _idx; \
 	} while (0)
 
+// _bucket 是一个 Bucket*
 #define ZEND_HASH_FOREACH_BUCKET(ht, _bucket) \
 	ZEND_HASH_FOREACH(ht, 0); \
 	_bucket = _p;
 
+// _val 是zval*
 #define ZEND_HASH_FOREACH_VAL(ht, _val) \
 	ZEND_HASH_FOREACH(ht, 0); \
 	_val = _z;
 
+// 搞不懂INDIRECT是干麻的, 先看看吧.
 #define ZEND_HASH_FOREACH_VAL_IND(ht, _val) \
 	ZEND_HASH_FOREACH(ht, 1); \
 	_val = _z;
 
+// zval是一个指针, 也还不懂他是干麻的.
 #define ZEND_HASH_FOREACH_PTR(ht, _ptr) \
 	ZEND_HASH_FOREACH(ht, 0); \
 	_ptr = Z_PTR_P(_z);
@@ -922,6 +932,7 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 	ZEND_HASH_FOREACH(ht, 0); \
 	_h = _p->h;
 
+// _key 是 zend_string*
 #define ZEND_HASH_FOREACH_STR_KEY(ht, _key) \
 	ZEND_HASH_FOREACH(ht, 0); \
 	_key = _p->key;
@@ -936,6 +947,8 @@ static zend_always_inline void *zend_hash_get_current_data_ptr_ex(HashTable *ht,
 	_h = _p->h; \
 	_val = _z;
 
+// _key zend_string*
+// _val 是 zval*
 #define ZEND_HASH_FOREACH_STR_KEY_VAL(ht, _key, _val) \
 	ZEND_HASH_FOREACH(ht, 0); \
 	_key = _p->key; \
@@ -1053,7 +1066,7 @@ static zend_always_inline zval *_zend_hash_append(HashTable *ht, zend_string *ke
 	if (!ZSTR_IS_INTERNED(key)) {
 		ht->u.flags &= ~HASH_FLAG_STATIC_KEYS;
 		zend_string_addref(key);
-		zend_string_hash_val(key);		
+		zend_string_hash_val(key);
 	}
 	p->key = key;
 	p->h = ZSTR_H(key);
@@ -1075,7 +1088,7 @@ static zend_always_inline zval *_zend_hash_append_ptr(HashTable *ht, zend_string
 	if (!ZSTR_IS_INTERNED(key)) {
 		ht->u.flags &= ~HASH_FLAG_STATIC_KEYS;
 		zend_string_addref(key);
-		zend_string_hash_val(key);		
+		zend_string_hash_val(key);
 	}
 	p->key = key;
 	p->h = ZSTR_H(key);
@@ -1097,7 +1110,7 @@ static zend_always_inline void _zend_hash_append_ind(HashTable *ht, zend_string 
 	if (!ZSTR_IS_INTERNED(key)) {
 		ht->u.flags &= ~HASH_FLAG_STATIC_KEYS;
 		zend_string_addref(key);
-		zend_string_hash_val(key);		
+		zend_string_hash_val(key);
 	}
 	p->key = key;
 	p->h = ZSTR_H(key);

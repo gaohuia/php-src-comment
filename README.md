@@ -42,6 +42,7 @@ PHP源码阅读笔记.
 #### zval取值
 
 宏并非函数, 只是快捷方式.
+快捷方便都是Z_开头
 
 ```C
     zend_long Z_LVAL(zval);         // 取long值
@@ -77,6 +78,7 @@ PHP源码阅读笔记.
 #### zval赋值
 
 以下方法会变更变量的类型. 没有特殊声明不影响引用计数.
+赋值操作都已ZVAL_开始
 
 ```C
     ZVAL_UNDEF(zval*);                  // 将变量设置为undefined
@@ -342,7 +344,7 @@ zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
 
 参数:
 
-* check_null 检测参数是否为null
+* check_null 检测参数是否为null, 如果调用函数时传入的参数为null时使用check_null来决定其行为. 如果check_null为1, 将null值写入pzval变量中. 否则将返回错误码.
 * deref 对变量进行解引用
 * separate 对变量进行分离. 如果这个变量原来与其它变量共享zend_value, 那就把这个zend_value分离出来.
 
