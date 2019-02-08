@@ -3,6 +3,8 @@ PHP源码阅读笔记.
 阅读过程中的一些笔记，便于将来写扩展时使用.
 基于php源码7.2.9
 
+大部分情况下, 我们不考虑线程安全的部分. 除非是研究线程安全本身.
+
 ## 重要文件
 
 * Zend/zend_types.h       定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
@@ -12,6 +14,16 @@ PHP源码阅读笔记.
 * Zend/zend_hash.h        定义了hash表相关的方法和宏.
 * Zend/zend_vm_def.h      定义了所有的Opcode handle
 * Zend/zend_globals_macros.h   定义了Zend的全局宏如: EG等.
+
+## 全局变量
+
+```
+zend_compiler_globals    *compiler_globals;   // 宏: CG
+# define CG(v) (compiler_globals.v)
+
+zend_executor_globals    *executor_globals;   // 宏: EG
+# define EG(v) (executor_globals.v)
+```
 
 ## zval
 
