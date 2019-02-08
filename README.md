@@ -5,6 +5,8 @@ PHP源码阅读笔记.
 
 大部分情况下, 我们不考虑线程安全的部分. 除非是研究线程安全本身.
 
+为标名部分C语言宏所需要传入的参数, 部分宏会以类似函数的方式进行标注. 
+
 ## 重要文件
 
 * Zend/zend_types.h       定义了所有的变量及值相关的数据结构, 定义了变量快捷取值的宏
@@ -20,6 +22,8 @@ PHP源码阅读笔记.
 ```
 zend_compiler_globals    *compiler_globals;   // 宏: CG
 # define CG(v) (compiler_globals.v)
+CG(function_table);
+CG(class_table);
 
 zend_executor_globals    *executor_globals;   // 宏: EG
 # define EG(v) (executor_globals.v)
