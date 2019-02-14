@@ -734,7 +734,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 		zval *__z = (z);				\
 		Z_LVAL_P(__z) = l;				\
 		Z_TYPE_INFO_P(__z) = IS_LONG;	\
-	}
+	} 
 
 #define ZVAL_DOUBLE(z, d) {				\
 		zval *__z = (z);				\

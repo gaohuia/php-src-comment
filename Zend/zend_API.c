@@ -1,4 +1,4 @@
-/* 
+/*
    +----------------------------------------------------------------------+
    | Zend Engine                                                          |
    +----------------------------------------------------------------------+
@@ -3633,10 +3633,13 @@ ZEND_API void zend_fcall_info_args_clear(zend_fcall_info *fci, int free_mem) /* 
 		zval *p = fci->params;
 		zval *end = p + fci->param_count;
 
+		// 依次减少每个变量的引用计数.
 		while (p != end) {
 			i_zval_ptr_dtor(p ZEND_FILE_LINE_CC);
 			p++;
 		}
+
+		// 释放params的内存块.
 		if (free_mem) {
 			efree(fci->params);
 			fci->params = NULL;

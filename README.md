@@ -65,8 +65,8 @@ zend_executor_globals    *executor_globals;   // 宏: EG
     zend_long Z_LVAL_P(zval*);      // 取long值
     double Z_DVAL(zval);            // 取double值
     double Z_DVAL(zval*);           // 取double值
-    zend_string Z_STR(zval);        // 返回字符串zend_string
-    zend_string Z_STR(zval*);       // 返回字符串zend_string
+    zend_string* Z_STR(zval);        // 返回字符串zend_string
+    zend_string* Z_STR(zval*);       // 返回字符串zend_string
     char* Z_STRVAL(zval);           // 取字符串缓冲区
     char* Z_STRVAL_P(zval*);        // 取字符串缓冲区
     size_t Z_STRLEN(zval);          // 取字符串变量的长度
@@ -388,6 +388,8 @@ zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
 
 
     // 返回数据相关方法.
+    // `RETURN_` 相关方法, 不增加引用.
+    // `RETVAL_` 开头的方法, 实际是向return_value这个zval* 变量中写入数据.
 
     RETURN_BOOL(zend_bool b);
     RETURN_NULL();
@@ -446,6 +448,13 @@ zend_executor_globals    *executor_globals;
 #define EG(v) executor_globals.v
 #define EX(element) ((execute_data)->element)
 
+```
+
+
+### 其它辅助
+
+```C
+zend_write(char* str, size_t len);    // 向标准输出输出一段字符串. 
 ```
 
 

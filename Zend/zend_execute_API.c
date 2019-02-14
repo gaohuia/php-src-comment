@@ -781,7 +781,7 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		if (ARG_SHOULD_BE_SENT_BY_REF(func, i + 1)) {
       // 如果要求传入的是一个引用
 			if (UNEXPECTED(!Z_ISREF_P(arg))) {
-        // 
+        //
 				if (!fci->no_separation) {
 					/* Separation is enabled -- create a ref */
 					ZVAL_NEW_REF(arg, arg);
