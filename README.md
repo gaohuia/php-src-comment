@@ -58,7 +58,7 @@ zend_executor_globals    *executor_globals;   // 宏: EG
 #### zval取值
 
 宏并非函数, 只是快捷方式.
-快捷方便都是Z_开头
+快捷方便都是`Z_`开头
 
 ```C
     zend_long Z_LVAL(zval);         // 取long值
@@ -94,7 +94,7 @@ zend_executor_globals    *executor_globals;   // 宏: EG
 #### zval赋值
 
 以下方法会变更变量的类型. 没有特殊声明不影响引用计数.
-赋值操作都已ZVAL_开始
+赋值操作都已`ZVAL_`开始
 
 ```C
     ZVAL_UNDEF(zval*);                  // 将变量设置为undefined
