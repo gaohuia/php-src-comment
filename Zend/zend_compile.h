@@ -337,10 +337,10 @@ typedef struct _zend_class_constant {
 
 /* arg_info for internal functions */
 typedef struct _zend_internal_arg_info {
-	const char *name;
-	zend_type type;
-	zend_uchar pass_by_reference;
-	zend_bool is_variadic;
+	const char *name;				// 参数名
+	zend_type type;					// 类型
+	zend_uchar pass_by_reference;	// 是否传引用
+	zend_bool is_variadic;				// 是否变长
 } zend_internal_arg_info;
 
 /* arg_info for user functions */

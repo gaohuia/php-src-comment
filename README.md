@@ -5,7 +5,7 @@ PHP源码阅读笔记.
 
 大部分情况下, 我们不考虑线程安全的部分. 除非是研究线程安全本身.
 
-为标名部分C语言宏所需要传入的参数, 部分宏会以类似函数的方式进行标注. 
+为标名部分C语言宏所需要传入的参数, 部分宏会以类似函数的方式进行标注.
 
 ## 重要文件
 
@@ -358,6 +358,13 @@ zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
 
 ### 扩展开发
 
+`Z_PARAM_`开头的宏来取得用户空间传入的参数.
+由于所有的参数在调用函数之前进行了一次拷贝, 所有取得的参数都是zend_value中定义的类型.
+如对于数组. zend_value 中定义为 `zend_array *arr` 所以我们只需要定义一个`zend_array *`类型的变量.
+并直接把这个变量放入宏中, 宏回自动取地址变成 `zend_array **`传入的相关函数中, 所以函数会往我们定义的指针变量
+中写入指针地址. 此指针不增加引用计数, 也无需释放. 取得的都是指向这批变量的指针.
+
+
 参数:
 
 * check_null 检测参数是否为null, 如果调用函数时传入的参数为null时使用check_null来决定其行为. 如果check_null为1, 将null值写入pzval变量中. 否则将返回错误码.
@@ -371,8 +378,9 @@ zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
     Z_PARAM_ARRAY_EX(zval *pzval, int check_null, int separate);                 // 当separate为1时, 将会对参数进行解引用
     // ...
     Z_PARAM_ZVAL(zval *pzval);
-    Z_PARAM_BOOL(zend_bool *p);
-    Z_PARAM_DOUBLE(double *p);
+    Z_PARAM_BOOL(zend_bool p);
+    Z_PARAM_DOUBLE(double p);
+    Z_PARAM_OPTIONAL; // 前面为必选参数. 后面为可选参数.
     // ...
     // ----结束参数定义------
     ZEND_PARSE_PARAMETERS_END();
