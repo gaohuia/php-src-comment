@@ -87,6 +87,8 @@ ZEND_BEGIN_ARG_INFO_EX(yaf_dispatcher_initview_arginfo, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
+// 定义一个yaf_dispatcher_setview_arginfo的数组
+// zend_internal_arg_info yaf_dispatcher_setview_arginfo[] = {}
 ZEND_BEGIN_ARG_INFO_EX(yaf_dispatcher_setview_arginfo, 0, 0, 1)
     ZEND_ARG_INFO(0, view)
 ZEND_END_ARG_INFO()

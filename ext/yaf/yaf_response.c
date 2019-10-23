@@ -445,14 +445,19 @@ zend_function_entry yaf_response_methods[] = {
 YAF_STARTUP_FUNCTION(response) {
 	zend_class_entry ce;
 
+	// 初始化这个class entry
+	// 内部调用 INIT_CLASS_ENTRY 进行初始化
 	YAF_INIT_CLASS_ENTRY(ce, "Yaf_Response_Abstract", "Yaf\\Response_Abstract", yaf_response_methods);
 
+	// 注册
 	yaf_response_ce = zend_register_internal_class_ex(&ce, NULL);
 	yaf_response_ce->ce_flags |= ZEND_ACC_EXPLICIT_ABSTRACT_CLASS;
 
 	zend_declare_property_null(yaf_response_ce, ZEND_STRL(YAF_RESPONSE_PROPERTY_NAME_HEADER), ZEND_ACC_PROTECTED);
 	zend_declare_property_null(yaf_response_ce, ZEND_STRL(YAF_RESPONSE_PROPERTY_NAME_BODY), ZEND_ACC_PROTECTED);
 	zend_declare_property_bool(yaf_response_ce, ZEND_STRL(YAF_RESPONSE_PROPERTY_NAME_HEADEREXCEPTION), 0, ZEND_ACC_PROTECTED);
+
+	// 定义类常量
 	zend_declare_class_constant_stringl(yaf_response_ce, ZEND_STRL(YAF_RESPONSE_PROPERTY_NAME_DEFAULTBODYNAME), ZEND_STRL(YAF_RESPONSE_PROPERTY_NAME_DEFAULTBODY));
 
 	YAF_STARTUP(response_http);

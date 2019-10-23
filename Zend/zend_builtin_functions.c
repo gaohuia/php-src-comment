@@ -459,6 +459,11 @@ ZEND_FUNCTION(func_get_args)
 	zval *p, *q;
 	uint32_t arg_count, first_extra_arg;
 	uint32_t i;
+
+	// 取得 zend_execute_data结构
+	// 为啥取得上一个execute_data?
+	// 因为当前execute_data已经变成func_get_args这个内部函数了
+	// 上一个execute_data就是调用func_get_args这个函数的代码所在的函数
 	zend_execute_data *ex = EX(prev_execute_data);
 
 	if (ZEND_CALL_INFO(ex) & ZEND_CALL_CODE) {
@@ -470,6 +475,7 @@ ZEND_FUNCTION(func_get_args)
 		RETURN_FALSE;
 	}
 
+	// 取出参数个数
 	arg_count = ZEND_CALL_NUM_ARGS(ex);
 
 	array_init_size(return_value, arg_count);

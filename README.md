@@ -22,8 +22,8 @@ PHP源码阅读笔记.
 ```
 zend_compiler_globals    *compiler_globals;   // 宏: CG
 # define CG(v) (compiler_globals.v)
-CG(function_table);
-CG(class_table);
+CG(function_table);         // HashTable* 
+CG(class_table);            // HashTable* 
 
 zend_executor_globals    *executor_globals;   // 宏: EG
 # define EG(v) (executor_globals.v)
@@ -52,7 +52,7 @@ zend_executor_globals    *executor_globals;   // 宏: EG
 
 #### 返回引用计数, 数字.
 ```C
-    uint32_t GC_REFCOUNT(zend_refcounted_h*);
+    uint32_t GC_REFCOUNT(zend_refcounted_h* /* 这正好是一个zval的value Z_COUNTED(z) */);
 ```
 
 #### zval取值
@@ -143,7 +143,7 @@ zend_executor_globals    *executor_globals;   // 宏: EG
 
 ```C
     Z_TRY_ADDREF(zval p);  // 如果是可以引用计数的, 那么增加它.
-    Z_TRY_DELREF(zval p);  // 尝试, 减少引用.
+    Z_TRY_DELREF(zval p);  // 尝试, 减少引用. 但即使变为0了，不释放内存
     zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存.
     zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法.
 ```
@@ -358,10 +358,14 @@ zend_string *zend_strpprintf(size_t max_len, const char *format, ...);
 
 ### 扩展开发
 
+发生PHP函数调用时, 引擎会把所有的参数放到一个zval数组中. 
+
+`Z_PARAM_`系列宏或`zend_parse_parameters` 都是通过指针直接引用这个数组当中的变量, 并没有产生新的变量， 所以不需要释放. 函数调用成功后内核会负责释放这些zval. (2019-10-22)
+
 `Z_PARAM_`开头的宏来取得用户空间传入的参数.
 由于所有的参数在调用函数之前进行了一次拷贝, 所有取得的参数都是zend_value中定义的类型.
 如对于数组. zend_value 中定义为 `zend_array *arr` 所以我们只需要定义一个`zend_array *`类型的变量.
-并直接把这个变量放入宏中, 宏回自动取地址变成 `zend_array **`传入的相关函数中, 所以函数会往我们定义的指针变量
+并直接把这个变量放入宏中, 宏会自动取地址变成 `zend_array **`传入的相关函数中, 所以函数会往我们定义的指针变量
 中写入指针地址. 此指针不增加引用计数, 也无需释放. 取得的都是指向这批变量的指针.
 
 

@@ -125,6 +125,8 @@ PHP_MINIT_FUNCTION(yaf)
 		REGISTER_LONG_CONSTANT("YAF_ERR_TYPE_ERROR",			YAF_ERR_TYPE_ERROR, CONST_PERSISTENT | CONST_CS);
 	}
 
+	// 分别调用子组件的startup函数
+	// 
 	/* startup components */
 	YAF_STARTUP(application);
 	YAF_STARTUP(bootstrap);
@@ -283,7 +285,7 @@ zend_module_entry yaf_module_entry = {
 	STANDARD_MODULE_HEADER,
 #endif
 	"yaf",
-	yaf_functions,
+	yaf_functions,	// 函数
 	PHP_MINIT(yaf),
 	PHP_MSHUTDOWN(yaf),
 	PHP_RINIT(yaf),

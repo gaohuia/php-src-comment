@@ -159,6 +159,7 @@ typedef uintptr_t zend_type;
 // 大小64位
 // 联合结构, 根据zval的type取不同的字段.
 // 只有zend_long 和 double 类型不需要释放内存, 因为他们与zval共享内存
+// 
 // 其它的值都是一个结构体指针. 结构体的开头都是一个zend_refcounted结构.
 // 所以counted字段可以安全地引用所有的结构体.
 // 我们简单的把所有zend_refcounted结构开始的结构称之为refcounted结构.
@@ -168,6 +169,7 @@ typedef union _zend_value {
 	double            dval;				/* double value */
 
 	// 可以指向下面各种内存变量, 不会单独使用.
+	// Z_COUNTED 可以取得该字段
 	zend_refcounted  *counted;			// 可以理解为, 一种多态.
 
   // 以下为refcounted结构.
@@ -200,7 +202,7 @@ struct _zval_struct {
 		struct {
 			ZEND_ENDIAN_LOHI_4(
 				zend_uchar    type,			/* active type */
-				zend_uchar    type_flags,
+				zend_uchar    type_flags,   /* IS_TYPE_REFCOUNTED 可以判断当前类型值是否为refcounted类型 */
 				zend_uchar    const_flags,
 				zend_uchar    reserved)	    /* call info for EX(This) */
 		} v;
@@ -222,6 +224,11 @@ struct _zval_struct {
 };
 
 // 8个字节
+// 前4个字节用来计数
+// 后4个字节不同值不同
+// zval z;
+// z.value.counted->gc.refcount
+// 
 typedef struct _zend_refcounted_h {
 	uint32_t         refcount;			/* reference counter 32-bit */
 	union {
@@ -485,7 +492,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_CONST_FLAGS_SHIFT			16
 // 变量扩展变量 END ---------------------------------------------------------
 
-// 引用计数部分. 传入的正好是一个value变量如, z.value.counted
+// 引用计数部分. 传入的正好是一个value变量如, z.value.counted 宏 Z_COUNTED(z)
 #define GC_REFCOUNT(p)				(p)->gc.refcount
 #define GC_TYPE(p)					(p)->gc.u.v.type
 #define GC_FLAGS(p)					(p)->gc.u.v.flags
@@ -708,7 +715,7 @@ static zend_always_inline zend_uchar zval_get_type(const zval* pz) {
 #define Z_PTR(zval)					(zval).value.ptr
 #define Z_PTR_P(zval_p)				Z_PTR(*(zval_p))
 
-// ZVAL_
+// `ZVAL_`系列宏接收zval参数时，接收的是指针
 #define ZVAL_UNDEF(z) do {				\
 		Z_TYPE_INFO_P(z) = IS_UNDEF;	\
 	} while (0)

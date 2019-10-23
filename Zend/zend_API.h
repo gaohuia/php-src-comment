@@ -90,6 +90,8 @@ typedef struct _zend_fcall_info_cache {
 #define ZEND_FUNCTION(name)				ZEND_NAMED_FUNCTION(ZEND_FN(name))
 #define ZEND_METHOD(classname, name)	ZEND_NAMED_FUNCTION(ZEND_MN(classname##_##name))
 
+// 生成一个数据数据结构，用于描述此方法
+// 包换函数的名字, 类名字, 参数信息
 #define ZEND_FENTRY(zend_name, name, arg_info, flags)	{ #zend_name, name, arg_info, (uint32_t) (sizeof(arg_info)/sizeof(struct _zend_internal_arg_info)-1), flags },
 
 #define ZEND_RAW_FENTRY(zend_name, name, arg_info, flags)   { zend_name, name, arg_info, (uint32_t) (sizeof(arg_info)/sizeof(struct _zend_internal_arg_info)-1), flags },
@@ -414,6 +416,7 @@ ZEND_API zval *zend_read_static_property(zend_class_entry *scope, const char *na
 
 ZEND_API char *zend_get_type_by_const(int type);
 
+// 根据返回当前调用的This变量
 #define getThis()							((Z_TYPE(EX(This)) == IS_OBJECT) ? &EX(This) : NULL)
 #define ZEND_IS_METHOD_CALL()				(EX(func)->common.scope != NULL)
 
@@ -673,7 +676,7 @@ END_EXTERN_C()
 	} while (0)
 
 // 将数据写入到return_value这个指针里面去.
-//
+// return_value是一个zval指针, 在那里写入我们需要返回的值
 #define RETVAL_BOOL(b)					ZVAL_BOOL(return_value, b)
 #define RETVAL_NULL() 					ZVAL_NULL(return_value)
 #define RETVAL_LONG(l) 					ZVAL_LONG(return_value, l)
@@ -805,6 +808,10 @@ ZEND_API ZEND_COLD void ZEND_FASTCALL zend_wrong_callback_error(zend_bool throw_
 			// i 应该是当前参数索引
 			_i = 0; \
 			// 看起来像是指向了参数列表的第一个参数zval结构的前面一个位置, 便于_real_arg++时, 指向第一个参数.
+			// 函数调用发生时, 会生成一个execute_data结构. 参数与返回值的zval都存在这个结构中. 
+			// 所有的参数被放在一个zval数组中
+			// 通过_real_arg指针遍历所有的参数
+			// 
 			_real_arg = ZEND_CALL_ARG(execute_data, 0);
 
 #define ZEND_PARSE_PARAMETERS_START(min_num_args, max_num_args) \
