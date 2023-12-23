@@ -76,9 +76,9 @@ zend_executor_globals    *executor_globals;   // 宏: EG
     zend_array* Z_ARR(zval);        // 取zend_array 别名: Z_ARRVAL
     zend_array* Z_ARR_P(zval*);     // 取zend_array 别名: Z_ARRVAL_P
     zend_object *Z_OBJ(zval);       // 取zend_object值
-    zend_object *Z_OBJCE(zval);     // 取zend_object值
+    zend_class_entry *Z_OBJCE(zval);     // 取zend_object值, 取对象的 zend_class_entry
     zend_object *Z_OBJ_P(zval*);    // 取zend_object值
-    zend_object *Z_OBJCE_P(zval*);  // 取zend_object值
+    zend_class_entry *Z_OBJCE_P(zval*);  // 取zend_object值
     zend_resource *Z_RES(zval);
     zend_resource *Z_RES_P(zval*);
     zend_reference *Z_REF(zval);

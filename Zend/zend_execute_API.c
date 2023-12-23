@@ -1042,6 +1042,7 @@ ZEND_API zend_class_entry *zend_get_called_scope(zend_execute_data *ex) /* {{{ *
         // 如果this是一个object, 取ce值
 		if (Z_TYPE(ex->This) == IS_OBJECT) {
       // 是一个对象
+      // 注意, 这里用的宏是Z_OBJ[CE], 不是Z_OBJ
 			return Z_OBJCE(ex->This);
 		} else if (Z_CE(ex->This)) {
       // 是一个

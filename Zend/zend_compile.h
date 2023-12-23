@@ -439,6 +439,8 @@ union _zend_function {
 	zend_uchar type;	/* MUST be the first element of this struct! */
 	uint32_t   quick_arg_flags;
 
+  // 用户层函数和内核层函数共有的结构. 
+	// zend_op_array 和 zend_internal_function 都有相同的结构开头
 	struct {
 		zend_uchar type;  /* never used */
 		zend_uchar arg_flags[3]; /* bitset of arg_info.pass_by_reference */
