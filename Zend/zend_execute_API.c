@@ -657,6 +657,9 @@ int _call_user_function_ex(zval *object, zval *function_name, zval *retval_ptr, 
 }
 /* }}} */
 
+// 调用函数
+// fci: 函数信息
+// fci_cache: 函数信息缓存
 int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /* {{{ */
 {
 	uint32_t i;
@@ -718,6 +721,8 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 			fci_cache = &fci_cache_local;
 		}
 
+		// 调用zend_is_callable_ex的时候可能往fci_cache里面写了东西
+		// 如下面用到的function_handler
 		if (!zend_is_callable_ex(&fci->function_name, fci->object, IS_CALLABLE_CHECK_SILENT, NULL, fci_cache, &error)) {
             // 不能执行的情况
 			if (error) {
@@ -750,7 +755,9 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 		}
 	}
 
+	// zend_function的一个指针
 	func = fci_cache->function_handler;
+	// 如果是静态方法, object就是NULL, 否则用fci_cache里面找到的object
 	fci->object = (func->common.fn_flags & ZEND_ACC_STATIC) ?
 		NULL : fci_cache->object;
 
@@ -776,12 +783,13 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
     // 对参数进行处理
 	for (i=0; i<fci->param_count; i++) {
 		zval *param;
+		// arg指向当前要处理的参数
 		zval *arg = &fci->params[i];
 
 		if (ARG_SHOULD_BE_SENT_BY_REF(func, i + 1)) {
-      // 如果要求传入的是一个引用
+      		// 如果要求传入的是一个引用但arg又不是一个引用
 			if (UNEXPECTED(!Z_ISREF_P(arg))) {
-        //
+        		//
 				if (!fci->no_separation) {
 					/* Separation is enabled -- create a ref */
 					ZVAL_NEW_REF(arg, arg);
@@ -805,8 +813,9 @@ int zend_call_function(zend_fcall_info *fci, zend_fcall_info_cache *fci_cache) /
 				}
 			}
 		} else {
-      // 如果传入的一个引用变量
-      // 解引用
+			// 要求传入的是一个普通变量
+      		// 如果传入的一个引用变量
+      		// 解引用
 			if (Z_ISREF_P(arg) &&
 			    !(func->common.fn_flags & ZEND_ACC_CALL_VIA_TRAMPOLINE)) {
 				/* don't separate references for __call */

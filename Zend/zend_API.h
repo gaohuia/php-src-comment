@@ -77,7 +77,7 @@ typedef struct _zend_fcall_info_cache {
 
 #define ZEND_NS_NAME(ns, name)			ns "\\" name
 
-// 函数名称
+// 函数名称, ## 是一个连接操作符, 用于连接两个字符串.
 #define ZEND_FN(name) zif_##name
 #define ZEND_MN(name) zim_##name
 #define ZEND_NAMED_FUNCTION(name)		void name(INTERNAL_FUNCTION_PARAMETERS)
@@ -172,6 +172,8 @@ typedef struct _zend_fcall_info_cache {
 #define ZEND_MODULE_GLOBALS_CTOR_D(module)  void ZEND_MODULE_GLOBALS_CTOR_N(module)(zend_##module##_globals *module##_globals)
 #define ZEND_MODULE_GLOBALS_DTOR_D(module)  void ZEND_MODULE_GLOBALS_DTOR_N(module)(zend_##module##_globals *module##_globals)
 
+// 编译出一个模块，如一个.so文件, 导出一个函数叫做get_module
+// 这个函数返回一个zend_module_entry结构体
 #define ZEND_GET_MODULE(name) \
     BEGIN_EXTERN_C()\
 	ZEND_DLEXPORT zend_module_entry *get_module(void) { return &name##_module_entry; }\

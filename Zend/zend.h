@@ -50,6 +50,7 @@
 // 在编译的时候, 如果有接收返回值的调用应该传上来的就是这个接收变量的指针
 // 如果没有接收返回值的, 要么就是由Zend分配了一个临时变量
 // 所以一个ZEND函数就是接收参数, 再把想要返回的值写回到这个return_value的指针指向的那个变量里面去.
+// 内部函数的参数列表， 第一个是一个zend_execute_data结构体, 第二个是返回值的指针
 #define INTERNAL_FUNCTION_PARAMETERS zend_execute_data *execute_data, zval *return_value
 #define INTERNAL_FUNCTION_PARAM_PASSTHRU execute_data, return_value
 

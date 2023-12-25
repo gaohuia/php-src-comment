@@ -423,11 +423,16 @@ typedef struct _zend_internal_function {
 	zend_string* function_name;
 	zend_class_entry *scope;
 	zend_function *prototype;
+	// 参数数量
 	uint32_t num_args;
+	// 必传的参数数量
 	uint32_t required_num_args;
-	zend_internal_arg_info *arg_info;
+	// 指向参数信息表，每一个参数都有一个zend_internal_arg_info结构
+	// 包含了每一个参数的名称，类型，是否传引用，是否变长
+	zend_internal_arg_info *arg_info; 
 	/* END of common elements */
 
+	// if refers to a "internal function"
 	zif_handler handler;
 	struct _zend_module_entry *module;
 	void *reserved[ZEND_MAX_RESERVED_RESOURCES];
@@ -439,7 +444,7 @@ union _zend_function {
 	zend_uchar type;	/* MUST be the first element of this struct! */
 	uint32_t   quick_arg_flags;
 
-  // 用户层函数和内核层函数共有的结构. 
+  	// 用户层函数和内核层函数共有的结构. 
 	// zend_op_array 和 zend_internal_function 都有相同的结构开头
 	struct {
 		zend_uchar type;  /* never used */
