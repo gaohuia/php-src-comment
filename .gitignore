@@ -239,4 +239,4 @@ win32/wsyslog.h
 .idea
 php-src.sublime-project
 php-src.sublime-workspace
-
+.vscode

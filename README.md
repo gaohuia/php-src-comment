@@ -57,8 +57,9 @@ zend_executor_globals    *executor_globals;   // 宏: EG
 
 #### zval取值
 
-宏并非函数, 只是快捷方式.
-快捷方便都是`Z_`开头
+宏并非函数, 只是快捷方式, 快速定位到zval.value.(xxx)
+取值宏都是`Z_`开头. 
+所有`_P`结尾的都是指针版本, 要求传入的参数是一个zval* 指针. `_P`结尾的宏会解引用传入的指针并调用不带`_P`的宏.
 
 ```C
     zend_long Z_LVAL(zval);         // 取long值
@@ -107,6 +108,12 @@ zend_executor_globals    *executor_globals;   // 宏: EG
     ZVAL_STR(zval*, zend_string*);      // 设置为zend_string值, 会考虑zend_string为internal的情况
     ZVAL_NEW_STR(zval*, zend_string*);  // 设置为zend_string值, 没有上述考虑
     ZVAL_STR_COPY(zval*, zend_string*); // 设置zval*变量的值为zend_string, 会增加zend_string引用数
+    ZVAL_STRING(zval*, char*);          // 设置zval*变量的值为字符串, 会复制第二个参数初始化一个zend_string. 
+    ZVAL_STRINGL(zval*, char*, size_t); // 设置zval*变量的值为字符串, 会复制第二个参数初始化一个zend_string. 第三个参数是字符串长度.
+    ZVAL_PSTRING(zval*, char*);         // 设置zval*变量的值为字符串, 会复制第二个参数初始化一个zend_string. 在系统内存中分配.
+    ZVAL_PSTRINGL(zval*, char*, size_t); // 设置zval*变量的值为字符串, 会复制第二个参数初始化一个zend_string. 第三个参数是字符串长度. 在系统内存中分配.
+    ZVAL_EMPTY_STRING(zval*);           // 设置zval*变量的值为空字符串.
+    ZVAL_EMPTY_PSTRING(zval*);          // 设置zval*变量的值为空字符串. 在系统内存中分配.
     ZVAL_ARR(zval*, zend_array*);       // 设置zval*变量的值为zend_array
     ZVAL_NEW_ARR(zval*);                // 分配一个新的zend_array结构, 并设置到zval作为其值, 引用计数为1. 并设置zval为IS_ARRAY
     ZVAL_NEW_PERSISTENT_ARR(zval*);     // 分配一个新的zend_array结构, 并设置到zval作为其值. 引用计数为1. 在系统内存中分配, 而不是zend内存
@@ -147,6 +154,31 @@ zend_executor_globals    *executor_globals;   // 宏: EG
     zval_ptr_dtor(zval* p); // 如果zval当前值是一个counted类型, 减少引用计数. 如果值减为0, 调用下面这个方法释放内存.
     zval_dtor_func(zend_refcounted*);   // 会根据zend_refcounted实际的类型, 调用相应的释放方法.
 ```
+
+
+#### RETVAL_系列宏
+
+这些宏都是操作return_value这个zval指针的. 用于设置返回值. 只能在`PHP_FUNCTION(xxx)`这种函数中会用(当然, 除非你的函数也使用`INTERNAL_FUNCTION_PARAMETERS`这种参数列表).
+
+对应的参数, 参考`ZVAL_`系列宏.  
+
+```C
+    RETVAL_STR()
+    RETVAL_INTERNED_STR()
+    RETVAL_NEW_STR()
+    RETVAL_STR_COPY()
+    RETVAL_STRING()
+    RETVAL_STRINGL()
+    RETVAL_EMPTY_STRING()
+    RETVAL_RES()
+    RETVAL_ARR()
+    RETVAL_OBJ()
+    RETVAL_ZVAL()
+    RETVAL_FALSE()
+    RETVAL_TRUE()
+```
+
+另外还有一个`RETURN_`系列宏, 实际上就是在`RETVAL_`对应的宏的基于上, 增加了一个`return;`语句终止当前函数. 
 
 ## 数据类型及常用操作
 
